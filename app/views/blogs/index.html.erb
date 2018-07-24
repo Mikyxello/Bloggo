@@ -1,0 +1,30 @@
+<%= render 'navbar' %>
+
+<div class="jumbotron">
+
+  <h1>Hello, Bloggoer!</h1>
+
+  <table class="table">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col" colspan="3"></th>
+      <th></th>
+    </tr>
+   
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.name %></td>
+        <td><%= blog.description %></td>
+        <td><%= link_to 'Show', blog_path(blog) %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog_path(blog),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= link_to 'New Bloggo', new_blog_path, class: "btn btn-info" %>
+
+</div>
