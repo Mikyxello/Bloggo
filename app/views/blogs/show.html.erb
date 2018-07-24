@@ -1,21 +1,18 @@
-<%= render 'navbar' %>
-
 <div class="jumbotron">
 
 	<h1><%= @blog.name %></h1>
 	 
 	<p><%= @blog.description %></p>
 
+	<%= link_to 'Edit Blog', edit_blog_path(@blog), class: "btn btn-warning" %> | 
+	<%= link_to 'Back to Bloggoes', blogs_path, class: "btn btn-dark" %>
+</div>
+
+<div class="jumbotron">
+	
 	<h2>Postoes on <%= @blog.name %></h2>
 	<%= render @blog.posts %>
 
-	<div class="jumbotron">
-		<h2>Add a Post</h2>
-		<%= render 'posts/form' %>
-	</div>
+	<%= link_to 'New Post', new_blog_post_path(@blog), class: "btn btn-info" %>
 
-	<div class="jumbotron">
-	<%= link_to 'Edit Blog', edit_blog_path(@blog), class: "btn btn-warning" %> | 
-	<%= link_to 'Back to Bloggoes', blogs_path, class: "btn btn-dark" %>
-	</div>
 </div>

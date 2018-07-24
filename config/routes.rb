@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  get 'blogs/index'
  
   resources :blogs do
   	resources :posts
@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   	resources :comments
   end
  
-  root 'welcome#index'
+  root 'blogs#index'
 end

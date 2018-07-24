@@ -1,4 +1,20 @@
-<%= form_with(model: [ @blog, @blog.posts.build ], local: true) do |form| %>
+<div class="jumbotron">
+
+<%= form_with model: [ @blog, @post ], local: true do |form| %>
+
+   <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:
+      </h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="form-row">
     <div class="form-group col-md-6">
       <%= form.label :title %><br>
@@ -13,5 +29,9 @@
     <%= form.label :content %><br>
     <%= form.text_area :content %>
   </div>
-  <button type="submit" class="btn btn-primary">Create Post</button>
+  <div class="form-group">
+    <%= form.submit :class => 'btn btn-info' %>
+  </div>
 <% end %>
+
+</div>

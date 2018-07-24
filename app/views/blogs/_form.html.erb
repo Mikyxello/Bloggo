@@ -1,3 +1,5 @@
+<div class="jumbotron">
+
 <%= form_with model: @blog, local: true do |form| %>
  
   <% if @blog.errors.any? %>
@@ -13,19 +15,21 @@
       </ul>
     </div>
   <% end %>
- 
-  <p>
+  
+  <div class="form-group">
     <%= form.label :name %><br>
     <%= form.text_field :name %>
-  </p>
+  </div>
  
-  <p>
+  <div class="form-group">
     <%= form.label :description %><br>
     <%= form.text_area :description %>
-  </p>
+  </div>
  
-  <p>
-    <%= form.submit %>
-  </p>
+  <div class="form-group">
+    <%= form.submit :class => 'btn btn-info' %>
+  </div>
  
 <% end %>
+
+</div>

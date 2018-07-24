@@ -1,10 +1,16 @@
-<p>
-  <strong>Content:</strong>
-  <%= comment.content %>
-</p>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= Commento %></h5>
+    <p class="card-text"><%= comment.content %></p>
+    <%= link_to 'Destroy Post', [comment.post, post.blog, blog],
+               method: :delete,
+               data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <%= link_to 'Edit Post', edit_post_comment_path(comment.post, post.blog, blog), class: "btn btn-warning" %>
+  </div>
+</div>
 
 <p>
-  <%= link_to 'Destroy Comment', [comment.post, comment],
+  <%= link_to 'Destroy Comment', [comment.post, post.blog, blog],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
 </p>

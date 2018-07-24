@@ -1,5 +1,9 @@
-<h1>Edit Blog</h1>
- 
-<%= render 'form' %>
- 
-<%= link_to 'Back', blogs_path %>
+<div class="jumbotron">
+
+	<h1>Edit Blog</h1>
+	 
+	<%= render 'form' %>
+	 
+	<%= link_to 'Back', blog_path(@blog), class: "btn btn-dark" %>
+
+</div>
