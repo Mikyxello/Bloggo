@@ -1,0 +1,52 @@
+<div class="container">
+
+	<div class="jumbotron">
+
+		<div class="card" style="width: 70%; display: inline-table;">
+			<p class="card-title" style="margin: 3%;">
+				<img src="<%= asset_path('favicon.png') %>" width="30px" height="30px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
+				<%= @post.title %>
+				<small class="text-muted">posted on</small> 
+				<%= link_to @post.blog.name, blog_path(@post.blog) %> 
+				<small class="text-muted">by</small> 
+				<%= link_to "Username" %> 
+				<small class="text-muted">&#8226; 10 hours ago</small>
+			</p>
+			<img class="card-img-top" src="<%= asset_path('favicon.png') %>" height="50%" alt="Post image">
+			<div class="card-body">
+			    
+			    <h6 class="card-subtitle mb-2 text-muted"><%= @post.subtitle %></h6>
+			    <div style="display: block;">
+				    <div style="width: 80%; display: inline-flex;" class="card-text"><%= raw @post.content %></div>
+				    <div style="width: 19%; display: inline-flex;">
+				    	<%= link_to raw('<i class="fas fa-trash-alt"></i>'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "margin:5px;" %>  
+				    	<%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(@post.blog, @post), class: "btn btn-warning", style: "margin:5px;" %>
+				    </div>
+				</div>
+		  	</div>
+
+		  	<div style="display: block;">
+				<%= render @post.comments %>
+			</div>
+
+			<p align="center">
+				<%= link_to raw('<i class="fas fa-pen-alt">Comment</i>'), new_blog_post_comment_path(@blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
+			</p>
+
+		</div>
+
+		<div class="card" style="width: 29%; display: inline-table; vertical-align: top; float: right;">
+			<div class="card-body">
+				<img src="<%= asset_path('favicon.png') %>" width="25px" height="25px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
+				<small class="card-title" style="display: inline-block;"><%= link_to "Username" %></small>
+				<small class="card-subtitle mb-2 text-muted" style="display: block;"><%= "16 Posts" %></small>
+				<p class="card-text" style="font-size: 14px;"><%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %></p>
+			</div>
+		</div>
+
+		<p style="display: block;">
+			<%= link_to raw('<i class="fas fa-caret-left">Back</i>'), blog_path(@blog), class: "btn btn-dark", style: "margin: 5px;" %>
+		</p>
+
+	</div>
+</div>
