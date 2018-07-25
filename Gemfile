@@ -63,4 +63,3 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'devise'
 gem 'canard', '~> 0.5.0.pre'
-gem "wysiwyg-rails"
