@@ -6,6 +6,7 @@ class BlogsController < ApplicationController
 
 	def show
 		@blog = Blog.find(params[:id])
+		render 'show'
 	end
 
 	def edit
