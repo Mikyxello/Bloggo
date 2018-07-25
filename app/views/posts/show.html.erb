@@ -1,8 +1,7 @@
 <div class="container">
-
 	<div class="jumbotron">
 
-		<div class="card" style="width: 70%; display: inline-table;">
+		<div class="card" style="width: 69%; display: inline-table;">
 			<p class="card-title" style="margin: 3%;">
 				<img src="<%= asset_path('favicon.png') %>" width="30px" height="30px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
 				<%= @post.title %>
@@ -30,22 +29,29 @@
 			</div>
 
 			<p align="center">
-				<%= link_to raw('<i class="fas fa-pen-alt">Comment</i>'), new_blog_post_comment_path(@blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
+				<%= link_to raw('<i class="fas fa-pen-alt"> Comment</i>'), new_blog_post_comment_path(@blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
 			</p>
 
 		</div>
 
-		<div class="card" style="width: 29%; display: inline-table; vertical-align: top; float: right;">
-			<div class="card-body">
-				<img src="<%= asset_path('favicon.png') %>" width="25px" height="25px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
-				<small class="card-title" style="display: inline-block;"><%= link_to "Username" %></small>
-				<small class="card-subtitle mb-2 text-muted" style="display: block;"><%= "16 Posts" %></small>
-				<p class="card-text" style="font-size: 14px;"><%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %></p>
+		<div style="width: 30%; display: inline-table; vertical-align: top; float: right;">
+			<div class="card">
+				<div class="card-body">
+					<img src="<%= asset_path('favicon.png') %>" width="25px" height="25px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
+					<small class="card-title" style="display: inline-block;"><%= link_to "Username" %></small>
+					<small class="card-subtitle mb-2 text-muted" style="display: block;"><%= "16 Posts" %></small>
+					<p class="card-text" style="font-size: 14px;"><%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %></p>
+				</div>
+			</div>
+
+			<div id="related_post" style="margin-top: 5%;">
+				<small>Related Posts</small>
+				<div style="font-size: 70%;"><%= render @blog.posts %></div>
 			</div>
 		</div>
 
 		<p style="display: block;">
-			<%= link_to raw('<i class="fas fa-caret-left">Back</i>'), blog_path(@blog), class: "btn btn-dark", style: "margin: 5px;" %>
+			<%= link_to raw('<i class="fas fa-caret-left"> Back</i>'), blog_path(@blog), class: "btn btn-dark", style: "margin: 5px;" %>
 		</p>
 
 	</div>

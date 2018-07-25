@@ -38,14 +38,11 @@
     	<%= form.text_area :content, class: "form-control" %>
     </div>
 
-    <div class="custom-file"  style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%;">
+    <div class="custom-file"  style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%; width: 30%;">
       <%= form.file_field :image, class: "custom-file-input"  %>
-      <label class="custom-file-label" for="post_image">Add Image</label>
+      <label class="custom-file-label" for="post_image"><i class="fas fa-camera-retro"> Add Image</i></label>
     </div>
 
-    <div class="form-group" style="padding-top:10px; margin-top:10px;">
-      
-    </div>
 
     <div class="form-group" style="text-align: center; padding-top:10px; margin-top:10px;">
       <%= form.submit :class => 'btn btn-primary' %>
@@ -54,7 +51,8 @@
 
   <script> 
     $(function() { $('#post_content').froalaEditor() });
-        $('#post_content').froalaEditor({
+    
+    $('#post_content').froalaEditor({
       width: '100%'
     });
 
