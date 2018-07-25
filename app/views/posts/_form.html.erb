@@ -16,21 +16,33 @@
   <% end %>
 
   <div class="form-row">
-    <div class="form-group col-md-6">
-      <%= form.label :title %><br>
-      <%= form.text_field :title %>
+
+  	<div class="form-group col-md-4">
+    	<%= form.label :title %><br>
+    	<%= form.text_field :title %>
     </div>
-    <div class="form-group col-md-6">
-      <%= form.label :subtitle %><br>
-      <%= form.text_field :subtitle %>
-    </p>
+
+    <div class="form-group col-md-4">
+    	<%= form.label :subtitle %><br>
+    	<%= form.text_field :subtitle %>
+    </div>
+
+    <div class="form-group col-md-4">
+    	<%= form.label :taggoes %><br>
+    	<%= form.text_area :taggoes %>
+    	<small id="taggoesHelp" class="form-text text-muted">Taggoes are separated by a comma.</small>
+  	</div>
   </div>
-  <div class="form-group col-md-12">
-    <%= form.label :content %><br>
-    <%= form.text_area :content %>
+
+  <div class="input-group">
+  	<div class="input-group-prepend">
+  		<span class="input-group-text">Content</span>
+  	</div>
+  	<%= form.text_area :content, class: "form-control", 'aria-label' => 'Content' %>
   </div>
-  <div class="form-group">
-    <%= form.submit :class => 'btn btn-info' %>
+
+  <div class="form-group" style="padding-top:10px; margin-top:10px;">
+    <%= form.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
 

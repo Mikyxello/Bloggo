@@ -1,6 +1,6 @@
 <div class="jumbotron">
 
-<%= form_with model: [ @blog, @post, @comment ], local: true do |form| %>
+<%= form_with model: [ @post.blog, @post, @comment ], local: true do |form| %>
 
    <% if @comment.errors.any? %>
     <div id="error_explanation">

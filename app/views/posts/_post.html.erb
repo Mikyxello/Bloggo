@@ -5,16 +5,16 @@
 	    <h5 class="card-title"><%= post.title %></h5>
 	    <h6 class="card-subtitle mb-2 text-muted"><%= post.subtitle %></h6>
 	    <p class="card-text"><%= post.content %></p>
-	    <%= link_to 'Destroy Post', [post.blog, post],
+	    <%= link_to raw('<i class="fas fa-trash-alt"></i>'), [post.blog, post],
 	               method: :delete,
 	               data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-	    <%= link_to 'Edit Post', edit_blog_post_path(post.blog, post), class: "btn btn-warning" %>
+	    <%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(post.blog, post), class: "btn btn-warning" %>
 	  </div>
 	</div>
 
 	<h2>Comments</h2>
 	<%= render post.comments %>
 
-	<%= link_to 'New Comment', new_post_comment_path(@blog, @post) %>
+	<%= link_to raw('<i class="fas fa-pen-alt">Comment</i>'), new_blog_post_comment_path(@blog, post) %>
 
 </div>
