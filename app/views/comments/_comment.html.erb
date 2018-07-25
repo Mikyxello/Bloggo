@@ -5,8 +5,8 @@
 	  	<small class="card-title" style="display: inline-block;"><%= link_to "Username" %> &#8226; 19 hours ago</small>
 	</p>
 	<p style="display: inline; float: right; text-align:right;">
-	    <%= link_to raw('<i class="fas fa-trash-alt fa-xs"></i>'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "padding:4px; margin:1px;" %>
-		<%= link_to raw('<i class="fas fa-edit fa-xs"></i>') , edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "btn btn-warning btn-xs" , style: "padding:4px; margin: 1px;"%>
+	    <%= link_to raw('<i class="fas fa-trash-alt"></i>'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+		<%= link_to raw('<i class="fas fa-edit"></i>') , edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "btn btn-warning"%>
     </p>
     <p class="card-text"><%= comment.content %></p>
   </div>

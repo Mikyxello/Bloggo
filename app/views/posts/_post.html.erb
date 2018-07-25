@@ -1,14 +1,16 @@
-<div style="padding: 5px; margin: 10px;">
 
-	<div class="card" style="width: 50%; height: 50%;" >
-		<img class="card-img-top" src="<%= asset_path('favicon.png') %>" alt="Post image">
+	<div class="card" >
 		<div class="card-body">
-			<h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
-			<h6 class="card-subtitle mb-2 text-muted"><%= post.subtitle %></h6>
-			<p class="card-text"><div class="fr-view"><%= raw post.content %></div></p>
-			<%= link_to raw('<i class="fas fa-trash-alt"></i>'), [post.blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-			<%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(post.blog, post), class: "btn btn-warning" %>
+			<div style="width: 10%; display: inline-table;">
+				<img src="<%= asset_path('favicon.png') %>" width="90%" height="90%" alt="Post image" style="border-radius: 50%;  display: inline-table;">
+			</div>
+			<div style="width: 90%; display: inline-table; vertical-align: top; float: right;">
+				<h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
+				<h6 class="card-subtitle mb-2 text-muted"><%= post.subtitle %></h6>
+				<p class="card-text"><div class="fr-view"><%= raw post.content %></div></p>
+				<%= link_to raw('<i class="fas fa-trash-alt"></i>'), [post.blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+				<%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(post.blog, post), class: "btn btn-warning" %>
+			</div>
 		</div>
 		<%= link_to raw('<small class="text-muted"><i class="fas fa-comment">Comments</i></small>'), blog_post_path(post.blog, post), style: "padding: 5px; margin-left: 5px;" %>
 	</div>
-</div>
