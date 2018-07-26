@@ -1,7 +1,12 @@
 class BlogsController < ApplicationController
-	
+
 	def index
-		@blogs = Blog.all
+		#@blogs = Blog.all
+		@blogs = if params[:blog]
+			Blog.where('name LIKE ?',"%#{params[:blog]}%")
+		else
+			Blog.all
+		end
 	end
 
 	def show

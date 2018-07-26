@@ -27,11 +27,19 @@
     <!-- Include Editor JS files. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
 
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark bg-primary" >
       <%= link_to 'Bloggo', blogs_path, class: "navbar-brand" %>
       <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search Bloggoes" aria-label="Search Bloggoes">
-        <button class="btn my-2 my-sm-0" type="submit">Search</button>
+        <!--<input class="form-control mr-sm-2" type="search" placeholder="Search Bloggoes" aria-label="Search Bloggoes"> -->
+        <!-- <button class="btn my-2 my-sm-0" type="submit">Search</button -->
+        <%= form_tag(blogs_path, method: :get) do %>
+        <%= text_field_tag :blog %>
+        <%= submit_tag 'Search' %>
+        <% end %>
+
+
+
+
       </form>
       <form class="form-inline">
         <% if user_signed_in? %>
