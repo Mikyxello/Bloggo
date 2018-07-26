@@ -28,11 +28,11 @@
 				    </div>
 				    <div id="votes">
 				    	<%= link_to like_blog_post_path(@post.blog, @post), method: :put, style: "color: green;" do %>
-					    	<i class="fas fa-arrow-circle-up"></i>
+					    	<i class="fas fa-thumbs-up"></i>
 					    	<%= @post.get_upvotes.size %>
 				    	<% end %>
 						<%= link_to dislike_blog_post_path(@post.blog, @post), method: :put, style: "color: red;" do %>
-							<i class="fas fa-arrow-circle-down"></i>
+							<i class="fas fa-angry"></i>
 							<%= @post.get_downvotes.size %>
 						<% end %>
 					</div>
