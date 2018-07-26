@@ -45,6 +45,22 @@ class PostsController < ApplicationController
 		redirect_to blog_path(@blog)
 	end
 
+	def upvote
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+		@post.upvote_by current_user
+
+		redirect_back fallback_location: @post
+	end  
+
+	def downvote
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+		@post.downvote_by current_user
+		
+		redirect_back fallback_location: @post
+	end
+
 	private
 	def post_params
 		params.require(:post).permit(:title, :subtitle, :content, :tag_list)

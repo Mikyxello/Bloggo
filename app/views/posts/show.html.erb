@@ -9,7 +9,7 @@
 				<%= link_to @post.blog.name, blog_path(@post.blog) %> 
 				<small class="text-muted">by</small> 
 				<%= link_to "Username" %> 
-				<small class="text-muted">&#8226; 10 hours ago</small>
+				<small class="text-muted">&#8226; <%= time_ago_in_words(@post.created_at) %></small>
 			</p>
 			<img class="card-img-top" src="<%= asset_path('favicon.png') %>" height="50%" alt="Post image">
 			<div class="card-body">
@@ -17,12 +17,25 @@
 					<%= render @post.tags %>
 				</div>
 			    <h6 class="card-subtitle mb-2 text-muted"><%= @post.subtitle %></h6>
-			    <div style="display: block;">
-				    <div style="width: 80%; display: inline-flex;" class="card-text"><%= raw @post.content %></div>
-				    <div style="width: 19%; display: inline-flex;">
+			    <div>
+				    <div style="width: 50%;" class="card-text"><%= raw @post.content %></div>
+				    <div style="width: 50%;" >
 				    	<%= link_to raw('<i class="fas fa-trash-alt"></i>'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "margin:5px;" %>  
 				    	<%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(@post.blog, @post), class: "btn btn-warning", style: "margin:5px;" %>
 				    </div>
+				    <div>
+				    	<small class="text-muted"><i class="fas fa-comment"> Comments <%= @post.comments.size.to_s %> </i></small>
+				    </div>
+				    <div id="votes">
+				    	<%= link_to like_blog_post_path(@post.blog, @post), method: :put, style: "color: green;" do %>
+					    	<i class="fas fa-arrow-circle-up"></i>
+					    	<%= @post.get_upvotes.size %>
+				    	<% end %>
+						<%= link_to dislike_blog_post_path(@post.blog, @post), method: :put, style: "color: red;" do %>
+							<i class="fas fa-arrow-circle-down"></i>
+							<%= @post.get_downvotes.size %>
+						<% end %>
+					</div>
 				</div>
 		  	</div>
 

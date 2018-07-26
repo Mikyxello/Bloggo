@@ -29,9 +29,9 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="left" style="text-align: left;">
-						<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"> Comments</i></small>'), blog_post_path(post.blog, post) %>
+						<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"> Comments ').concat(post.comments.size.to_s).concat(raw('</i></small>')), blog_post_path(post.blog, post) %>
 					</td>
-					<td>&nbsp;</td>
+					<td><i class="fas fa-arrow-up" style="color: green;"><%= post.get_upvotes.size %></i><i class="fas fa-arrow-down" style="color: red;"><%= post.get_downvotes.size%></i></td>
 					<td colspan="2" align="right" style="text-align: right;">
 						<%= link_to raw('<i class="fas fa-trash-alt"></i>'), [post.blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 						<%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(post.blog, post), class: "btn btn-warning" %>
