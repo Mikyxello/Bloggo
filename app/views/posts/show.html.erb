@@ -13,7 +13,9 @@
 			</p>
 			<img class="card-img-top" src="<%= asset_path('favicon.png') %>" height="50%" alt="Post image">
 			<div class="card-body">
-			    
+			    <div style="position: absolute; overflow: hidden; float: right;">
+					<%= render @post.tags %>
+				</div>
 			    <h6 class="card-subtitle mb-2 text-muted"><%= @post.subtitle %></h6>
 			    <div style="display: block;">
 				    <div style="width: 80%; display: inline-flex;" class="card-text"><%= raw @post.content %></div>

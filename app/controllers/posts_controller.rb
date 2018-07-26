@@ -26,13 +26,6 @@ class PostsController < ApplicationController
 		end
 	end
 
-	def show
-			@blog = Blog.find(params[:blog_id])
-			@post = @blog.posts.find(params[:id])
-			render 'post'
-	end
-
-
 	def create
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.create(post_params)
@@ -54,6 +47,6 @@ class PostsController < ApplicationController
 
 	private
 	def post_params
-		params.require(:post).permit(:title, :subtitle, :content)
+		params.require(:post).permit(:title, :subtitle, :content, :tag_list)
 	end
 end

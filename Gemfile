@@ -64,3 +64,5 @@ gem 'haml'
 gem 'devise'
 gem 'canard', '~> 0.5.0.pre'
 gem "wysiwyg-rails"
+gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts_as_votable', '~> 0.11.1'

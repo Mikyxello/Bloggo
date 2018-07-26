@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="jumbotron" style="margin-top: 20px;">
 
-		<img src="../resources/blog_profile_example.jpg" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> 
+		<img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> 
 		<h1 class="text-center"><%= @blog.name %></h1>
 
 		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
@@ -19,7 +19,7 @@
     	</div>
   	</div>
 		<%= link_to 'Subscribe', edit_blog_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
-		<%-# qua ci va la funzione subscribe -%> 
+		<!-- qua ci va la funzione subscribe --> 
 	</div>
 
 	<h3><%= @blog.description %></h3>
@@ -31,14 +31,7 @@
 		<div class="col-sm">
 			<div class="jumbotron">
       	<h3 class="text-center"> Lastest Post</h3>
-      	<% @blog.posts.each do |post| %>
-      		<div class="row" style="margin-left: 15px;">
-						<div class="col-sm">
-		        	<h3><%= post.title %></h3>
-		       	  <p><%= post.subtitle %></p>
-		      </div>
-		    </div>
-		    <% end %>
+      		<%= render @blog.posts.last(5) %>
     	</div>
     </div>
 

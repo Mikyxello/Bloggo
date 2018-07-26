@@ -29,7 +29,7 @@
 
       <div class="form-group col-md-4">
       	<%= form.label :tags %><br>
-      	<%= form.text_area :tags %>
+        <%= form.text_field :tag_list, value: form.object.tag_list.to_s %>
       	<small id="taggoesHelp" class="form-text text-muted">Tags must be separated by a comma.</small>
     	</div>
     </div>

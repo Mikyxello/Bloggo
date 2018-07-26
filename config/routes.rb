@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
         sessions: 'users/sessions'
       }
-  get 'blogs/index'
 
   resources :blogs do
   	resources :posts do
@@ -10,5 +9,8 @@ Rails.application.routes.draw do
   	end
   end
 
+  resources :tags, only: [:index, :show]
+
+  get 'blogs/index'
   root 'blogs#index'
 end
