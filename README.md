@@ -50,7 +50,8 @@ bundle exec rspec
 * [Bootstrap](https://getbootstrap.com/) - Frontend library
 * [Unsplash](https://unsplash.com/) - External API for letting users get free images to use
 * [Photoeditor](https://www.photoeditorsdk.com/) - External API for letting users modify images
-* [Agor](https://www.open-agora.com/en/products/api) - Externa API for letting users make polls
+* [Agor](https://www.open-agora.com/en/products/api) - External API for letting users make polls
+* [FroalaEditor](https://www.froala.com/wysiwyg-editor) - External API for personalized text area
 
 ## Authors
 
