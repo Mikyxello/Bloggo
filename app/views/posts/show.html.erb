@@ -13,7 +13,7 @@
 			</p>
 			<img class="card-img-top" src="<%= asset_path('favicon.png') %>" height="50%" alt="Post image">
 			<div class="card-body">
-			    <div style="position: absolute; overflow: hidden; float: right;">
+			    <div style="overflow: hidden; float: right;">
 					<%= render @post.tags %>
 				</div>
 			    <h6 class="card-subtitle mb-2 text-muted"><%= @post.subtitle %></h6>
@@ -48,7 +48,7 @@
 
 			<div id="related_post" style="margin-top: 5%;">
 				<small>Related Posts</small>
-				<div style="font-size: 70%;"><%= render @blog.posts %></div>
+				<div style="font-size: 70%;"><%= render @blog.posts.last(3) %></div>
 			</div>
 		</div>
 
