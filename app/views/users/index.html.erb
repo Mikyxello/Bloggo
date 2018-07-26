@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+    <div class="jumbotron">
+     <h1>Hello, <%= current_user.email %> </h1>
+    </div>
+  <% else %>
+    <%= redirect_to "blogs/index" %>
+<% end %>

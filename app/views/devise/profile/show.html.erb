@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <div>
+  	<h2 style="text-align:center;">  <%= current_user.email %>  Profile</h2>
+<% else %>
+	render "blogs/show"
+<% end %>

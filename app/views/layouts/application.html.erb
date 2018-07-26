@@ -36,7 +36,7 @@
       <form class="form-inline">
         <% if user_signed_in? %>
           <div>
-            Hi, <%= current_user.email %> &nbsp;
+           <%= link_to '<button type="button" class="btn btn-success"> Profile Page </button>'.html_safe, users_url %>
           </div>
           <%= link_to '<button type="button" class="btn btn-success">Logout</button>'.html_safe, destroy_user_session_path, :method=>'delete'%>
         <% else %>

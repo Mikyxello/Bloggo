@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   	end
   end
 
+  resources :users
+
   resources :tags, only: [:index, :show]
 
   get 'blogs/index'
