@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 		@comment = @post.comments.create(comment_params)
 
 		if @comment.save
-			redirect_to blog_path(@post.blog)
+			redirect_to blog_post_path(@post.blog, @post)
 		else
 			render 'new'
 		end
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
 		@comment = @post.comments.find(params[:id])
 
 		if @comment.update(comment_params)
-			redirect_to blog_path(@post.blog)
+			redirect_to blog_post_path(@post.blog, @post)
 		else
 			render 'edit'
 		end
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
 		@comment = @post.comments.find(params[:id])
 		@comment.destroy
 
-		redirect_to blog_path(@post.blog)
+		redirect_to blog_post_path(@post.blog, @post)
 	end
 
 	private

@@ -1,27 +1,30 @@
-<div class="jumbotron">
+<div class="container">
+  <div class="jumbotron">
 
-<%= form_with model: [ @post.blog, @post, @comment ], local: true do |form| %>
+  <%= form_with model: [ @post.blog, @post, @comment ], local: true do |form| %>
 
-   <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:
-      </h2>
-      <ul>
-        <% @comment.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+     <% if @comment.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:
+        </h2>
+        <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group col-md-6">
+      <%= form.label :content %><br>
+      <%= form.text_area :content %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.submit :class => 'btn btn-primary' %>
     </div>
   <% end %>
 
-  <div class="form-group col-md-12">
-    <%= form.label :content %><br>
-    <%= form.text_area :content %>
   </div>
-  <div class="form-group">
-    <%= form.submit :class => 'btn btn-info' %>
-  </div>
-<% end %>
-
 </div>

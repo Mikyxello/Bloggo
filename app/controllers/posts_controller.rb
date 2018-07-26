@@ -10,12 +10,17 @@ class PostsController < ApplicationController
 		@post = @blog.posts.find(params[:id])
 	end
 
+	def show
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+	end
+
 	def update
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 
 		if @post.update(post_params)
-			redirect_to blog_path(@blog)
+			redirect_to blog_post_path(@blog, @post)
 		else
 			render 'edit'
 		end
@@ -33,7 +38,7 @@ class PostsController < ApplicationController
 		@post = @blog.posts.create(post_params)
 
 		if @post.save
-			redirect_to blog_path(@blog)
+			redirect_to blog_post_path(@blog, @post)
 		else
 			render 'new'
 		end
