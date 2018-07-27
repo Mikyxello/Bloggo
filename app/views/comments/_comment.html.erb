@@ -2,7 +2,7 @@
   <div class="card-body">
   	<p>
 	  	<img src="<%= asset_path('favicon.png') %>" width="50px" height="50px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
-	  	<small class="card-title" style="display: inline-block;"><%= link_to "Username" %> &#8226; 19 hours ago</small>
+	  	<small class="card-title" style="display: inline-block;"><%= link_to comment.user.email, user_path(comment.user) %> &#8226; <%= time_ago_in_words(comment.created_at) %></small>
 	</p>
 	<p style="display: inline; float: right; text-align:right;">
 	    <%= link_to raw('<i class="fas fa-trash-alt"></i>'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>

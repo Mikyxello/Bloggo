@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 	
+	before_action :check_user, except: [ :show, :new, :create]
+
 	def new
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.build
@@ -29,6 +31,7 @@ class PostsController < ApplicationController
 	def create
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.create(post_params)
+		@post.user = current_user
 
 		if @post.save
 			redirect_to blog_post_path(@blog, @post)
@@ -64,5 +67,12 @@ class PostsController < ApplicationController
 	private
 	def post_params
 		params.require(:post).permit(:title, :subtitle, :content, :tag_list)
+	end
+
+	private
+	def check_user
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+		redirect_to blog_post_path(@blog, @post) unless @post.blog.user == current_user
 	end
 end

@@ -1,7 +1,8 @@
 class BlogsController < ApplicationController
 
+	before_action :check_user, except: [ :show, :new, :create]
+
 	def index
-		#@blogs = Blog.all
 		@blogs = if params[:blog]
 			Blog.where('name LIKE ?',"%#{params[:blog]}%")
 		else
@@ -29,7 +30,7 @@ class BlogsController < ApplicationController
 	end
 
 	def new
-		@blog = Blog.new
+		@blog = current_user.blogs.build
 	end
 
 	def destroy
@@ -40,7 +41,7 @@ class BlogsController < ApplicationController
 	end
 
 	def create
-		@blog = Blog.new(blog_params)
+		@blog = current_user.blogs.build(blog_params)
 
 		if @blog.save
 			redirect_to @blog
@@ -50,9 +51,14 @@ class BlogsController < ApplicationController
 	end
 
 	private
-
 	def blog_params
 		params.require(:blog).permit(:name, :description)
+	end
+
+	private
+	def check_user
+		@blog = Blog.find(params[:id])
+		redirect_to blog_path(@blog) unless @blog.user == current_user
 	end
 
 end
