@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	
-	before_action :check_user, except: [ :show, :new, :create]
+	before_action :check_user, except: [ :show, :new, :create, :upvote, :downvote ]
 
 	def new
 		@blog = Blog.find(params[:blog_id])
@@ -73,6 +73,6 @@ class PostsController < ApplicationController
 	def check_user
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		redirect_to blog_post_path(@blog, @post) unless @post.blog.user == current_user
+		redirect_to blog_post_path(@blog, @post) unless @post.user == current_user
 	end
 end
