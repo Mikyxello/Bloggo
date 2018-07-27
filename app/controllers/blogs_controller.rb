@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
 
-	before_action :check_user, except: [ :show, :new, :create]
+	before_action :check_user, except: [ :index, :show, :new, :create ]
 
 	def index
 		@blogs = if params[:blog]
