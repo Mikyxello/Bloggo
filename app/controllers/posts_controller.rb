@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 	def show
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
+		@related_posts = Post.tagged_with(@post.tag_list, any: true).last(3)
 	end
 
 	def update
