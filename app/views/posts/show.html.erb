@@ -1,13 +1,12 @@
 <div class="container">
 	<div class="jumbotron">
-
-		<table>
+		<table width="100%">
 			<tr>
 				<td rowspan="2" width="70%">
-					<div class="card" style="padding: 5px;">
+					<div class="card" style="padding: 10px;">
 						<table width="100%" align="center" >
 							<tr>
-								<td colspan="5" align="left">
+								<td colspan="4" align="left" valign="top">
 									<img src="<%= asset_path('favicon.png') %>" width="30px" height="30px" alt="Avatar image" style="border-radius: 50%;">
 									<%= @post.title %>
 									<small class="text-muted"> posted on </small>
@@ -15,6 +14,17 @@
 									<small class="text-muted"> by </small>
 									<%= link_to @post.user.email, user_path(@post.blog.user) %>
 									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %></small>
+								</td>
+								<td align="right" valign="top">
+									<% if current_user == @post.user %>
+										<div class="dropdown">
+											<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>  
+												<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(@post.blog, @post), class: "dropdown-item" %>
+											</div>
+										</div>
+									<% end %>
 								</td>
 							</tr>
 							<tr>
@@ -42,24 +52,22 @@
 							</tr>
 							<tr>
 								<td align="left">
-									<%= link_to like_blog_post_path(@post.blog, @post), method: :put, style: "color: green;" do %>
-								    	<i class="fas fa-thumbs-up"><%= @post.get_upvotes.size %></i>
+									<%= link_to like_blog_post_path(@post.blog, @post), method: :put do %>
+								    	<i class="fas fa-thumbs-up like"></i><small><%= @post.get_upvotes.size %></small>
 							    	<% end %>
-									<%= link_to dislike_blog_post_path(@post.blog, @post), method: :put, style: "color: red;" do %>
-										<i class="fas fa-angry"><%= @post.get_downvotes.size %></i>
+									<%= link_to dislike_blog_post_path(@post.blog, @post), method: :put do %>
+										<i class="fas fa-angry angry"></i><small><%= @post.get_downvotes.size %></small>
 									<% end %>
 								</td>
 								<td align="left">
 									<small class="text-muted"><i class="fas fa-comment"></i> Comments <%= @post.comments.size.to_s %> </small>
 								</td>
 								<td colspan="3" align="right">
-									<%= link_to raw('<i class="fas fa-trash-alt"></i>'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "margin:5px;" %>  
-							    	<%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(@post.blog, @post), class: "btn btn-warning", style: "margin:5px;" %>
 								</td>
 							</tr>
 						</table>
 
-					  	<div style="display: block;">
+					  	<div style="display: block; margin-top: 1%;">
 							<%= render @post.comments %>
 						</div>
 

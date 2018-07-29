@@ -1,17 +1,16 @@
-
 	<div class="card" >
-		<div class="card-body">
+		<div class="card-body tg-wrap">
 			<table width="100%">
 				<tr>
-					<th colspan="2" align="left" style="text-align: left;">
+					<td colspan="2" align="left" style="text-align: left;">
 						<img src="<%= asset_path('favicon.png') %>" width="50px" height="50px" alt="Post image" style="border-radius: 50%;">
-					</th>
-					<th colspan="2" align="left" style="text-align: left;">
+					</td>
+					<td colspan="2" align="left" style="text-align: left;">
 						<h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
-					</th>
-					<th align="right" style="text-align: right;">
+					</td>
+					<td align="right" style="text-align: right;">
 						<%= render post.tags %>	
-					</th>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
@@ -28,13 +27,23 @@
 					
 				</tr>
 				<tr>
-					<td><i class="fas fa-thumbs-up" style="color: green;"><%= post.get_upvotes.size %></i> <i class="fas fa-angry" style="color: red;"><%= post.get_downvotes.size%></i></td>
+					<td align="left" style="text-align: left;" >
+						<i class="fas fa-thumbs-up like" style="color: green;"></i><small><%= post.get_upvotes.size %></small> 
+						<i class="fas fa-angry angry"></i><small><%= post.get_downvotes.size%></small>
+					</td>
 					<td colspan="2" align="left" style="text-align: left;">
-						<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"> Comments ').concat(post.comments.size.to_s).concat(raw('</i></small>')), blog_post_path(post.blog, post) %>
+						<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"></i> Comments ').concat(post.comments.size.to_s).concat(raw('</small>')), blog_post_path(post.blog, post) %>
 					</td>
 					<td colspan="2" align="right" style="text-align: right;">
-						<%= link_to raw('<i class="fas fa-trash-alt"></i>'), [post.blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-						<%= link_to raw('<i class="fas fa-edit"></i>'), edit_blog_post_path(post.blog, post), class: "btn btn-warning" %>
+						<% if current_user == post.user %>
+							<div class="btn-group dropup">
+								<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+								<div class="dropdown-menu">
+									<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [post.blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+									<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(post.blog, post), class: "dropdown-item" %>
+								</div>
+							</div>
+						<% end %>
 					</td>
 				</tr>
 			</table>

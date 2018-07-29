@@ -1,13 +1,30 @@
-<div class="card">
-  <div class="card-body">
-  	<p>
-	  	<img src="<%= asset_path('favicon.png') %>" width="50px" height="50px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
-	  	<small class="card-title" style="display: inline-block;"><%= link_to comment.user.email, user_path(comment.user) %> &#8226; <%= time_ago_in_words(comment.created_at) %></small>
-	</p>
-	<p style="display: inline; float: right; text-align:right;">
-	    <%= link_to raw('<i class="fas fa-trash-alt"></i>'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-		<%= link_to raw('<i class="fas fa-edit"></i>') , edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "btn btn-warning"%>
-    </p>
-    <p class="card-text"><%= comment.content %></p>
-  </div>
+<div class="card" style="padding: 1%;">
+	<div class="card-body tg-wrap">
+		<table width="100%">
+			<tr>
+				<td colspan="2" align="left" valign="top">
+					<img src="<%= asset_path('favicon.png') %>" width="30px" height="30px" alt="Avatar image" style="border-radius: 50%;">
+					<small>
+						<%= link_to comment.user.email, user_path(comment.user) %> &#8226; <%= time_ago_in_words(comment.created_at) %>
+					</small>
+				</td>
+				<td align="right" valign="top">
+					<% if current_user == comment.user %>
+						<div class="dropdown">
+							<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+								<%= link_to raw('<i class="fas fa-edit"></i> Edit') , edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "dropdown-item"%>
+							</div>
+						</div>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" align="left">
+					<p class="card-text"><%= comment.content %></p>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>

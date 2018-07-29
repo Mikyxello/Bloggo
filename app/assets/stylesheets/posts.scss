@@ -1,3 +1,15 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.angry {
+	background: -webkit-linear-gradient(#FF7C00, #AA0404);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.like {
+	background: -webkit-linear-gradient(#002F77, #12BAEB);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
