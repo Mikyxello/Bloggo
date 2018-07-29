@@ -1,0 +1,32 @@
+<h2 style="text-align:center;">Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <table class="table">
+    <tr>
+      <th><%= f.label :email %></th>
+      <th><%= f.email_field :email, autofocus: true, autocomplete: "email" %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %></th>
+      <th><%= f.password_field :password, autocomplete: "off" %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :password_confirmation %></th>
+      <th><%= f.password_field :password_confirmation, autocomplete: "off" %></th>
+    </tr>
+  </table>
+
+  <div class="actions" style="text-align:center;">
+    <%= f.submit "Sign up", class: "btn btn-primary"%>
+    <%= link_to '<button type="button" class="btn btn-danger">Signin with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>
+  </div>
+<% end %>
+
+</br>
+<h4 style="text-align:center;">
+  <%= render "devise/shared/links" %>
+</h4>

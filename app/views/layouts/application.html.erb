@@ -37,15 +37,51 @@
       <form class="form-inline">
         <% if user_signed_in? %>
           <div>
-           <%= link_to '<button type="button" class="btn btn-success"> Profile Page </button>'.html_safe, users_url %>
+            Hello, <%= current_user.name %> &nbsp;
           </div>
+          <div>
+           <%= link_to '<button type="button" class="btn btn-success"> Profile Page </button>'.html_safe, users_url %>
+         </div>&nbsp;
           <%= link_to '<button type="button" class="btn btn-success">Logout</button>'.html_safe, destroy_user_session_path, :method=>'delete'%>
         <% else %>
-            <%= link_to '<button type="button" class="btn btn-success">Login</button>'.html_safe, new_user_session_path %> |
-            <%= link_to '<button type="button" class="btn btn-secondary">Sign Up</button>'.html_safe, new_user_registration_path %>
+            <%= link_to '<button type="button" class="btn btn-outline-light">Login</button>'.html_safe, "#loginModal", "data-toggle" => "modal" %>
+            <!-- LOGIN BUTTON WITHOUT MODAL <%= link_to '<button type="button" class="btn btn-success">Login</button>'.html_safe, new_user_session_path %> -->
+            <!-- SIGNUP WITHOUT MODAL <%= link_to '<button type="button" class="btn btn-secondary">Sign Up</button>'.html_safe, new_user_registration_path %> -->
+            &nbsp;<%= link_to '<button type="button" class="btn btn-outline-light">Sign Up</button>'.html_safe, "#signupModal", "data-toggle" => "modal"  %>
           <% end %>
       </form>
     </nav>
+    <div class="modal" id="loginModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= render "devise/sessions/new" %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="signupModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Signup</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <%= render "devise/registrations/new" %>
+          </div>
+        </div>
+      </div>
+    </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
