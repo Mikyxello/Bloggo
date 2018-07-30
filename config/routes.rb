@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   	end
   end
 
+  get 'blogs/:id/visited_view' => "blogs#visited_view", :as => :visited_view
+  get 'blogs/:id/recent_view' => "blogs#recent_view", :as => :recent_view
+
   resources :users
 
   resources :tags, only: [:index, :show]

@@ -37,7 +37,7 @@
       <form class="form-inline">
         <% if user_signed_in? %>
           <div>
-            Hello, <%= current_user.name %> &nbsp;
+            Hello, <%= current_user.email %> &nbsp;
           </div>
           <div>
            <%= link_to '<button type="button" class="btn btn-success"> Profile Page </button>'.html_safe, users_url %>

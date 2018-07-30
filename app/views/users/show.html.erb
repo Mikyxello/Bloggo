@@ -1,0 +1,44 @@
+<div class="container">	
+	<div class="jumbotron" style="margin-top: 20px;">
+
+		<img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> 
+		<h1 class="text-center"><%= @user.email %></h1>
+
+		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
+    	<div class="col-sm text-center">
+      	<h3> Blogs</h3>
+      	<h6> <%= @blog.count %></h6>
+    	</div>
+  	</div>
+	</div>
+
+	<div class="row" style="margin-top: 120px;">
+
+		<div class="col-sm">
+			<div class="jumbotron" >
+      	<h3 class="text-center" style="margin-bottom: 20px;"> Lastest Bloggoes</h3>
+  	      <% @blog.last(5).each do |blog| %>
+      	<div class="jumbotron" style="background: white">
+  	      <h3 class="text-center" style: "color: black"> <%= link_to blog.name, blog_path(blog)%> </h3>
+  	      <h6 class="text-center" style: "color: black"> <%= blog.description %> </h6>
+  	    </div>
+	        <% end %>
+    	</div>
+    </div>
+
+		<div class="col-sm">
+			<div class="jumbotron text-center">
+      	<h3>Top 5 Post</h3>
+      	  <div class="dropdown">
+					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by
+					  <span class="caret"></span></button>
+					  <ul class="dropdown-menu">
+					    <li><a href="#">Most Visited</a></li>
+					    <li><a href="#">Newest</a></li>
+					    <li><a href="#">Most Reacted</a></li>
+	 				  </ul>
+				  </div> 
+    	</div>
+    </div>
+  </div>
+</div>

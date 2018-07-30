@@ -12,8 +12,30 @@ class BlogsController < ApplicationController
 
 	def show
 		@blog = Blog.find(params[:id])
+		@posts = Post.where(blog_id: @blog)
+		@blog.counter = 0
+		@posts.each do |post|
+			@blog.increment(:counter, post.counter)
+		end
+		@filter = "Most Recent"
+		@shown_posts = @blog.posts.last(5)
 		render 'show'
 	end
+
+	def visited_view
+		@filter == "Most Visited"
+		@shown_posts = @blog.posts.order(:counter).last(5)
+		render 'show'
+	end
+
+	def recent_view
+		@filter = "Most Recent"
+		@shown_posts = @blog.posts.last(5)
+		render 'show'
+	end
+				
+
+
 
 	def edit
 		@blog = Blog.find(params[:id])
@@ -30,7 +52,11 @@ class BlogsController < ApplicationController
 	end
 
 	def new
-		@blog = current_user.blogs.build
+		if user_signed_in?
+			@blog = current_user.blogs.build
+		else
+			render 'index'
+		end
 	end
 
 	def destroy
