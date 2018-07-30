@@ -2,18 +2,18 @@
 	<div class="jumbotron">
 		<table width="100%">
 			<tr>
-				<td rowspan="2" width="70%">
-					<div class="card" style="padding: 10px;">
-						<table width="100%" align="center" >
+				<td rowspan="2" width="70%" valign="top">
+					<div class="card" style="padding: 10px;" id="post_card">
+						<table width="100%" align="center">
 							<tr>
 								<td colspan="4" align="left" valign="top">
-									<img src="<%= asset_path('favicon.png') %>" width="30px" height="30px" alt="Avatar image" style="border-radius: 50%;">
+									<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
 									<%= @post.title %>
 									<small class="text-muted"> posted on </small>
 									<%= link_to @post.blog.name, blog_path(@post.blog) %>
 									<small class="text-muted"> by </small>
-									<%= link_to @post.user.email, user_path(@post.blog.user) %>
-									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %></small>
+									<%= link_to @post.user.name, user_path(@post.blog.user) %>
+									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %> ago</small>
 								</td>
 								<td align="right" valign="top">
 									<% if current_user == @post.user %>
@@ -29,7 +29,7 @@
 							</tr>
 							<tr>
 								<td colspan="5" align="center">
-									<img class="card-img-top" src="<%= asset_path('favicon.png') %>" height="50%" alt="Post image">
+									<%= image_tag(@post.image.url, alt: @post.image.identifier, width: '100%', height: '100%', style: "padding: 1%;") if @post.image? %>
 								</td>
 							</tr>
 							<tr>
@@ -42,7 +42,7 @@
 							</tr>
 							<tr>
 								<td colspan="3" rowspan="2" align="left">
-									<div class="fr-view"><%= raw @post.content %></div>
+									<div class="fr-view"><%= @post.content.html_safe %></div>
 								</td>
 								<td colspan="2" rowspan="2" align="right">
 									&nbsp;
@@ -60,9 +60,10 @@
 									<% end %>
 								</td>
 								<td align="left">
-									<small class="text-muted"><i class="fas fa-comment"></i> Comments <%= @post.comments.size.to_s %> </small>
+									<small class="text-muted"><i class="fas fa-comment"></i> Comments <%= @post.comments.size.to_s %></small>
 								</td>
 								<td colspan="3" align="right">
+									<small class="text-muted"><i class="fas fa-eye"></i> Views <%= @post.counter %></small>
 								</td>
 							</tr>
 						</table>
@@ -70,25 +71,41 @@
 					  	<div style="display: block; margin-top: 1%;">
 							<%= render @post.comments %>
 						</div>
-
-						<p align="center">
-							<%= link_to raw('<i class="fas fa-pen-alt"> Comment</i>'), new_blog_post_comment_path(@post.blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
-						</p>
-
+						<% if user_signed_in? %>
+							<p align="center">
+								<%= link_to raw('<i class="fas fa-pen-alt"> Comment</i>'), new_blog_post_comment_path(@post.blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
+							</p>
+						<% end %>
 					</div>
 				</td>
 				<td valign="top" width="30%">
-					<div class="card">
-						<div class="card-body">
-							<img src="<%= asset_path('favicon.png') %>" width="25px" height="25px" alt="Avatar image" style="border-radius: 50%; display: inline-block;">
-							<small class="card-title" style="display: inline-block;"><%= link_to @post.user.email, user_path(@post.user) %></small>
-							<small class="card-subtitle mb-2 text-muted" style="display: block;"><%= @post.user.posts.size %> Post</small>
-							<p class="card-text" style="font-size: 14px;"><%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %></p>
+					<div class="card" id="user_card" style="padding: 5%;">
+						<div class="tg-wrap">
+							<table>
+								<tr>
+									<td>
+										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '25px', height: '25px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
+										<small class="card-title"><%= link_to @post.user.email, user_path(@post.user) %></small>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<small class="card-subtitle mb-2 text-muted"><%= @post.user.posts.size %> Post</small>
+									</td>
+								</tr>
+								<tr>
+								    <td>
+								    	<p class="card-text" style="font-size: 14px;">
+								    		<%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %>
+								    	</p>
+								    </td>
+								</tr>
+							</table>
 						</div>
 					</div>
 					<div id="related_post" style="margin-top: 5%;">
 						<small>Related Posts</small>
-						<div style="font-size: 70%;"><%= render @related_posts %></div>
+						<div style="font-size: 70%;" id="related_posts"><%= render @related_posts %></div>
 					</div>
 				</td>
 			</tr>
