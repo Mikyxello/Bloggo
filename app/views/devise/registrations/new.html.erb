@@ -4,6 +4,14 @@
   <%= devise_error_messages! %>
   <table class="table">
     <tr>
+      <th><%= f.label :name %></th>
+      <th><%= f.text_field :name %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :surname %></th>
+      <th><%= f.text_field :surname %></th>
+    </tr>
+    <tr>
       <th><%= f.label :email %></th>
       <th><%= f.email_field :email, autocomplete: "email" %></th>
     </tr>

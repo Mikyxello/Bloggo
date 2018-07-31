@@ -37,7 +37,7 @@
       <form class="form-inline">
         <% if user_signed_in? %>
           <div>
-            Hello, <%= current_user.email %> &nbsp;
+            Hello, <%= current_user.name %> <%= current_user.surname %> &nbsp;
           </div>
           <div>
            <%= link_to '<button type="button" class="btn btn-success"> Profile Page </button>'.html_safe, users_url %>
@@ -46,8 +46,8 @@
         <% else %>
             <%= link_to '<button type="button" class="btn btn-outline-light">Login</button>'.html_safe, "#loginModal", "data-toggle" => "modal" %>
             <!-- LOGIN BUTTON WITHOUT MODAL <%= link_to '<button type="button" class="btn btn-success">Login</button>'.html_safe, new_user_session_path %> -->
-            <!-- SIGNUP WITHOUT MODAL <%= link_to '<button type="button" class="btn btn-secondary">Sign Up</button>'.html_safe, new_user_registration_path %> -->
-            &nbsp;<%= link_to '<button type="button" class="btn btn-outline-light">Sign Up</button>'.html_safe, "#signupModal", "data-toggle" => "modal"  %>
+            &nbsp;<%= link_to '<button type="button" class="btn btn-outline-light">Sign Up</button>'.html_safe, new_user_registration_path %>
+            <!-- SIGNUP WITH MODAL <%= link_to '<button type="button" class="btn btn-outline-light">Sign Up</button>'.html_safe, "#signupModal", "data-toggle" => "modal"  %> -->
           <% end %>
       </form>
     </nav>
