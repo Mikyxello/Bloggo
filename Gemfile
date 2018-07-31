@@ -68,3 +68,4 @@ gem "wysiwyg-rails"
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'carrierwave', '~> 1.0'
+gem 'impressionist'
