@@ -7,12 +7,16 @@
 						<table width="100%" align="center">
 							<tr>
 								<td colspan="4" align="left" valign="top">
-									<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
+									<% if false %>
+										<%= image_tag(@post.blog.image.url, alt: @post.blog.image.identifier, width: '30px', style: "border-radius: 50%;") if @post.blog.image? %>
+									<% end %>
+
+									<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
 									<%= @post.title %>
 									<small class="text-muted"> posted on </small>
 									<%= link_to @post.blog.name, blog_path(@post.blog) %>
 									<small class="text-muted"> by </small>
-									<%= link_to @post.user.name, user_path(@post.blog.user) %>
+									<%= link_to @post.user.name, user_path(@post.user) %>
 									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %> ago</small>
 								</td>
 								<td align="right" valign="top">
@@ -91,8 +95,8 @@
 							<table>
 								<tr>
 									<td>
-										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '25px', height: '25px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
-										<small class="card-title"><%= link_to @post.user.email, user_path(@post.user) %></small>
+										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
+										<small class="card-title"><%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user) %></small>
 									</td>
 								</tr>
 								<tr>
