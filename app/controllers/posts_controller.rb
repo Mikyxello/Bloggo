@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
-	
+
 	before_action :check_user, except: [ :show, :new, :create, :upvote, :downvote ]
 
 	def new
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.build
+	end
+
+	def index
+		 @posts = Post.all.order("created_at").paginate(:page => params[:page], :per_page => 1)
 	end
 
 	def edit
@@ -57,13 +61,13 @@ class PostsController < ApplicationController
 		@post.upvote_by current_user
 
 		redirect_back fallback_location: @post
-	end  
+	end
 
 	def downvote
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 		@post.downvote_by current_user
-		
+
 		redirect_back fallback_location: @post
 	end
 

@@ -22,13 +22,13 @@
                   data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
-    <% else %> 
+    <% else %>
       <h3> No blogs found! </h3>
     <% end %>
   </table>
   <% if user_signed_in? %>
     <%= link_to 'New Bloggo', new_blog_path, class: "btn btn-info" %>
   <% else %>
-    <h5> Log In for create a new Bloggo! </h5>
+    <h5> Login to create a new Bloggo! </h5>
   <% end %>
 </div>

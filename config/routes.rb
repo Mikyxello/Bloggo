@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   resources :tags, only: [:index, :show]
 
   get 'blogs/index'
-  root 'blogs#index'
+  root 'home#index'
 end

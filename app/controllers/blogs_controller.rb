@@ -34,9 +34,6 @@ class BlogsController < ApplicationController
 		render 'show'
 	end
 				
-
-
-
 	def edit
 		@blog = Blog.find(params[:id])
 	end

@@ -27,7 +27,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
 
     <nav class="navbar navbar-dark bg-primary" >
-      <%= link_to 'Bloggo', blogs_path, class: "navbar-brand" %>
+      <%= link_to 'Bloggo', root_path, class: "navbar-brand" %>
 
       <%= form_tag(blogs_path, {class: 'form-inline', method: :get}) do %>
       	<%= text_field_tag :blog, nil, placeholder: 'Search Bloggoes', class: "form-control mr-sm-2" %>

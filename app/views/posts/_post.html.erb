@@ -9,7 +9,7 @@
 						<h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
 					</td>
 					<td align="right" style="text-align: right;">
-						<%= render post.tags %>	
+						<%= render post.tags %>
 					</td>
 				</tr>
 				<tr>
@@ -20,15 +20,14 @@
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					
+
 					<td colspan="5" align="left" style="text-align: left;">
 						<div class="fr-view"><%= truncate(post.content.html_safe, length: 100, omission: "... <small class='text-muted'>(Read More)</small>".html_safe, :escape => false) %></div>
 					</td>
-					
 				</tr>
 				<tr>
 					<td align="left" style="text-align: left;" >
-						<i class="fas fa-thumbs-up like" style="color: green;"></i><small><%= post.get_upvotes.size %></small> 
+						<i class="fas fa-thumbs-up like" style="color: green;"></i><small><%= post.get_upvotes.size %></small>
 						<i class="fas fa-angry angry"></i><small><%= post.get_downvotes.size%></small>
 					</td>
 					<td colspan="2" align="left" style="text-align: left;">
