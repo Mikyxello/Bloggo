@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
           </div>
         </div>
       </div>
@@ -72,10 +72,15 @@
   <% end %>
 
   <script> 
-    $(function() { $('#post_content').froalaEditor() });
-    
-    $('#post_content').froalaEditor({
-      width: '100%'
+    $(document).ready(function(){
+      $('#post_content').froalaEditor({
+        width: '100%',
+        htmlAllowComments: false,
+        imageUpload: false,
+        fileUpload: false,
+        emoticonsUseImage: false,
+        htmlExecuteScripts: false
+      });
     });
 
     $('#post_image').on('change', function(){

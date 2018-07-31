@@ -27,14 +27,14 @@
 					
 				</tr>
 				<tr>
-					<td align="left" style="text-align: left;" >
-						<i class="fas fa-thumbs-up like" style="color: green;"></i><small><%= post.get_upvotes.size %></small> 
+					<td colspan="3" align="left" style="text-align: left;">
+						<i class="fas fa-thumbs-up like""></i><small><%= post.get_upvotes.size %></small> 
 						<i class="fas fa-angry angry"></i><small><%= post.get_downvotes.size%></small>
 					</td>
-					<td colspan="2" align="left" style="text-align: left;">
+					<td align="left" style="text-align: left;">
 						<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"></i> Comments ').concat(post.comments.size.to_s).concat(raw('</small>')), blog_post_path(post.blog, post) %>
 					</td>
-					<td colspan="2" align="right" style="text-align: right;">
+					<td colspan="1" align="right" style="text-align: right;">
 						<% if current_user == post.user %>
 							<div class="btn-group dropup">
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>

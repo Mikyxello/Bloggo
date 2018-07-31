@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="jumbotron">
-		<h1 style="text-align: center;">List of posts containing <i class="text-muted">&#96;<%= @tag.name %>&#96;</i> tag </h1>
+		<h1 style="text-align: center;">List of <%= @tag.taggings_count %> posts containing <i class="text-muted">&#96;<%= @tag.name %>&#96;</i> tag </h1>
 		<div><%= render @posts %></div>
 	</div>
 </div>

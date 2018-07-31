@@ -1,6 +1,4 @@
-<div class="container">
-  <div class="jumbotron">
-
+<div class="jumbotron">
   <%= form_with model: [ @post.blog, @post, @comment ], local: true do |form| %>
 
      <% if @comment.errors.any? %>
@@ -16,15 +14,13 @@
       </div>
     <% end %>
 
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12">
       <%= form.label :content %><br>
-      <%= form.text_area :content %>
+      <%= form.text_area :content, style: "width: 100%; resize: none;"%>
     </div>
     
     <div class="form-group">
       <%= form.submit :class => 'btn btn-primary' %>
     </div>
   <% end %>
-
-  </div>
 </div>
