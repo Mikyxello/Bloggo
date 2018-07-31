@@ -135,6 +135,8 @@ GEM
     hashie (3.5.7)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
+    impressionist (1.6.1)
+      nokogiri (~> 1)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -314,6 +316,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   haml
+  impressionist
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

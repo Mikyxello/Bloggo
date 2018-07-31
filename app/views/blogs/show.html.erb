@@ -15,7 +15,7 @@
     	</div>
     	<div class="col-sm text-center">
       	<h3> Visits</h3>
-      	<h6> <%= @blog.counter %> </h6>
+      	<h6> <%= "#{@blog.impressionist_count} views so far!" %> </h6>
     	</div>
   	</div>
 		<%= link_to 'Subscribe', edit_blog_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
