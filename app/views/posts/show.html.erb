@@ -67,9 +67,11 @@
 							</tr>
 						</table>
 
-						<div style="display: block; margin-top: 1%;">
-							<%= render partial: 'comments/form_new' %>
-						</div>
+						<% if user_signed_in? %>
+							<div style="display: block; margin-top: 1%;">
+								<%= render partial: 'comments/form_new' %>
+							</div>
+						<% end %>
 
 					  	<div style="display: block; margin-top: 2%;">
 							<%= render @post.comments %>
