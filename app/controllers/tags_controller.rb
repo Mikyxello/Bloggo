@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
 
   def index
-    @tags = ActsAsTaggableOn::Tag.all
+    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse
   end
 
   def show
@@ -10,7 +10,7 @@ class TagsController < ApplicationController
   end
 
   def mostcount
-    @tags = Post.tag_counts_on(:tags).limit(10)
+    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse
   end
 
 end
