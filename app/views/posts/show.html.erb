@@ -29,7 +29,7 @@
 							</tr>
 							<tr>
 								<td colspan="5" align="center">
-									<%= image_tag(@post.image.url, alt: @post.image.identifier, width: '100%', height: '100%', style: "padding: 1%;") if @post.image? %>
+									<%= image_tag(@post.image.url, alt: @post.image.identifier, width: '100%', style: "padding: 1%;") if @post.image? %>
 								</td>
 							</tr>
 							<tr>
@@ -68,13 +68,19 @@
 							</tr>
 						</table>
 
-					  	<div style="display: block; margin-top: 1%;">
+						<div style="display: block; margin-top: 1%;">
+							<%= render partial: 'comments/form_new' %>
+						</div>
+
+					  	<div style="display: block; margin-top: 2%;">
 							<%= render @post.comments %>
 						</div>
-						<% if user_signed_in? %>
-							<p align="center">
-								<%= link_to raw('<i class="fas fa-pen-alt"> Comment</i>'), new_blog_post_comment_path(@post.blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
-							</p>
+						<% if false %>
+							<% if user_signed_in? %>
+								<p align="center">
+									<%= link_to raw('<i class="fas fa-pen-alt"> Comment</i>'), new_blog_post_comment_path(@post.blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
+								</p>
+							<% end %>
 						<% end %>
 					</div>
 				</td>
@@ -111,9 +117,11 @@
 			</tr>
 		</table>
 
-		<p style="display: block;">
-			<%= link_to raw('<i class="fas fa-caret-left"> Back</i>'), blog_path(@post.blog), class: "btn btn-dark", style: "margin: 5px;" %>
-		</p>
+		<% if false %>
+			<p style="display: block;">
+				<%= link_to raw('<i class="fas fa-caret-left"> Back</i>'), blog_path(@post.blog), class: "btn btn-dark", style: "margin: 5px;" %>
+			</p>
+		<% end %>
 
 	</div>
 </div>
