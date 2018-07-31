@@ -19,8 +19,6 @@ class PostsController < ApplicationController
 	def show
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		@post.increment(:counter, 1)
-		@post.save
 		@related_posts = Post.tagged_with(@post.tag_list, any: true).last(3)
 	end
 
