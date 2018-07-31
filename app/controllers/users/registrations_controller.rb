@@ -10,9 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+      @user = User.create(params.require(:user).permit(:email,:name,:surname,:password,:password_confirmation))
+  end
 
   # GET /resource/edit
   # def edit
@@ -38,17 +38,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected
+  # If you have extra params to permit, append them to the sanitizer.
+  #def configure_sign_up_params
+  #   devise_parameter_sanitizer.permit(:signup, keys: [:name, :surname, :email, :password, :password_confirmation])
+  #end
+
+#  before_action :configure_permitted_parameters, if: :devise_controller?
+
+#  def configure_permitted_parameters
+#    devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :surname, :email])
+#    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :surname, :email, :password, :password_confirmation])
+#    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :surname, :email, :password, :password_confirmation, :current_password])
+#  end
+
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+#   def configure_account_update_params
+#     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :surname, :email, :password, :password_confirmation])
+#  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

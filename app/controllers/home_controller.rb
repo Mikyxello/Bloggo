@@ -7,6 +7,7 @@ class HomeController < ApplicationController
 			            Blog.all
 		              end
     @posts = Post.all
+    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse
   end
 
 

@@ -1,9 +1,18 @@
 class User < ApplicationRecord
 	acts_as_voter
 
+	mount_uploader :avatar_image, ImageUploader
+
 	has_many :blogs
 	has_many :posts
 	has_many :comments
+
+	validates_presence_of :name, :surname
+
+	validates_presence_of   :avatar_image
+  validates_integrity_of  :avatar_image
+  validates_processing_of :avatar_image
+
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :database_authenticatable, :registerable,
@@ -16,11 +25,12 @@ class User < ApplicationRecord
 
 	   unless user
 	     password = Devise.friendly_token[0,20]
-	     user = User.create(name: data["name"], surname: data["surname"], email: data["email"],
-	       password: password, password_confirmation: password, image: data["image"]
+	     user = User.create(:name => data["name"],:surname => data["surname"], email: data["email"],
+	       password: password, password_confirmation: password, avatar_image: data["avatar_image"]
 	     )
 	   end
 	   user
 	 end
+
 
 end

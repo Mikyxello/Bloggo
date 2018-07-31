@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:10px;">
   <div class="row container-fluid">
     <div class="col" style="max-width:50%; max-height:50%;">
       <div class="card">
@@ -34,9 +34,11 @@
         <h2>Trending Tags</h2>
       </div>
       <div class="card-body">
-        <%= render partial: 'tags/mostcount' %>
+        <%= render @tags %>
       </div>
-    </div></div>
+    </div>
+  </div>
+
     <div class="w-100"></div>
 
     <div class="col" style="max-width:50%; max-height:50%;">

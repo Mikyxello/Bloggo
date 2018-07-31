@@ -1,8 +1,16 @@
 <h2 style="text-align:center;">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, :html => {:multipart => true}, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <table class="table">
+    <tr>
+      <th><%= f.label :name %></th>
+      <th><%= f.text_field :name %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :surname %></th>
+      <th><%= f.text_field :surname %></th>
+    </tr>
     <tr>
       <th><%= f.label :email %></th>
       <th><%= f.email_field :email, autocomplete: "email" %></th>
@@ -17,6 +25,10 @@
     <tr>
       <th><%= f.label :password_confirmation %></th>
       <th><%= f.password_field :password_confirmation, autocomplete: "off" %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :avatar_image %></th>
+      <th><%= f.file_field :avatar_image %></th>
     </tr>
   </table>
 

@@ -1,5 +1,0 @@
-<% if tag.taggings_count >= 2 %>
-  <%= link_to tag.name, tag_path(tag), class: "badge badge-danger" %>
-<% else %>
-  <%= link_to tag.name, tag_path(tag), class: "badge badge-secondary" %>
-<%end%>
