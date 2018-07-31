@@ -1,11 +1,18 @@
 class User < ApplicationRecord
 	acts_as_voter
 
+	mount_uploader :avatar_image, ImageUploader
+
 	has_many :blogs
 	has_many :posts
 	has_many :comments
 
 	validates_presence_of :name, :surname
+
+	validates_presence_of   :avatar_image
+  validates_integrity_of  :avatar_image
+  validates_processing_of :avatar_image
+
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :database_authenticatable, :registerable,
