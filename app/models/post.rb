@@ -19,7 +19,7 @@ class Post < ApplicationRecord
 		errors[:tag_list] << "5 tags maximum" if tag_list.count > 5
 		self.tag_list.each do |tag|
 			errors[:tag_list] << "#{tag} must be shorter than 10 characters maximum" if tag.length > 10
-			errors[:tag_list] << "#{tag} must be longer than 4 characters minimum" if tag.length < 4
+			errors[:tag_list] << "#{tag} must be longer than 4 characters minimum" if tag.length < 3
 		end
 	end
 
