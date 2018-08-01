@@ -1,4 +1,5 @@
-<div class="container">	
+<link rel="stylesheet" href="styles.scss">
+<div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
 	<div class="jumbotron" style="margin-top: 20px;">
 
 		<img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> 
@@ -12,39 +13,26 @@
   	</div>
 	</div>
 
-	<div class="row" style="margin-top: 120px;">
-		<div class=".col-md-4">
-			<div class="jumbotron" >
-      	<h3 class="text-center" style="margin-bottom: 20px;"> Favorite Bloggoes</h3>
-	      	<div class="jumbotron" style="background: white">
-  	      	<% @blog.last(5).each do |blog| %>
-  	      		<h3 class="text-center"> <%= link_to blog.name, blog_path(blog)%> </h3>
-  	     		 	<h6 class="text-center" style="margin-bottom: 25px"> <%= blog.description %> </h6>
-	        	<% end %>
-    	    </div>
-    	</div>
+  <div class="row container-fluid">
+    <div class="col-6"">
+      <div class="card">
+        <div class="card-header pastel_colour_yellow" style="text-align:center;">
+          <h2>Favourite Bloggoes</h2>
+        </div>
+        <div class="card-body">
+          <h3> No bloggoes found! </h3>
+        </div>
+      </div>
     </div>
-		<div class=".col-md-4">
-			<div class="jumbotron text-center">
-      	<h3 class="text-center" style="margin-bottom: 20px;"> Favourite Postoes</h3>
-  	      <% @blog.last(5).each do |blog| %>
-      	<div class="jumbotron" style="background: white">
-  	      <h3 class="text-center" style: "color: black"> <%= link_to blog.name, blog_path(blog)%> </h3>
-  	      <h6 class="text-center" style: "color: black"> <%= blog.description %> </h6>
-  	    </div>
-	        <% end %>
-    	</div>
-    </div>
-		<div class=".col-md-4">
-			<div class="jumbotron text-center">
-      	<h3 class="text-center" style="margin-bottom: 20px;"> Notification</h3>
-  	      <% @blog.last(5).each do |blog| %>
-      	<div class="jumbotron" style="background: white">
-  	      <h3 class="text-center" style: "color: black"> <%= link_to blog.name, blog_path(blog)%> </h3>
-  	      <h6 class="text-center" style: "color: black"> <%= blog.description %> </h6>
-  	    </div>
-	        <% end %>
-    	</div>
+    <div class="col-6"">
+      <div class="card">
+        <div class="card-header pastel_colour_red " style="text-align:center;">
+          <h2>Favourite Postoes</h2>
+        </div>
+        <div class="card-body">
+          <h3> No Postoes found! </h3>
+        </div>
+      </div>
     </div>
   </div>
 </div>

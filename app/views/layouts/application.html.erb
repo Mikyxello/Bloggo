@@ -4,7 +4,6 @@
     <title>Bloggo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
@@ -13,8 +12,8 @@
 
   <body>
 
-    <nav class="navbar navbar-dark bg-primary" >
-      <%= link_to 'Bloggo', root_path, class: "navbar-brand" %>
+    <nav class="navbar navbar-dark pastel_colour_navbar" >
+      <%= link_to 'Bloggo', root_path, class: "navbar-brand", style: "colour= black;" %>
 
       <%= form_tag(blogs_path, {class: 'form-inline', method: :get}) do %>
       	<%= text_field_tag :blog, nil, placeholder: 'Search Bloggoes', class: "form-control mr-sm-2" %>
