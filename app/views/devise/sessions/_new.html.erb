@@ -28,8 +28,9 @@
   <% end -%>
 
   <div class="actions" style="text-align:center;">
-    <%= f.submit "Login", class: "btn btn-primary" %>
+    <%= f.submit "Login", class: "btn btn-success" %>
     <%= link_to '<button type="button" class="btn btn-danger">Login with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>
+    <%= link_to '<button type="button" class="btn btn-primary">Login with Facebook</button>'.html_safe, user_facebook_omniauth_authorize_path %>
   </div>
   <div>
 

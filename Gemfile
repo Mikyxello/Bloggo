@@ -62,6 +62,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'haml'
 gem 'devise'
+gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 gem 'canard', '~> 0.5.0.pre'
 gem "wysiwyg-rails"
