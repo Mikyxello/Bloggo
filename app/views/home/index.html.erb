@@ -18,7 +18,7 @@
               <td><%= link_to blog.name, blog_path(blog) %></td>
               <td><%= blog.description %></td>
               <td><%= link_to blog.user.name, user_path(blog.user) %></td>
-              <td><%= link_to blog.counter%></td>
+              <td><%= link_to blog.impressionist_count%></td>
             </tr>
           <% end %>
         <% else %>

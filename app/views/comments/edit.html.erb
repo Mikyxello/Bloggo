@@ -1,8 +1,7 @@
-<div class="jumbotron">
-
-	<h1>Edit Comment</h1>
-	 
-	<%= render 'form_edit' %>
-	 
-	<%= link_to raw('<i class="fas fa-caret-left"> Back</i>'), blog_path(@comment.post.blog), class: "btn btn-dark" %>
+<div class="container">
+	<div class="jumbotron">
+		<h1>Edit Comment</h1>
+		<%= render 'form_edit' %>
+		<%= link_to '<i class="fas fa-undo"></i> Back'.html_safe, blog_post_path(@comment.post.blog, @comment.post), class: "btn btn-dark" %>
+	</div>
 </div>

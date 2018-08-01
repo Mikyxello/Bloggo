@@ -14,10 +14,6 @@ class BlogsController < ApplicationController
 	def show
 		@blog = Blog.find(params[:id])
 		@posts = Post.where(blog_id: @blog)
-		@blog.counter = 0
-		@posts.each do |post|
-			@blog.increment(:counter, post.counter)
-		end
 		@filter = "Most Recent"
 		@shown_posts = @blog.posts.last(5)
 		render 'show'

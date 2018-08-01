@@ -1,91 +1,107 @@
-<div class="jumbotron">
+<%= form_with model: [ @blog, @post ], local: true do |form| %>
 
-  <%= form_with model: [ @blog, @post ], local: true do |form| %>
+  <% if @post.errors.any? %>
+    <script>
+      $(document).ready(function(){$('#errorPostModal').modal();});
+    </script>
+  <% end %>
 
-    <% if @post.errors.any? %>
-      <script>
-        $(document).ready(function(){$('#errorPostModal').modal();});
-      </script>
-    <% end %>
-
-    <!-- Modal -->
-    <div class="modal fade" id="errorPostModal" tabindex="-1" role="dialog" aria-labelledby="errorPostModalTitle" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="errorPostModalTitle">Error</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+  <!-- Modal -->
+  <div class="modal fade" id="errorPostModal" tabindex="-1" role="dialog" aria-labelledby="errorPostModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorPostModalTitle">Error</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@post.errors.count, "error") %> errors found:
+            </h2>
+            <ul>
+              <% @post.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
           </div>
-          <div class="modal-body">
-            <div id="error_explanation">
-              <h2>
-                <%= pluralize(@post.errors.count, "error") %> errors found:
-              </h2>
-              <ul>
-                <% @post.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="form-row" style="text-align: center;">
+  <div class="tg-wrap">
+    <table width="100%">
+      <tr>
+        <td align="left" valign="top">
+          <div class="form-group">
+            <%= form.label :title %><br>
+            <%= form.text_field :title %>
+          </div>
+        </td>
+        <td align="left" valign="top">
+          <div class="form-group">
+            <%= form.label :subtitle %><br>
+            <%= form.text_area :subtitle, style: "resize: none;" %>
+          </div>
+        </td>
+        <td colspan="2" align="right" valign="top">
+          <div class="form-group">
+            <%= form.label :tags %><br>
+            <%= form.text_area :tag_list, value: form.object.tag_list.to_s, style: "resize: none;" %>
+            <small id="taggoesHelp" class="form-text text-muted">Tags must be separated by a comma.</small>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" align="center">
+          <div class="input-group">
+            <%= form.text_area :content, class: "form-control" %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="left">
+          <div class="custom-file"  style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%; width: 100%;">
+            <%= form.file_field :image, class: "custom-file-input"  %>
+            <label class="custom-file-label" for="post_image"><i class="fas fa-camera-retro"> Add Image</i></label>
+          </div>
+        </td>
+        <td colspan="2" align="center">
+          <div class="form-group" style="text-align: center; padding-top:10px; margin-top:10px;">
+            <% if @post.id.present? %>
+              <%= button_tag(type: 'submit', class: "btn btn-primary") do %><i class="fas fa-edit"></i> Update<% end %>
+            <% else %>
+              <%= button_tag(type: 'submit', class: "btn btn-primary") do %><i class="fas fa-check"></i> Publish<% end %>
+            <% end %>
+          </div>
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>
 
-    	<div class="form-group col-md-4">
-      	<%= form.label :title %><br>
-      	<%= form.text_field :title %>
-      </div>
-
-      <div class="form-group col-md-4">
-      	<%= form.label :subtitle %><br>
-      	<%= form.text_field :subtitle %>
-      </div>
-
-      <div class="form-group col-md-4">
-      	<%= form.label :tags %><br>
-        <%= form.text_field :tag_list, value: form.object.tag_list.to_s %>
-      	<small id="taggoesHelp" class="form-text text-muted">Tags must be separated by a comma.</small>
-    	</div>
-    </div>
-
-    <div class="input-group" style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%;">
-    	<%= form.text_area :content, class: "form-control" %>
-    </div>
-
-    <div class="custom-file"  style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%; width: 30%;">
-      <%= form.file_field :image, class: "custom-file-input"  %>
-      <label class="custom-file-label" for="post_image"><i class="fas fa-camera-retro"> Add Image</i></label>
-    </div>
-
-
-    <div class="form-group" style="text-align: center; padding-top:10px; margin-top:10px;">
-      <%= form.submit :class => 'btn btn-primary' %>
-    </div>
-  <% end %>
-
-  <script> 
-    $(document).ready(function(){
-      $('#post_content').froalaEditor({
-        width: '100%',
-        htmlAllowComments: false,
-        imageUpload: false,
-        fileUpload: false,
-        emoticonsUseImage: false,
-        htmlExecuteScripts: false
-      });
+<script> 
+  $(document).ready(function(){
+    $('#post_content').froalaEditor({
+      width: '100%',
+      htmlAllowComments: false,
+      imageUpload: false,
+      fileUpload: false,
+      emoticonsUseImage: false,
+      htmlExecuteScripts: false
     });
+  });
 
-    $('#post_image').on('change', function(){
-      $('.custom-file-label').html($('input[type=file]').val().replace(/C:\\fakepath\\/i, ''));
-    });
-  </script>
-
-</div>
+  $('#post_image').on('change', function(){
+    $('.custom-file-label').html($('input[type=file]').val().replace(/C:\\fakepath\\/i, ''));
+  });
+</script>
