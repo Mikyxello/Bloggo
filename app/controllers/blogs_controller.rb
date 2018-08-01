@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
 
-	before_action :check_user, except: [ :index, :show, :new, :create ]
+	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow ]
 	impressionist actions: [:show], unique: [:session_hash]
 
 	def index
@@ -18,6 +18,18 @@ class BlogsController < ApplicationController
 		@shown_posts = @blog.posts.last(5)
 		render 'show'
 	end
+
+	def follow
+		@blog = Blog.find(params[:id])
+		current_user.follow(@blog)
+		show
+		end
+
+	def unfollow
+		@blog = Blog.find(params[:id])
+		current_user.stop_following(@blog)
+		show
+		end
 
 	def visited_view
 		@filter == "Most Visited"

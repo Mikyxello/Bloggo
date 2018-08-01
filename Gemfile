@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/Mikyxello/Bloggo.git" }
+# git_source(:github) { |repo| "https://github.com/Mikyxello/Bloggo.git" }
 
 ruby '2.5.1'
 
@@ -70,3 +70,5 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'carrierwave', '~> 1.0'
 gem 'impressionist'
+gem 'notifications', '~> 0.6.0'
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
