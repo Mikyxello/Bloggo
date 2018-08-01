@@ -7,7 +7,7 @@
 		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
     	<div class="col-sm text-center">
       	<h3> Followers</h3>
-      	<h6> 1M</h6>
+      	<h6> <%= @blog.followers_count%> </h6>
     	</div>
     	<div class="col-sm text-center">
       	<h3> Posts</h3>
@@ -18,8 +18,23 @@
       	<h6> <%= "#{@blog.impressionist_count} views so far!" %> </h6>
     	</div>
   	</div>
-		<%= link_to 'Subscribe', edit_blog_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
+  	<% if user_signed_in? %>
+
+  			<% if current_user.id == @blog.user_id %>
+					<%= link_to 'Edit', edit_blog_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
+				<% else %>
+			  	<% if current_user.following?(@blog) %>
+						<%= link_to 'Unfollow', unfollow_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
+					<% else %>
+						<%= link_to 'Follow', follow_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
+					<% end %>
+
+				<% end %>
+
+		<% else %>
+				<%= link_to 'Sign in to follow', "#loginModal", "data-toggle" => "modal" , class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
 		<!-- qua ci va la funzione subscribe --> 
+		<% end %>
 	</div>
 	<h3><%= @blog.description %></h3>
 
