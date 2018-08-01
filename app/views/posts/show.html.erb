@@ -8,10 +8,10 @@
 							<tr>
 								<td colspan="4" align="left" valign="top">
 									<% if false %>
-										<%= image_tag(@post.blog.image.url, alt: @post.blog.image.identifier, width: '30px', style: "border-radius: 50%;") if @post.blog.image? %>
+										<%= image_tag(@post.blog.image.url, alt: @post.blog.image.identifier, width: '30px', height: '30px', style: "border-radius: 50%;") if @post.blog.image? %>
 									<% end %>
 
-									<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
+									<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;") if @post.user.avatar_image? %>
 									<%= @post.title %>
 									<small class="text-muted"> posted on </small>
 									<%= link_to @post.blog.name, blog_path(@post.blog) %>
@@ -95,10 +95,8 @@
 						<div class="tg-wrap">
 							<table>
 								<tr>
-									<td>
-										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
-										<small class="card-title"><%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user) %></small>
-									</td>
+									<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;") if @post.user.avatar_image? %>
+									<small class="card-title"><%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user) %></small>
 								</tr>
 								<tr>
 									<td>
@@ -116,8 +114,10 @@
 						</div>
 					</div>
 					<div id="related_post" style="margin-top: 5%;">
-						<small>Related Posts</small>
-						<div style="font-size: 70%;" id="related_posts"><%= render @related_posts %></div>
+						<% if @related_posts.size > 0 %>
+							<small>Related Posts</small>
+							<div style="font-size: 70%;" id="related_posts"><%= render @related_posts %></div>
+						<% end %>
 					</div>
 				</td>
 			</tr>

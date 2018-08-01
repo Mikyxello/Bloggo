@@ -2,10 +2,10 @@
 	<div class="card-body tg-wrap" style="width: 100%;">
 		<table width="100%">
 			<tr>
-				<td colspan="2" align="left"  valign="top" style="text-align: left; width: 15%; padding: 1%;">
-					<%= image_tag(post.user.avatar_image.url, alt: post.user.avatar_image.identifier, width: '100%', style: "border-radius: 50%;") if post.user.avatar_image? %>
+				<td colspan="2" align="left"  valign="top" style="text-align: left;">
+					<%= image_tag(post.user.avatar_image.url, alt: post.user.avatar_image.identifier, width: '100rem', height: '100rem', style: "border-radius: 50%; object-fit:cover;") if post.user.avatar_image? %>
 				</td>
-				<td colspan="2" align="left" valign="center" style="text-align: left;">
+				<td colspan="2" align="left" valign="center" style="text-align: left; padding-left: 1%; width: 100%;">
 					<h5 style="font-size:1rem;"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
 					<h6 style="font-size:0.8rem;" class="text-muted"><%= post.subtitle %></h6>
 				</td>
@@ -14,14 +14,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">&nbsp;</td>
-				<td colspan="2">&nbsp;</td>
-				<td>&nbsp;</td>
+				<td colspan="5">&nbsp;</td>
 			</tr>
 			<tr>
 				<td colspan="5" align="left" valign="center" style="text-align: left;">
 					<div class="fr-view"><%= truncate(post.content.html_safe, length: 100, omission: "<small class='text-muted'>...(Read More)</small>".html_safe, :escape => false) %></div>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="5">&nbsp;</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="left" style="text-align: left;">
