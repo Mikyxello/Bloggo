@@ -1,7 +1,1 @@
-<% if tag.taggings_count <= 1 %>
-    <%= link_to tag.name, tag_path(tag), class: "badge badge-secondary" %>
-<% elsif tag.taggings_count <= 3 %>
-  <h2><%= link_to tag.name, tag_path(tag), class: "badge badge-success" %></h2>
-<% elsif tag.taggins_count >= 5 %>
-  <h1><%= link_to tag.name, tag_path(tag), class: "badge badge-danger" %></h1>
-<%end%>
+<%= link_to tag.name, tag_path(tag), class: "badge badge-secondary" %>

@@ -261,7 +261,7 @@ Devise.setup do |config|
 
   }
 
-  config.omniauth :facebook, "849655068560418", "79ca120a48037f26939fc925dba33080", scope: 'email', info_fields: 'email,first_name,last_name'
+  config.omniauth :facebook, "849655068560418", "79ca120a48037f26939fc925dba33080", scope: 'email', info_fields: 'email,name,first_name,last_name'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
