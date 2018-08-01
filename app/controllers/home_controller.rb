@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 		              end
     @most_viewed = Blog.order('impressions_count DESC').last(10)
     @posts = Post.all
-    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse.first(10)
+    @tags = ActsAsTaggableOn::Tag.most_used.order("taggings_count").first(10)
   end
 
 

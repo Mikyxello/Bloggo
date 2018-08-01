@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
-	before_action :check_user, except: [ :show, :new, :create, :upvote, :downvote ]
+	impressionist actions: [:show], unique: [:session_hash]
+	before_action :check_user, except: [ :index, :show, :new, :create, :upvote, :downvote ]
 
 	def new
 		@blog = Blog.find(params[:blog_id])

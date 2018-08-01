@@ -22,7 +22,9 @@
             </tr>
           <% end %>
         <% else %>
-          <h3> No blogs found! </h3>
+        <div class="card-body">
+          <h3> No bloggoes found! </h3>
+        </div>
         <% end %>
       </table>
       </div>
@@ -34,7 +36,11 @@
         <h2>Top Trending Taggoes</h2>
       </div>
       <div class="card-body">
-        <%= render @tags %>
+        <% if @tags != nil && @tags.count != 0%>
+          <%= render @tags %>
+        <% else %>
+          <h3> No taggoes found! </h3>
+        <% end %>
       </div>
     </div>
   </div>
@@ -46,7 +52,7 @@
         <div class="card-header bg-danger" style="text-align:center;">
           <h2>Bloggoes Showcase</h2>
         </div>
-        <% if @blogs != nil && @blogs.count != 0%>
+        <% if @blogs != nil && @blogs.count != 0 %>
           <table class="table">
             <tr>
               <th scope="col">Name</th>
@@ -62,9 +68,11 @@
               <td><%= link_to blog.impressionist_count%></td>
             </tr>
           <% end %>
-        <% else %>
-          <h3> No blogs found! </h3>
-        <% end %>
+          <% else %>
+          <div class="card-body">
+            <h3> No bloggoes found! </h3>
+          </div>
+          <% end %>
       </table>
       </div>
     </div>
@@ -74,26 +82,33 @@
           <div class="card-header bg-success" style="text-align:center;">
             <h2>Top Trending Postoes</h2>
           </div>
-            <div class="card-group">
-              <% @posts.each do |post| %>
-                <div class="card">
-                  <% if post.image? %>
-                    <img class="card-img-top" style="height:300px; object-fit: contain;" src="<%= post.image %>" alt="Card image cap">
-                  <% else %>
-                    <img class="card-img-top" style="height:300px; object-fit: contain;" src="http://via.placeholder.com/1920x1080" alt="Card image cap">
-                  <%end %>
-                  <div class="card-body">
-                    <h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
-                    <p class="card-text"><%= truncate(post.content.html_safe, length: 100, :escape => false) %></br> <%= link_to 'Read more', blog_post_path(post.blog, post) %></p>
+            <% if @posts != nil && @posts.count != 0 %>
+              <!-- <div class="card-group">
+                <% @posts.each do |post| %>
+                  <div class="card">
+                    <% if post.image? %>
+                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="<%= post.image %>" alt="Card image cap">
+                    <% else %>
+                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="http://via.placeholder.com/1920x1080" alt="Card image cap">
+                    <%end %>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
+                      <p class="card-text"><%= truncate(post.content.html_safe, length: 100, :escape => false) %></br> <%= link_to 'Read more', blog_post_path(post.blog, post) %></p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-muted font-weight-bold"><%= link_to post.user.name, user_path(post.user) %></small>
+                      -
+                      <small class="text-muted font-italic"><%= link_to post.blog.name, blog_path(post.blog) %></small>
+                    </div>
                   </div>
-                  <div class="card-footer">
-                    <small class="text-muted font-weight-bold"><%= link_to post.user.name, user_path(post.user) %></small>
-                    -
-                    <small class="text-muted font-italic"><%= link_to post.blog.name, blog_path(post.blog) %></small>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+                <% end %>
+            </div> -->
+            <%= render @posts %>
+            <% else %>
+              <div class="card-body">
+                <h3> No postoes found</h3>
+              </div>
+            <% end %>
           </div>
     </div>
   </div>

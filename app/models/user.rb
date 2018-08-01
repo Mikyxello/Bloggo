@@ -26,28 +26,13 @@ class User < ApplicationRecord
 
 	   unless user
 	     password = Devise.friendly_token[0,20]
-	     user = User.create(:name => data["name"],:surname => data["surname"], email: data["email"],
-	       password: password, password_confirmation: password, avatar_image: data["avatar_image"]
+	     user = User.create(:name => data["first_name"],:surname => data["last_name"], email: data["email"],
+	       password: password, password_confirmation: password, avatar_image: data["image"]
 	     )
+			 user.save!
 	   end
 	   user
 	 end
-
-	 def self.from_omniauth(auth)
-	  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-	    user.email = auth.info.email
-	    user.password = Devise.friendly_token[0,20]
-	    user.name = auth.info.name   # assuming the user model has a name
-	    user.avatar_image = auth.info.image # assuming the user model has an image
-	    # If you are using confirmable and the provider(s) you use validate emails,
-	    # uncomment the line below to skip the confirmation emails.
-	    # user.skip_confirmation!
-			password = Devise.friendly_token[0,20]
-			user = User.create(:name => auth.info.name,:surname => auth.info.last_name, email: auth.info.email,
-				password: password, password_confirmation: password, avatar_image: auth.info.image
-			)
-	  end
-	end
 
 	 def self.new_with_session(params, session)
     super.tap do |user|
