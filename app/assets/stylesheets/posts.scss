@@ -3,21 +3,36 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .angry {
-	background: -webkit-linear-gradient(#FF7C00, #AA0404);
+	background: -webkit-linear-gradient(#FF493A, #FDD983);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+	transition: transform .2s;
 }
 
 .like {
 	background: -webkit-linear-gradient(#002F77, #12BAEB);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+	transition: transform .2s;
+}
+
+a > .like:hover {
+	transform: scale(2);
+}
+
+a > .angry:hover {
+	transform: scale(2);
 }
 
 .post-link:hover {
 	text-decoration: none;
+	opacity: 0.9;
 }
 
 .image-link:hover {
 	opacity: 0.7;
+}
+
+.pagination-margin {
+	margin-top: 1%;
 }

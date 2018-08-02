@@ -9,7 +9,8 @@ class PostsController < ApplicationController
 	end
 
 	def index
-		 @posts = Post.all.order("created_at").paginate(:page => params[:page], :per_page => 1)
+		@blog = Blog.find(params[:blog_id])
+		@posts = @blog.posts.paginate(page: params[:page], per_page: 5)
 	end
 
 	def edit

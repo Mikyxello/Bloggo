@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td colspan="5" align="left" valign="center" style="text-align: left;">
-					<div class="fr-view"><%= truncate(post.content.html_safe, length: 200, omission: "<small class='text-muted'>... #{link_to('[Read More]', blog_post_path(post.blog, post), class: 'post-link')}</small>".html_safe, :escape => false) %></div>
+					<div class="fr-view"><%= truncate(post.content.html_safe, length: 250, omission: "<small class='text-muted'>... #{link_to('[Read More]', blog_post_path(post.blog, post), class: 'post-link')}</small>".html_safe, :escape => false) %></div>
 				</td>
 			</tr>
 			<tr>
