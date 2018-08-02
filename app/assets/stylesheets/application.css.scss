@@ -22,6 +22,8 @@
 @import "comments";
 @import 'bootstrap';
 
+@import url(http://fonts.googleapis.com/css?family=Roboto:200,300,400,600);
+
 .pastel_colour_blue {
 	background : #00796b;
 	color: white;
@@ -42,7 +44,7 @@
 	color: white;
 }
 
-.pastel_colour_navbar .pastel_colour_footer{
+.pastel_colour_navbar, .pastel_colour_footer{
 	background: #00796b;
 }
 

@@ -23,13 +23,13 @@ class BlogsController < ApplicationController
 		@blog = Blog.find(params[:id])
 		current_user.follow(@blog)
 		show
-		end
+	end
 
 	def unfollow
 		@blog = Blog.find(params[:id])
 		current_user.stop_following(@blog)
 		show
-		end
+	end
 
 	def visited_view
 		@filter == "Most Visited"
