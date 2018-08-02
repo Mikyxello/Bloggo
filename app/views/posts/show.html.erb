@@ -7,16 +7,16 @@
 						<table width="100%" align="center">
 							<tr>
 								<td colspan="4" align="left" valign="top">
-									<% if false %>
-										<%= image_tag(@post.blog.image.url, alt: @post.blog.image.identifier, width: '30px', style: "border-radius: 50%;") if @post.blog.image? %>
+									<% if @post.user.avatar_image? %>
+										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
+									<% else %>
+										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
 									<% end %>
-
-									<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
 									<%= @post.title %>
 									<small class="text-muted"> posted on </small>
-									<%= link_to @post.blog.name, blog_path(@post.blog) %>
+									<%= link_to @post.blog.name, blog_path(@post.blog), class: "post-link" %>
 									<small class="text-muted"> by </small>
-									<%= link_to @post.user.name, user_path(@post.user) %>
+									<%= link_to @post.user.name, user_path(@post.user), class: "post-link" %>
 									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %> ago</small>
 								</td>
 								<td align="right" valign="top">
@@ -56,10 +56,10 @@
 							</tr>
 							<tr>
 								<td align="left">
-									<%= link_to like_blog_post_path(@post.blog, @post), method: :put do %>
+									<%= link_to like_blog_post_path(@post.blog, @post), class: "post-link", method: :put do %>
 								    	<i class="fas fa-thumbs-up like"></i><small><%= @post.get_upvotes.size %></small>
 							    	<% end %>
-									<%= link_to dislike_blog_post_path(@post.blog, @post), method: :put do %>
+									<%= link_to dislike_blog_post_path(@post.blog, @post), class: "post-link", method: :put do %>
 										<i class="fas fa-angry angry"></i><small><%= @post.get_downvotes.size %></small>
 									<% end %>
 								</td>
@@ -93,12 +93,20 @@
 				<td valign="top" width="30%">
 					<div class="card" id="user_card" style="padding: 5%;">
 						<div class="tg-wrap">
-							<table>
+							<table width="100%">
 								<tr>
-									<td>
-										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', style: "border-radius: 50%;") if @post.user.avatar_image? %>
-										<small class="card-title"><%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user) %></small>
-									</td>
+									<% if @post.user.avatar_image? %>
+										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
+									<% else %>
+										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
+									<% end %>
+									<small class="card-title">
+										<% if @post.user.name? %>
+											<%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user), class: "post-link" %>
+										<% else %>
+											<%= link_to @post.user.email, user_path(@post.user), class: "post-link" %>
+										<% end %>	
+									</small>
 								</tr>
 								<tr>
 									<td>
@@ -116,8 +124,10 @@
 						</div>
 					</div>
 					<div id="related_post" style="margin-top: 5%;">
-						<small>Related Posts</small>
-						<div style="font-size: 70%;" id="related_posts"><%= render @related_posts %></div>
+						<% if @related_posts.size > 0 %>
+							<small class="text-muted" style="padding: 2px;">Related Posts</small>
+							<div style="font-size: 0.7rem;" id="related_posts"><%= render @related_posts %></div>
+						<% end %>
 					</div>
 				</td>
 			</tr>

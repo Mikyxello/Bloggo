@@ -2,26 +2,31 @@
 	<div class="card-body tg-wrap" style="width: 100%;">
 		<table width="100%">
 			<tr>
-				<td colspan="2" align="left"  valign="top" style="text-align: left; width: 15%; padding: 1%;">
-					<%= image_tag(post.user.avatar_image.url, alt: post.user.avatar_image.identifier, width: '100%', style: "border-radius: 50%;") if post.user.avatar_image? %>
+				<td colspan="2" align="left"  valign="top" style="text-align: left;">
+					<% if post.user.avatar_image? %>
+						<%= image_tag(post.user.avatar_image.url, alt: post.user.avatar_image.identifier, width: '70rem', height: '70rem', style: "border-radius: 50%; object-fit:cover;") %>
+					<% else %>
+						<%= image_tag(asset_path('user-placeholder.jpeg'), alt: post.user.name, width: '70rem', height: '70rem', style: "border-radius: 50%; object-fit:cover;")  %>
+					<% end %>
 				</td>
-				<td colspan="2" align="left" valign="center" style="text-align: left;">
-					<h5 style="font-size:1rem;"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
-					<h6 style="font-size:0.8rem;" class="text-muted"><%= post.subtitle %></h6>
+				<td colspan="2" align="left" valign="center" style="text-align: left; padding-left: 1%; width: 100%;">
+					<h5 style="font-size:0.9rem;"><%= link_to truncate(post.title, length: 20, omission: "..."), blog_post_path(post.blog, post), class: "post-link" %> <small class="text-muted"> by </small> <%= link_to post.user.name, user_path(post.user), class: "post-link" %> </h5>
+					<h6 style="font-size:0.7rem;" class="text-muted"><%= truncate(post.subtitle, length: 25, omission: "...") %></h6>
 				</td>
 				<td align="right" valign="top" style="text-align: right;">
 					<%= render post.tags %>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">&nbsp;</td>
-				<td colspan="2">&nbsp;</td>
-				<td>&nbsp;</td>
+				<td colspan="5">&nbsp;</td>
 			</tr>
 			<tr>
 				<td colspan="5" align="left" valign="center" style="text-align: left;">
-					<div class="fr-view"><%= truncate(post.content.html_safe, length: 100, omission: "<small class='text-muted'>...(Read More)</small>".html_safe, :escape => false) %></div>
+					<div class="fr-view"><%= truncate(post.content.html_safe, length: 200, omission: "<small class='text-muted'>... #{link_to('[Read More]', blog_post_path(post.blog, post), class: 'post-link')}</small>".html_safe, :escape => false) %></div>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="5">&nbsp;</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="left" style="text-align: left;">
@@ -29,7 +34,7 @@
 					<i class="fas fa-angry angry"></i><small><%= post.get_downvotes.size%></small>
 				</td>
 				<td colspan="2" align="left" style="text-align: left;">
-					<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"></i> Comments ').concat(post.comments.size.to_s).concat(raw('</small>')), blog_post_path(post.blog, post) %>
+					<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"></i> Comments ').concat(post.comments.size.to_s).concat(raw('</small>')), blog_post_path(post.blog, post), class: "post-link" %>
 				</td>
 				<td colspan="1" align="right" style="text-align: right;">
 					<% if current_user == post.user %>

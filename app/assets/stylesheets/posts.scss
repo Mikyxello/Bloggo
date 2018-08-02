@@ -13,3 +13,11 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
+.post-link:hover {
+	text-decoration: none;
+}
+
+.image-link:hover {
+	opacity: 0.7;
+}

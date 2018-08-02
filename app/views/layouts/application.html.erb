@@ -7,7 +7,10 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:200,300,400,600">
+=======
+>>>>>>> 4291841fb0cb8910f3e3a6da267df94296a18266
   </head>
 
   <body>
@@ -25,7 +28,7 @@
 
           <div>
             <img style="border-radius:60%; width:50px; height:50px; object-fit:cover;"
-             src="<% if current_user.avatar_image?%>
+             src="<% if current_user.avatar_image? %>
                     <%= current_user.avatar_image %>
                   <% else %>
                     <%= asset_path('user-placeholder.jpeg') %>
@@ -44,6 +47,7 @@
           <% end %>
       </form>
     </nav>
+
     <div class="modal" id="loginModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -55,7 +59,6 @@
           </div>
           <div class="modal-body">
             <%= render "devise/sessions/new" %>
-
           </div>
         </div>
       </div>
@@ -75,10 +78,11 @@
         </div>
       </div>
     </div>
+
     <%= yield %>
 
     <!-- Footer -->
-    <footer class="footer" style="text-align: center; padding-top: 5%; background: #e9ecef;">
+    <footer class="footer pastel_colour_footer" style="text-align: center; padding-top: 5%;">
       <div class="container">
         <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
         <a href="https://plus.google.com/"><i class="fab fa-google-plus-g"></i></a>
@@ -90,6 +94,7 @@
         <span class="text-muted">2018 Copyright &copy; <a href="http://localhost:3000/">Bloggo</a></span>
       </div>
     </footer>
+<<<<<<< HEAD
 
     <style>
 
@@ -162,5 +167,7 @@
       }
     </style>
 
+=======
+>>>>>>> 4291841fb0cb8910f3e3a6da267df94296a18266
   </body>
 </html>
