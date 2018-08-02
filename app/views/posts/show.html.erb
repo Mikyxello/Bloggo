@@ -124,7 +124,7 @@
 						</div>
 					</div>
 					<div id="related_post" style="margin-top: 5%;">
-						<% if @related_posts.size > 0 %>
+						<% if @related_posts %>
 							<small class="text-muted" style="padding: 2px;">Related Posts</small>
 							<div style="font-size: 0.7rem;" id="related_posts"><%= render @related_posts %></div>
 						<% end %>

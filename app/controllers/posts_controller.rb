@@ -1,38 +1,27 @@
 class PostsController < ApplicationController
 
-	impressionist actions: [:show], unique: [:session_hash]
+	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 	before_action :check_user, except: [ :index, :show, :new, :create, :upvote, :downvote ]
-
-	def new
-		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.build
-	end
 
 	def index
 		@blog = Blog.find(params[:blog_id])
 		@posts = @blog.posts.paginate(page: params[:page], per_page: 5)
 	end
 
-	def edit
-		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
-	end
-
 	def show
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		@related_posts = Post.tagged_with(@post.tag_list, any: true).where.not(id: @post.id).last(3)
+		@related_posts = Post.where.not(id: @post.id).tagged_with(@post.tag_list, any: true).order(:cached_weighted_average => :desc, :impressions_count => :asc).first(3)
 	end
 
-	def update
+	def new
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.build
+	end
+
+	def edit
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-
-		if @post.update(post_params)
-			redirect_to blog_post_path(@blog, @post)
-		else
-			render 'edit'
-		end
 	end
 
 	def create
@@ -44,6 +33,17 @@ class PostsController < ApplicationController
 			redirect_to blog_post_path(@blog, @post)
 		else
 			render 'new'
+		end
+	end
+
+	def update
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+
+		if @post.update(post_params)
+			redirect_to blog_post_path(@blog, @post)
+		else
+			render 'edit'
 		end
 	end
 

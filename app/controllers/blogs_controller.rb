@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
 
 	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow ]
-	impressionist actions: [:show], unique: [:session_hash]
+	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
 	def index
 		@blogs = if params[:blog]

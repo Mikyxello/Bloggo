@@ -3,7 +3,7 @@ class Post < ApplicationRecord
 
 	acts_as_votable
 
-	is_impressionable :counter_cache => true
+	is_impressionable :counter_cache => true, :column_name => :impressions_count
 
 	mount_uploader :image, ImageUploader
 
