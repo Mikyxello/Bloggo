@@ -67,10 +67,17 @@
       </tr>
       <tr>
         <td align="left">
-          <div class="custom-file"  style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%; width: 100%;">
-            <%= form.file_field :image, class: "custom-file-input"  %>
-            <label class="custom-file-label" for="post_image"><i class="fas fa-camera-retro"> Add Image</i></label>
+          <div class="custom-file" style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%;">
+            <%= form.file_field :file, class: "custom-file-input", 'aria-describedby' => "fileHelp" %>
+            <label class="custom-file-label" for="post_file">
+              <% if @post.file.file.nil? %>
+                <i class="fas fa-file-upload"></i> Add File
+              <% else %>
+                <%= @post.file.file.filename %>
+              <% end %>
+            </label>
           </div>
+          <small id="fileHelp" class="form-text text-muted" style="position: absolute;">File must be 'jpeg', 'jpg', 'png', 'gif' or 'mp4'</small>
         </td>
         <td colspan="2" align="center">
           <div class="form-group" style="text-align: center; padding-top:10px; margin-top:10px;">
@@ -89,15 +96,12 @@
   </div>
 <% end %>
 
+<br/>
+
 <script> 
   $(document).ready(function(){
     $('#post_content').froalaEditor({
-      width: '100%',
-      htmlAllowComments: false,
-      imageUpload: false,
-      fileUpload: false,
-      emoticonsUseImage: false,
-      htmlExecuteScripts: false
+      width: '100%'
     });
   });
 

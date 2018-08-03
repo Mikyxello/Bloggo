@@ -86,10 +86,10 @@
               <!-- <div class="card-group">
                 <% @posts.each do |post| %>
                   <div class="card">
-                    <% if post.image? %>
-                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="<%= post.image %>" alt="Card image cap">
+                    <% if post.file? %>
+                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="<%= post.file %>" alt="Card file cap">
                     <% else %>
-                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="http://via.placeholder.com/1920x1080" alt="Card image cap">
+                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="http://via.placeholder.com/1920x1080" alt="Card file cap">
                     <%end %>
                     <div class="card-body">
                       <h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
@@ -130,7 +130,7 @@
       <tr>
         <td><%= link_to post.title, blog_posts_path(post) %></td>
         <td>
-          <%= image_tag(post.image.url, alt: post.image.identifier, width:'40px',height:'40px') if post.image? %>
+          <%= image_tag(post.file.url, alt: post.file.identifier, width:'40px',height:'40px') if post.file? %>
 
         </td>
         <td><%= link_to post.user.name, user_path(post.user) %></td>

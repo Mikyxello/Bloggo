@@ -5,7 +5,10 @@ class Post < ApplicationRecord
 
 	is_impressionable :counter_cache => true, :column_name => :impressions_count
 
-	mount_uploader :image, ImageUploader
+	mount_uploader :file, FileUploader
+
+	validates_integrity_of :file
+	validates_processing_of :file
 
 	has_many :comments, dependent: :destroy
 

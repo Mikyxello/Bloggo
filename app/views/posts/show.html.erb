@@ -33,7 +33,15 @@
 							</tr>
 							<tr>
 								<td colspan="5" align="center">
-									<%= image_tag(@post.image.url, alt: @post.image.identifier, width: '100%', style: "padding: 1%;") if @post.image? %>
+									<% if @post.file.file.nil? %>
+										<br/>
+									<% else %>
+										<% if @post.file.file.extension.downcase == 'mp4' %>
+											<%= video_tag(@post.file.url, controls: true, autobuffer: true) %>
+										<% else %>
+											<%= image_tag(@post.file.url, alt: @post.file.identifier, width: '100%', style: "padding: 1%;") %>
+										<% end %>
+									<% end %>
 								</td>
 							</tr>
 							<tr>
