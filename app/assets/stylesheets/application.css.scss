@@ -67,48 +67,101 @@ h6 {
 	color: white;
 }
 
-.pastel_colour_navbar, .pastel_colour_footer{
+.pastel_colour_navbar {
 	background: #00796b;
 }
 
-.fab {
-	padding: 2%;
-	font-size: 20px;
+
+// Footer
+
+.pastel_colour_footer{
+	background: #00796b;
+}
+
+.footer {
 	text-align: center;
-	text-decoration: none;
-	border-radius: 50%;
+	padding-top: 2%;
+	padding-bottom: 1%;
 }
 
-.fab:hover {
-	opacity: 0.7;
+.smGlobalBtn { /* global button class */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border:2px solid #ddd; /* add border to the buttons */
+    box-shadow: 0 3px 3px #999;
+    padding: 0px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 2em;
+    border-radius: 27px;
+    -moz-border-radius:27px;
+    -webkit-border-radius:27px;
 }
 
-.fa-facebook-f {
-	background: #3B5998;
-	color: white;
+.facebookBtn{
+    background: #4060A5;
 }
 
-.fa-google-plus-g {
-	background: #dd4b39;
-	color: white;
+.facebookBtn:hover{
+    color: #4060A5;
+    background: #fff;
+    border-color: #4060A5;
 }
 
-.fa-linkedin-in {
-	background: #007bb6;
-	color: white;
+.twitterBtn{
+    background: #00ABE3;
 }
 
-.fa-instagram {
-	background: #517fa4;
-	color: white;
+.twitterBtn:hover{
+      color: #00ABE3;
+      background: #fff;
+      border-color: #00ABE3;
 }
 
-.fa-pinterest {
-	background: #cb2027;
-	color: white;
+.googleplusBtn{
+    background: #e64522;
 }
 
-.fa-twitter {
-	background: #55ACEE;
-	color: white;
+.googleplusBtn:hover{
+      color: #e64522;
+      background: #fff;
+      border-color: #e64522;
+}
+
+.linkedinBtn{
+    background: #0094BC;
+}
+
+.linkedinBtn:hover{
+      color: #0094BC;
+      background: #fff;
+      border-color: #0094BC;
+}
+
+.pinterestBtn{
+    background: #cb2027;
+}
+
+.pinterestBtn:hover{
+      color: #cb2027;
+      background: #fff;
+      border-color: #cb2027;
+}
+
+.copyright {
+	color: #FFFFFF;
+}
+
+.copyright > a {
+	color: #E8E8E8;
+	&:hover {
+		color: #F5F5F5;
+		text-decoration: none;
+	}
 }

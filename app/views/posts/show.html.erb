@@ -3,16 +3,16 @@
 		<table width="100%">
 			<tr>
 				<td rowspan="2" width="70%" valign="top">
-					<div class="card" style="padding: 10px;" id="post_card">
+					<div class="card post-card">
 						<table width="100%" align="center">
 							<tr>
 								<td colspan="4" align="left" valign="top">
 									<% if @post.user.avatar_image? %>
-										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
+										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, class: "image-link") %>
 									<% else %>
-										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
+										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, class: "image-link") %>
 									<% end %>
-									<%= @post.title %>
+									<strong><%= @post.title %></strong>
 									<small class="text-muted"> posted on </small>
 									<%= link_to @post.blog.name, blog_path(@post.blog), class: "post-link" %>
 									<small class="text-muted"> by </small>
@@ -37,9 +37,9 @@
 										<br/>
 									<% else %>
 										<% if @post.file.file.extension.downcase == 'mp4' %>
-											<%= video_tag(@post.file.url, controls: true, autobuffer: true) %>
+											<%= video_tag(@post.file.url, controls: true, autobuffer: true, class: 'post-file')  %>
 										<% else %>
-											<%= image_tag(@post.file.url, alt: @post.file.identifier, width: '100%', style: "padding: 1%;") %>
+											<%= image_tag(@post.file.url, alt: @post.file.identifier, class: 'post-file') %>
 										<% end %>
 									<% end %>
 								</td>
@@ -89,13 +89,6 @@
 					  	<div style="display: block; margin-top: 2%;">
 							<%= render @post.comments %>
 						</div>
-						<% if false %>
-							<% if user_signed_in? %>
-								<p align="center">
-									<%= link_to raw('<i class="fas fa-pen-alt"> Comment</i>'), new_blog_post_comment_path(@post.blog, @post), class: "btn btn-info", style: "margin: 5px;" %>
-								</p>
-							<% end %>
-						<% end %>
 					</div>
 				</td>
 				<td valign="top" width="30%">
@@ -104,9 +97,9 @@
 							<table width="100%">
 								<tr>
 									<% if @post.user.avatar_image? %>
-										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
+										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, class: "image-link") %>
 									<% else %>
-										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, width: '30px', height: '30px', style: "border-radius: 50%; object-fit:cover;", class: "image-link") %>
+										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, class: "image-link") %>
 									<% end %>
 									<small class="card-title">
 										<% if @post.user.name? %>
@@ -123,9 +116,7 @@
 								</tr>
 								<tr>
 								    <td>
-								    	<p class="card-text" style="font-size: 14px;">
-								    		<%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %>
-								    	</p>
+								    	<p class='user-description'><%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %></p>
 								    </td>
 								</tr>
 							</table>
@@ -140,12 +131,5 @@
 				</td>
 			</tr>
 		</table>
-
-		<% if false %>
-			<p style="display: block;">
-				<%= link_to raw('<i class="fas fa-caret-left"> Back</i>'), blog_path(@post.blog), class: "btn btn-dark", style: "margin: 5px;" %>
-			</p>
-		<% end %>
-
 	</div>
 </div>

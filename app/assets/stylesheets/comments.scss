@@ -1,3 +1,18 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// Comment Show (views/comments/_comment.html.erb)
+
+.comment-content {
+	padding: 1%;
+}
+
+
+// Comment Form (views/comments/_form_new.html.erb)
+
+.comment-form.content {
+	width: 100%;
+	resize: none;
+}

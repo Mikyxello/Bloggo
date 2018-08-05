@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="jumbotron">
 		<% if @posts %>
-			<h3>Posts on <%= link_to @blog.name, blog_path(@blog), class: "post-link" %></h3>
+			<h3>Posts on <%= link_to @blog.name, blog_path(@blog), class: 'post-link' %></h3>
 			<%= render @posts %>
 			<%= will_paginate @posts, list_classes: %w(pagination justify-content-end pagination-sm pagination-margin), next_label: 'Next &raquo;', previous_label: '&laquo; Previous', aria_label: 'Posts Navigation' %>
 		<% else %>
-			<h3>There aren't posts for <%= link_to @blog.name, blog_path(@blog), class: "post-link" %></h3>
+			<h3>There aren't posts for <%= link_to @blog.name, blog_path(@blog), class: 'post-link' %></h3>
 		<% end %>
 	</div>
 </div>

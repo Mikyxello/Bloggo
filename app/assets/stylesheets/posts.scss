@@ -2,6 +2,53 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+// Post Index (views/posts/index.html.erb)
+
+.pagination-margin {
+	margin-top: 1%;
+}
+
+
+// Post Show (views/posts/show.html.erb)
+
+.post-card {
+	padding: 2%;
+}
+
+.post-title {
+	font-size: 0.9rem;
+}
+
+.post-subtitle {
+	font-size: 0.7rem;
+}
+
+.image-link {
+	border-radius: 50%;
+	object-fit: cover;
+	width: 2.5rem;
+	height: 2.5rem;
+	
+	&:hover {
+		opacity: 0.7;
+	}
+}
+
+.post-link {
+	font-family: 'Roboto';
+	
+	&:hover {
+		text-decoration: none;
+		opacity: 0.9;
+	}
+}
+
+.post-file {
+	width: 100%;
+	padding: 1%;
+}
+
 .angry {
 	background: -webkit-linear-gradient(#FF493A, #FDD983);
 	-webkit-background-clip: text;
@@ -24,15 +71,55 @@ a > .angry:hover {
 	transform: scale(2);
 }
 
-.post-link:hover {
-	text-decoration: none;
-	opacity: 0.9;
+
+// Post Partial Render (views/posts/_post.html.erb)
+
+.post-title-aux {
+	text-align: left;
+	padding-left: 1%;
+	width: 100%;
 }
 
-.image-link:hover {
-	opacity: 0.7;
+.image-link-aux {
+	border-radius: 50%;
+	object-fit:cover;
+	width: 4.5rem;
+	height: 4.5rem;
 }
 
-.pagination-margin {
-	margin-top: 1%;
+.read-more {
+	font-family: 'Roboto';
+	font-size: 0.7rem;
+	font-weight: 300;
+}
+
+
+// Post Form (views/posts/_form.html.erb)
+
+.post-form-file {
+	padding-top: 1%; 
+	margin-top: 1%; 
+	padding-bottom: 1%;
+	margin-bottom: 1%;
+}
+
+.post-form-tag-list, .post-form-subtitle {
+	resize: none;
+}
+
+.post-form-file-helper {
+	position: absolute;
+}
+
+.post-form-buttons {
+	text-align: center;
+	padding-top:10px;
+	margin-top:10px;
+}
+
+
+// User View
+
+.user-description {
+	font-size: 0.8rem;
 }

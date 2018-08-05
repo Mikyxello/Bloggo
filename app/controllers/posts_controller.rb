@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 	def show
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		@related_posts = Post.where.not(id: @post.id).tagged_with(@post.tag_list, any: true).order(:cached_weighted_average => :desc, :impressions_count => :asc).first(3)
+		@related_posts = Post.where.not(id: @post.id).tagged_with(@post.tag_list, any: true).order(:cached_weighted_average => :desc, :cached_votes_total => :desc, :impressions_count => :asc).first(3)
 	end
 
 	def new

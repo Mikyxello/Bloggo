@@ -47,13 +47,13 @@
         <td align="left" valign="top">
           <div class="form-group">
             <%= form.label :subtitle %><br>
-            <%= form.text_area :subtitle, style: "resize: none;" %>
+            <%= form.text_area :subtitle, class: 'post-form-subtitle' %>
           </div>
         </td>
         <td colspan="2" align="right" valign="top">
           <div class="form-group">
             <%= form.label :tags %><br>
-            <%= form.text_area :tag_list, value: form.object.tag_list.to_s, style: "resize: none;" %>
+            <%= form.text_area :tag_list, value: form.object.tag_list.to_s, class: 'post-form-tag-list' %>
             <small id="taggoesHelp" class="form-text text-muted">Tags must be separated by a comma.</small>
           </div>
         </td>
@@ -67,7 +67,7 @@
       </tr>
       <tr>
         <td align="left">
-          <div class="custom-file" style="padding-top: 1%; margin-top: 1%; padding-bottom: 1%; margin-bottom: 1%;">
+          <div class="custom-file post-form-file">
             <%= form.file_field :file, class: "custom-file-input", 'aria-describedby' => "fileHelp" %>
             <label class="custom-file-label" for="post_file">
               <% if @post.file.file.nil? %>
@@ -77,10 +77,10 @@
               <% end %>
             </label>
           </div>
-          <small id="fileHelp" class="form-text text-muted" style="position: absolute;">File must be 'jpeg', 'jpg', 'png', 'gif' or 'mp4'</small>
+          <small id="fileHelp" class="form-text text-muted post-form-file-helper">File must be 'jpeg', 'jpg', 'png', 'gif' or 'mp4'</small>
         </td>
         <td colspan="2" align="center">
-          <div class="form-group" style="text-align: center; padding-top:10px; margin-top:10px;">
+          <div class="form-group post-form-buttons">
             <% if @post.id.present? %>
               <%= button_tag(type: 'submit', class: "btn btn-primary") do %><i class="fas fa-edit"></i> Update<% end %>
             <% else %>
@@ -105,7 +105,21 @@
     });
   });
 
-  $('#post_image').on('change', function(){
-    $('.custom-file-label').html($('input[type=file]').val().replace(/C:\\fakepath\\/i, ''));
+  $('#post_file').on('change', function(){
+    var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+    var extension = filename.substr( (filename.lastIndexOf('.') +1) );
+    switch(extension) {
+        case 'jpeg':
+        case 'jpg':
+        case 'png':
+        case 'gif':
+            $('.custom-file-label').html('<i class="fas fa-file-image"></i> ' + filename);
+        break;
+        case 'mp4':
+            $('.custom-file-label').html('<i class="fas fa-file-video"></i> ' + filename);
+        break;
+        default:
+            $('.custom-file-label').html('<i class="fas fa-exclamation-triangle"></i> Extension not allowed!');
+    }
   });
 </script>
