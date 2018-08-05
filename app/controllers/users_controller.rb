@@ -11,6 +11,13 @@ class UsersController < ApplicationController
 		@blog = Blog.where(user_id: @user)
  	end
 
+ 	def upgrade
+ 		@user = current_user
+		@blog = Blog.where(user_id: @user)
+ 		@user.bloggoer!
+ 		render 'index'
+ 	end
+
   def create
     @user = User.create(user_params)
   end
