@@ -6,9 +6,9 @@ class HomeController < ApplicationController
 		         else
               Blog.all
 		              end
-    @most_viewed = Blog.order('impressions_count DESC').last(10)
+    @most_viewed = Blog.order('impressions_count DESC').last(5)
     @posts = Post.all
-    @tags = ActsAsTaggableOn::Tag.most_used.order("taggings_count").first(10)
+    @tags = ActsAsTaggableOn::Tag.most_used.order("taggings_count").first(5)
   end
 
 

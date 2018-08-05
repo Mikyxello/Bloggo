@@ -10,8 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-      @user = User.create(params.require(:user).permit(:email,:name,:surname,:password,:password_confirmation))
+#  def create
+#      @user = User.create(params.require(:user).permit(:email,:name,:surname,:password,:password_confirmation))
+#  end
+
+  protected
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
   end
 
   # GET /resource/edit

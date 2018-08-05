@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 	acts_as_voter
-  acts_as_follower	
+  acts_as_follower
 
 	mount_uploader :avatar_image, ImageUploader
 
@@ -33,6 +33,13 @@ class User < ApplicationRecord
 	   #end
 	  # user
 	 #end
+
+	 enum role: [:user, :bloggoer, :editor, :admin]
+   after_initialize :set_default_role, :if => :new_record?
+
+	 def set_default_role
+    	self.role ||= :user
+  	end
 
 	 def self.from_omniauth(auth)
 	  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

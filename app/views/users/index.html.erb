@@ -1,9 +1,15 @@
-<link rel="stylesheet" href="styles.scss">
+<!-- <link rel="stylesheet" href="styles.scss"> -->
 <div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
 	<div class="jumbotron" style="margin-top: 20px;">
 
-		<img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> 
-		<h1 class="text-center"><%= @user.email %></h1>
+		<img class="mx-auto d-block" style="border-radius:60%; width:200px; height:200px; object-fit:cover; margin-top: 50px;" alt="User Profile Pic Example"
+		 src="<% if current_user.avatar_image? %>
+						<%= current_user.avatar_image %>
+					<% else %>
+						<%= asset_path('user-placeholder.jpeg') %>
+					<% end %>" />
+		<!-- <img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> -->
+		<h1 class="text-center"><%= @user.name %> <%= @user.surname %></h1>
 
 		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
     	<div class="col-sm text-center">
@@ -11,10 +17,13 @@
       	<h6> <%= @blog.count %></h6>
     	</div>
   	</div>
+		<% if @user.id == current_user.id %>
+			<%= link_to '<button type="button" class="btn btn-primary">Edit Profile</button>'.html_safe, "#editModal", "data-toggle" => "modal" %>
+		<% end %>
 	</div>
 
   <div class="row container-fluid">
-    <div class="col-6"">
+    <div class="col-6">
       <div class="card">
         <div class="card-header pastel_colour_yellow" style="text-align:center;">
           <h2>Favourite Bloggoes</h2>
@@ -24,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="col-6"">
+    <div class="col-6">
       <div class="card">
         <div class="card-header pastel_colour_red " style="text-align:center;">
           <h2>Favourite Postoes</h2>
@@ -35,4 +44,22 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal" id="editModal" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Edit Profile</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<%= render "devise/passwords/edit" %>
+				<hr />
+				<%= render "devise/registrations/edit" %>
+			</div>
+		</div>
+	</div>
 </div>
