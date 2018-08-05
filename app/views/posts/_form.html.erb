@@ -80,6 +80,9 @@
           <small id="fileHelp" class="form-text text-muted post-form-file-helper">File must be 'jpeg', 'jpg', 'png', 'gif' or 'mp4'</small>
         </td>
         <td colspan="2" align="center">
+          <img id="filePreview" width="100px" class="post-form-file-preview"/>
+        </td>
+        <td>
           <div class="form-group post-form-buttons">
             <% if @post.id.present? %>
               <%= button_tag(type: 'submit', class: "btn btn-primary") do %><i class="fas fa-edit"></i> Update<% end %>
@@ -87,9 +90,6 @@
               <%= button_tag(type: 'submit', class: "btn btn-primary") do %><i class="fas fa-check"></i> Publish<% end %>
             <% end %>
           </div>
-        </td>
-        <td>
-          &nbsp;
         </td>
       </tr>
     </table>
@@ -121,5 +121,21 @@
         default:
             $('.custom-file-label').html('<i class="fas fa-exclamation-triangle"></i> Extension not allowed!');
     }
+  });
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#filePreview').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#post_file").change(function () {
+    readURL(this);
   });
 </script>
