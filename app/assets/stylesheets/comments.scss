@@ -9,10 +9,19 @@
 	padding: 1%;
 }
 
+.comments-show {
+	display: block;
+	margin-top: 2%;
+}
 
 // Comment Form (views/comments/_form_new.html.erb)
 
 .comment-form-content {
 	width: 100%;
 	resize: none;
+}
+
+.comment-form-new {
+	display: block;
+	margin-top: 1%;
 }

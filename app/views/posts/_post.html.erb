@@ -10,7 +10,13 @@
 					<% end %>
 				</td>
 				<td colspan="2" align="left" valign="center" class="post-title-aux">
-					<h5 class="post-title"><%= link_to truncate(post.title, length: 20, omission: "..."), blog_post_path(post.blog, post), class: "post-link" %> <small class="text-muted"> by </small> <%= link_to post.user.name, user_path(post.user), class: "post-link" %> </h5>
+					<h5 class="post-title"><%= link_to truncate(post.title, length: 20, omission: "..."), blog_post_path(post.blog, post), class: "post-link" %> <small class="text-muted"> by </small>
+						<% if post.user.username %>
+							<%= link_to post.user.username, user_path(post.user), class: "post-link" %>
+						<% else %>
+							<%= link_to post.user.name, user_path(post.user), class: "post-link" %> 
+						<% end %>
+					</h5>
 					<h6 class="text-muted post-subtitle"><%= truncate(post.subtitle, length: 25, omission: "...") %></h6>
 				</td>
 				<td align="right" valign="top">
@@ -22,7 +28,15 @@
 			</tr>
 			<tr>
 				<td colspan="5" align="left" valign="center">
-					<div class="fr-view"><%= truncate(post.content.html_safe, length: 250, omission: "<small class='text-muted read-more'>... #{link_to('[Read More]', blog_post_path(post.blog, post), class: 'post-link')}</small>".html_safe, :escape => false) %></div>
+					<div class="fr-view">
+						<%= 
+							truncate(post.content.html_safe, 
+							:length => 200, 
+							:separator => '<a', 
+	  						:omission => "... #{link_to 'Read more', blog_post_path(post.blog, post), class: 'post-link read-more'}".html_safe,
+	  						:escape => false)
+    					%>
+					</div>
 				</td>
 			</tr>
 			<tr>
