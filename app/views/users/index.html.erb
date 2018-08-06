@@ -1,43 +1,75 @@
 <!-- <link rel="stylesheet" href="styles.scss"> -->
 <div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
-	<div class="jumbotron" style="margin-top: 20px;">
+  <div class="row">
+    <div class="col-sm-6">
+    	<div class="jumbotron" style="margin-top: 20px;">
 
-		<img class="mx-auto d-block" style="border-radius:60%; width:200px; height:200px; object-fit:cover; margin-top: 50px;" alt="User Profile Pic Example"
-		 src="<% if current_user.avatar_image? %>
-						<%= current_user.avatar_image %>
-					<% else %>
-						<%= asset_path('user-placeholder.jpeg') %>
-					<% end %>" />
-		<!-- <img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> -->
-		<h1 class="text-center"><%= @user.name %> <%= @user.surname %></h1>
+    		<img class="mx-auto d-block" style="border-radius:60%; width:200px; height:200px; object-fit:cover; margin-top: 50px;" alt="User Profile Pic Example"
+    		 src="<% if current_user.avatar_image? %>
+    						<%= current_user.avatar_image %>
+    					<% else %>
+    						<%= asset_path('user-placeholder.jpeg') %>
+    					<% end %>" />
+    		<!-- <img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> -->
+    		<h1 class="text-center"><%= @user.name %> <%= @user.surname %></h1>
 
-		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
-    	<div class="col-sm text-center">
-      	<h3> Blogs</h3>
-      	<h6> <%= @blog.count %></h6>
+    		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
+        	<div class="col-sm text-center">
+          	<h3> Blogs</h3>
+          	<h6> <%= @blog.count %></h6>
+        	</div>
+      	</div>
+    		<% if @user.id == current_user.id %>
+    			<%= link_to '<button type="button" class="btn btn-primary">Edit Profile</button>'.html_safe, "#editModal", "data-toggle" => "modal" %>
+    			<% if @user.bloggoer? || @user.admin? %>
+    				<%= link_to '<button type="button" class="btn btn-primary">Create Bloggoes</button>'.html_safe, new_blog_path %>
+    			<% else %>
+    				<%= link_to '<button type="button" class="btn btn-primary">Become a Bloggoer!</button>'.html_safe, upgrade_path %>
+    			<% end %>
+    		<% end %>
     	</div>
-  	</div>
-		<% if @user.id == current_user.id %>
-			<%= link_to '<button type="button" class="btn btn-primary">Edit Profile</button>'.html_safe, "#editModal", "data-toggle" => "modal" %>
-			<% if @user.bloggoer? || @user.admin? %>
-				<%= link_to '<button type="button" class="btn btn-primary">Create Bloggoes</button>'.html_safe, new_blog_path %>
-			<% else %>
-				<%= link_to '<button type="button" class="btn btn-primary">Become a Bloggoer!</button>'.html_safe, upgrade_path %>
-			<% end %>
-		<% end %>
-	</div>
-
-  <div class="row container-fluid">
-    <div class="col-6">
+    </div>
+    <div class="col-sm-6">
       <div class="card">
         <div class="card-header pastel_colour_yellow" style="text-align:center;">
-          <h2>Favourite Bloggoes</h2>
+          <h2>My Bloggoes</h2>
         </div>
         <div class="card-body">
-          <h3> No bloggoes found! </h3>
+        <% if @blog != nil && @blog.count != 0%>
+          <table class="table">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Author</th>
+              <th scope="col">Visits</th>
+            </tr>
+            <% @blog.each do |blog| %>
+            <tr>
+              <td><%= link_to blog.name, blog_path(blog) %></td>
+              <td><%= blog.description %></td>
+              <td><%= link_to blog.user.name, user_path(blog.user) %></td>
+              <td><%= link_to blog.impressionist_count%></td>
+            </tr>
+            <% end %>
+          </table>
+          <% else %>
+            <h3> No bloggoes found! </h3>
+        <% end %>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+  <div class="row container-fluid">
+    <div class="col-6">
+      <div class="card-header pastel_colour_red " style="text-align:center;">
+          <h2>Favourite Bloggoes</h2>
+        </div>
+        <div class="card-body">
+          <h3> No Bloggoes found! </h3>
+        </div>
+      </div>
     <div class="col-6">
       <div class="card">
         <div class="card-header pastel_colour_red " style="text-align:center;">
