@@ -19,6 +19,25 @@ class BlogsController < ApplicationController
 		render 'show'
 	end
 
+	def add_editors
+		@blog = Blog.find(params[:id])
+		@user = User.find(params[:user_id])
+		@posts = Post.where(blog_id: @blog)
+		@shown_posts = @blog.posts.last(5)
+		@blog.editors = @user.id
+		@blog.save
+		render 'show'
+	end
+
+	def remove_editors
+		@blog = Blog.find(params[:id])
+		@user = User.find(params[:user_id])
+		if (@blog.editors.includes(@user.id))
+			@blog.editors.remove(@user.id)
+		end
+		render 'show'
+	end
+
 	def follow
 		@blog = Blog.find(params[:id])
 		current_user.follow(@blog)
@@ -88,7 +107,7 @@ class BlogsController < ApplicationController
 
 	private
 	def blog_params
-		params.require(:blog).permit(:name, :description)
+		params.require(:blog).permit(:name, :description, :editors)
 	end
 
 	private

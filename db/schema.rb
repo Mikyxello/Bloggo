@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_08_06_144726) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "impressions_count"
+    t.integer "editors"
     t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
