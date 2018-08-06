@@ -41,6 +41,10 @@ class User < ApplicationRecord
     	self.role ||= :user
   	end
 
+		def set_default_username
+			self.username ||= self.name + self.surname
+		end
+
 	 def self.from_omniauth(auth)
 	  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
 	    user.email = auth.info.email

@@ -18,6 +18,16 @@ class UsersController < ApplicationController
  		render 'index'
  	end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    if current_user.admin?
+		    redirect_to admin_panel_index_path
+    else
+      redirect_to root_path
+    end
+  end
+
   def create
     @user = User.create(user_params)
   end

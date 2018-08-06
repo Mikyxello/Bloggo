@@ -16,7 +16,11 @@
 									<small class="text-muted"> posted on </small>
 									<%= link_to @post.blog.name, blog_path(@post.blog), class: "post-link" %>
 									<small class="text-muted"> by </small>
-									<%= link_to @post.user.name, user_path(@post.user), class: "post-link" %>
+									<% if @post.user.username %>
+										<%= link_to @post.user.username, user_path(@post.user), class: "post-link" %>
+									<% else %>
+										<%= link_to @post.user.name, user_path(@post.user), class: "post-link" %> 
+									<% end %>
 									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %> ago</small>
 								</td>
 								<td align="right" valign="top">
@@ -81,18 +85,18 @@
 						</table>
 
 						<% if user_signed_in? %>
-							<div style="display: block; margin-top: 1%;">
+							<div class="comments-form-new">
 								<%= render partial: 'comments/form_new' %>
 							</div>
 						<% end %>
 
-					  	<div style="display: block; margin-top: 2%;">
+					  	<div class="comments-show">
 							<%= render @post.comments %>
 						</div>
 					</div>
 				</td>
 				<td valign="top" width="30%">
-					<div class="card" id="user_card" style="padding: 5%;">
+					<div class="card user-card" id="user_card">
 						<div class="tg-wrap">
 							<table width="100%">
 								<tr>
@@ -102,11 +106,10 @@
 										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, class: "image-link") %>
 									<% end %>
 									<small class="card-title">
-										<% if @post.user.name? %>
-											<%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user), class: "post-link" %>
-										<% else %>
-											<%= link_to @post.user.email, user_path(@post.user), class: "post-link" %>
-										<% end %>	
+										<%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user), class: "post-link" %>
+										<% if @post.user.username %>
+											<small class="text-muted"> aka </small><%= link_to @post.user.username, user_path(@post.user), class: "post-link" %>
+										<% end %>
 									</small>
 								</tr>
 								<tr>
@@ -122,10 +125,10 @@
 							</table>
 						</div>
 					</div>
-					<div id="related_post" style="margin-top: 5%;">
+					<div id="related_posts" class="related-posts">
 						<% if @related_posts %>
-							<small class="text-muted" style="padding: 2px;">Related Posts</small>
-							<div style="font-size: 0.7rem;" id="related_posts"><%= render @related_posts %></div>
+							<small class="text-muted related-posts-title">Related Posts</small>
+							<div class="related-posts-show"><%= render @related_posts %></div>
 						<% end %>
 					</div>
 				</td>

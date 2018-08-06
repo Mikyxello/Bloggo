@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
 
   def index
-    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse
+    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse # TODO: where tag.taggins_count != 0
   end
 
   def show
@@ -11,6 +11,12 @@ class TagsController < ApplicationController
 
   def mostcount
     @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse
+  end
+
+  def destroy
+    @tag =  ActsAsTaggableOn::Tag.find(params[:id])
+    @tag.destroy
+    redirect_to admin_panel_index_path
   end
 
 end

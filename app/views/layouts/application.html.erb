@@ -21,7 +21,9 @@
 
       <form class="form-inline">
         <% if user_signed_in? %>
-
+          <% if current_user.admin? %>
+            <%= link_to '<button type="button" class="btn btn-danger btn-sm"> Admin Panel </button>'.html_safe, admin_panel_index_path %> &nbsp;
+          <% end %>
           <div style="font-size:18px;">
             <img style="border-radius:60%; width:50px; height:50px; object-fit:cover;"
              src="<% if current_user.avatar_image? %>
@@ -29,8 +31,11 @@
                   <% else %>
                     <%= asset_path('user-placeholder.jpeg') %>
                   <% end %>" />
-
-              <%= current_user.name %> <%= current_user.surname %> &nbsp;
+              <% if current_user.username? %>
+                <%= current_user.username %> &nbsp;
+              <% else %>
+                <%= current_user.name %> <%= current_user.surname %> &nbsp;
+              <%end%>
 
           </div>
           <div>
