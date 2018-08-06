@@ -52,7 +52,12 @@ class PostsController < ApplicationController
 		@post = @blog.posts.find(params[:id])
 		@post.destroy
 
-		redirect_to blog_path(@blog)
+		if current_user.admin?
+			redirect_to admin_panel_index_path
+		else
+			redirect_to blog_path(@blog)
+		end
+
 	end
 
 	def upvote

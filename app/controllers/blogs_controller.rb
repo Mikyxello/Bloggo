@@ -42,7 +42,7 @@ class BlogsController < ApplicationController
 		@shown_posts = @blog.posts.last(5)
 		render 'show'
 	end
-				
+
 	def edit
 		@blog = Blog.find(params[:id])
 	end
@@ -68,8 +68,12 @@ class BlogsController < ApplicationController
 	def destroy
 		@blog = Blog.find(params[:id])
 		@blog.destroy
-
-		redirect_to blogs_path
+		
+		if current_user.admin?
+			redirect_to admin_panel_index_path
+		else
+			redirect_to blogs_path
+		end
 	end
 
 	def create

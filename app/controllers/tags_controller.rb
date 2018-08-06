@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
 
   def index
-    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse
+    @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse # TODO: where tag.taggins_count != 0
   end
 
   def show

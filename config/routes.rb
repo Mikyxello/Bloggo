@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get 'blogs/:id/followed', to: 'blogs#follow', :as => :follow
   get 'blogs/:id/unfollowed', to: 'blogs#unfollow', :as => :unfollow
   get 'users/upgrade', to: 'users#upgrade', :as => :upgrade
-
+  get 'admin_panel/index'
 
 
   resources :users

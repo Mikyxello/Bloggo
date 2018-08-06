@@ -1,0 +1,133 @@
+
+<div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
+  <div class="card" style="margin-bottom:10px;">
+    <div class="card-header pastel_colour_blue" style="text-align:center;">
+      <h2>Users Table  &nbsp;|&nbsp;  Total: <%= @users.count %> </h2>
+    </div>
+
+      <% if @users != nil && @users.count != 0%>
+        <table class="table">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col" colspan="3"></th>
+            <th></th>
+          </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %>&nbsp;<%= user.surname %></td>
+            <td><%= user.email %></td>
+            <td><%= link_to 'Show', user_path(user), class: "btn btn-sm btn-primary" %></td>
+            <!-- <td><%= link_to 'Edit', edit_user_registration_path(user), class: "btn btn-sm btn-success" %></td> -->
+            <td><%= link_to 'Destroy', user_path(user),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger"  %></td>
+          </tr>
+        <% end %>
+      <% else %>
+      <div class="card-body">
+        <h3> No tags found! </h3>
+      </div>
+      <% end %>
+  </table>
+  </div>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="card-header pastel_colour_blue" style="text-align:center;">
+          <h2>Blogs Table  &nbsp;|&nbsp;  Total: <%= @blogs.count %> </h2>
+        </div>
+        <% if @blogs != nil && @blogs.count != 0%>
+          <table class="table">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Author</th>
+              <th scope="col" colspan="3"></th>
+              <th></th>
+            </tr>
+          <% @blogs.each do |blog| %>
+            <tr>
+              <td><%= blog.name %></td>
+              <td><%= blog.description %></td>
+              <td>di <%= link_to blog.user.email, user_path(blog.user) %></td>
+              <td><%= link_to 'Show', blog_path(blog), class: "btn btn-sm btn-primary" %></td>
+              <td><%= link_to 'Edit', edit_blog_path(blog), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to 'Destroy', blog_path(blog),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger"  %></td>
+            </tr>
+          <% end %>
+        <% else %>
+        <div class="card-body">
+          <h3> No blogs found! </h3>
+        </div>
+        <% end %>
+
+        </table>
+
+      </div>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="card-header pastel_colour_blue" style="text-align:center;">
+          <h2>Posts Table  &nbsp;|&nbsp;  Total: <%= @posts.count %> </h2>
+        </div>
+
+          <% if @posts != nil && @posts.count != 0%>
+            <table class="table">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Author</th>
+                <th scope="col" colspan="3"></th>
+                <th></th>
+              </tr>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.title %></td>
+                <td><%= post.content.html_safe %></td>
+                <td>di <%= link_to post.user.email, user_path(post.user) %></td>
+                <td><%= link_to 'Show', blog_post_path(post.blog, post), class: "btn btn-sm btn-primary"  %></td>
+                <td><%= link_to 'Edit', edit_blog_post_path(post.blog, post), class: "btn btn-sm btn-success"  %></td>
+                <td><%= link_to 'Destroy', blog_post_path(post.blog, post),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger"  %></td>
+              </tr>
+            <% end %>
+          <% else %>
+          <div class="card-body">
+            <h3> No posts found! </h3>
+          </div>
+          <% end %>
+      </table>
+      </div>
+      <div class="card" style="margin-bottom:10px;">
+        <div class="card-header pastel_colour_blue" style="text-align:center;">
+          <h2>Tags Table  &nbsp;|&nbsp;  Total: <%= @tags.count %> </h2>
+        </div>
+
+          <% if @tags != nil && @tags.count != 0%>
+            <table class="table">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Popularity</th>
+                <th scope="col" colspan="3"></th>
+                <th></th>
+              </tr>
+            <% @tags.each do |tag| %>
+              <tr>
+                <td><%= tag.name %></td>
+                <td><%= tag.taggings_count %></td>
+                <td><%= link_to 'Show', tag_path(tag), class: "btn btn-sm btn-primary" %></td>
+                <td><%= link_to 'Destroy', tag_path(tag),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger"  %></td>
+              </tr>
+              <%end%>
+          <% else %>
+          <div class="card-body">
+            <h3> No tags found! </h3>
+          </div>
+          <% end %>
+      </table>
+      </div>
+</div>
