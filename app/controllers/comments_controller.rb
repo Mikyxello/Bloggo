@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
 
+	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 	before_action :check_user, except: [ :show, :new, :create]
-
+	
 	def new
 		@post = Post.find(params[:post_id])
-		@comment = @post.comments.build
+		@comment = @post.comments.build(:parent_id => params[:parent_id])
 	end
 
 	def edit
@@ -45,7 +46,7 @@ class CommentsController < ApplicationController
 
 	private
 	def comment_params
-		params.require(:comment).permit(:content)
+		params.require(:comment).permit(:parent_id, :content)
 	end
 
 	private

@@ -91,7 +91,10 @@
 						<% end %>
 
 					  	<div class="comments-show">
-							<%= render @post.comments %>
+					  		<% if @comments.size > 0 %>
+					  			<hr>
+								<%= nested_comments @comments %>
+							<% end %>
 						</div>
 					</div>
 				</td>

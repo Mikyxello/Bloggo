@@ -1,39 +1,46 @@
-<div class="card" style="padding: 1%;">
-	<div class="card-body tg-wrap">
-		<table width="100%">
-			<tr>
-				<td colspan="2" align="left" valign="top">
-					<% if comment.user.avatar_image? %>
-						<%= image_tag(comment.user.avatar_image.url, alt: comment.user.avatar_image.identifier, class: "image-link")  %>
-					<% else %>
-						<%= image_tag(asset_path('user-placeholder.jpeg'), alt: comment.user.name, class: "image-link")  %>
-					<% end %>
-					<small>
-						<% if comment.user.name? %>
-							<%= link_to raw(comment.user.name + "&nbsp;" + comment.user.surname), user_path(comment.user), class: 'post-link' %>
-						<% else %>
-							<%= link_to comment.user.email, user_path(comment.user), class: 'post-link' %> 
-						<% end %>
-						<small class="text-muted">&#8226; <%= time_ago_in_words(comment.created_at) %> ago</small>
-					</small>
-				</td>
-				<td align="right" valign="top">
-					<% if current_user == comment.user %>
-						<div class="dropdown">
-							<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
-								<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "dropdown-item"%>
-							</div>
-						</div>
-					<% end %>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3" align="left">
-					<p class="card-text comment-content"><%= comment.content %></p>
-				</td>
-			</tr>
-		</table>
-	</div>
-</div>
+<table width="100%" style="padding: 1%;">
+	<tr>
+		<td colspan="2" align="left" valign="top">
+			<% if comment.has_parent? %>
+				<small class="text-muted"><i class="fas fa-reply"></i> Reply to <% if comment.parent.user.username %><%= comment.parent.user.username %><% else %><%= comment.parent.user.name %><% end %> by </small>
+			<% end %>
+			<% if comment.user.avatar_image? %>
+				<%= image_tag(comment.user.avatar_image.url, alt: comment.user.avatar_image.identifier, class: "image-link")  %>
+			<% else %>
+				<%= image_tag(asset_path('user-placeholder.jpeg'), alt: comment.user.name, class: "image-link")  %>
+			<% end %>
+			<small>
+				<% if comment.user.username? %>
+					<%= link_to comment.user.username, user_path(comment.user), class: 'post-link' %>
+				<% else %>
+					<%= link_to raw(comment.user.name + "&nbsp;" + comment.user.surname), user_path(comment.user), class: 'post-link' %>
+				<% end %>
+				<small class="text-muted">&#8226; <%= time_ago_in_words(comment.created_at) %> ago</small>
+			</small>
+		</td>
+		<td align="right" valign="top">
+			<% if current_user == comment.user %>
+				<div class="dropdown">
+					<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+						<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "dropdown-item"%>
+					</div>
+				</div>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="left">
+			<p class="card-text comment-content"><%= comment.content %></p>
+		</td>
+	</tr>
+	<% if user_signed_in? %>
+		<tr>
+			<td colspan="3" align="right">
+				<%= link_to raw("<i class='fas fa-reply'></i> Reply"), new_blog_post_comment_path(comment.post.blog, comment.post, :parent_id => comment), class: 'post-link reply-link' %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<hr>

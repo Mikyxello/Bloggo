@@ -2,6 +2,6 @@
 	<div class="jumbotron">
 		<h1>New Comment</h1>
 		<%= render 'form' %>
-		<%= link_to '<i class="fas fa-undo"></i> Back'.html_safe, blog_post_path(@comment.post.blog, @comment.post), class: "btn btn-dark" %>
+		<%= link_to '<i class="fas fa-undo"></i> Back'.html_safe, blog_post_path(@comment.post.blog, @comment.post), class: "btn btn-dark btn-sm" %>
 	</div>
 </div>

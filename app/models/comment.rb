@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+	has_ancestry
+	
 	validates :content, presence: true, length: { minimum: 1 }
 
 	belongs_to :post, :class_name => "Post", :foreign_key => "post_id"

@@ -39,6 +39,18 @@
     <table width="100%">
       <tr>
         <td>
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title"> You're answering to <strong><% if @comment.parent.user.username %><%= @comment.parent.user.username %><% else %><%= @comment.parent.user.name %><% end %></strong> </div>
+              <div class="comment-form-parent comment-form-parent-content">
+                <%= @comment.parent.content %>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <div class="form-group">
             <%= form.label :content %><br>
             <%= form.text_area :content, class: 'comment-form-content' %>
@@ -48,7 +60,7 @@
       <tr>
         <td>
           <div class="form-group">
-            <%= button_tag(type: 'submit', class: "btn btn-primary btn-sm") do %><i class="fas fa-edit"></i> Update<% end %>
+            <%= button_tag(type: 'submit', class: "btn btn-primary btn-sm") do %><i class='fas fa-reply'></i> Reply<% end %>
           </div>
         </td>
       </tr>
