@@ -31,8 +31,11 @@
                   <% else %>
                     <%= asset_path('user-placeholder.jpeg') %>
                   <% end %>" />
-
-              <%= current_user.name %> <%= current_user.surname %> &nbsp;
+              <% if current_user.username? %>
+                <%= current_user.username %> &nbsp;
+              <% else %>
+                <%= current_user.name %> <%= current_user.surname %> &nbsp;
+              <%end%>
 
           </div>
           <div>

@@ -13,4 +13,10 @@ class TagsController < ApplicationController
     @tags = ActsAsTaggableOn::Tag.all.order("taggings_count").reverse
   end
 
+  def destroy
+    @tag =  ActsAsTaggableOn::Tag.find(params[:id])
+    @tag.destroy
+    redirect_to admin_panel_index_path
+  end
+
 end

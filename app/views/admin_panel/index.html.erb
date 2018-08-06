@@ -9,6 +9,7 @@
         <table class="table">
           <tr>
             <th scope="col">ID</th>
+            <th scope="col">Username</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col" colspan="3"></th>
@@ -17,6 +18,7 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.id %></td>
+            <td><%= user.username %></td>
             <td><%= user.name %>&nbsp;<%= user.surname %></td>
             <td><%= user.email %></td>
             <td><%= link_to 'Show', user_path(user), class: "btn btn-sm btn-primary" %></td>

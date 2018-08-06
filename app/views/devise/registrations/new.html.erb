@@ -4,6 +4,10 @@
   <%= devise_error_messages! %>
   <table class="table">
     <tr>
+      <th><%= f.label :username %></th>
+      <th><%= f.text_field :username %></th>
+    </tr>
+    <tr>
       <th><%= f.label :name %></th>
       <th><%= f.text_field :name %></th>
     </tr>

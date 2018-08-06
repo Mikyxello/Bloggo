@@ -24,9 +24,10 @@ Rails.application.routes.draw do
   get 'admin_panel/index'
 
 
+
   resources :users
 
-  resources :tags, only: [:index, :show]
+  resources :tags, only: [:index, :show, :destroy]
 
   get 'blogs/index'
   root 'home#index'
