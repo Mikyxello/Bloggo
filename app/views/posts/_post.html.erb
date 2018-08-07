@@ -59,6 +59,13 @@
 								<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(post.blog, post), class: "dropdown-item" %>
 							</div>
 						</div>
+					<% elsif (post.blog.user == current_user) || (post.blog.editors == current_user.id) %>
+						<div class="btn-group dropup">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+							<div class="dropdown-menu">
+								<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [post.blog, post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+							</div>
+						</div>
 					<% end %>
 				</td>
 			</tr>

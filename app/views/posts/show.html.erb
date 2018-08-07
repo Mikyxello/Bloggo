@@ -32,6 +32,13 @@
 												<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(@post.blog, @post), class: "dropdown-item" %>
 											</div>
 										</div>
+									<% elsif (@blog.user == current_user) || (@blog.editors == current_user.id)  %>
+										<div class="dropdown">
+											<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+											</div>
+										</div>
 									<% end %>
 								</td>
 							</tr>
@@ -91,9 +98,9 @@
 						<% end %>
 
 					  	<div class="comments-show">
-					  		<% if @comments.size > 0 %>
+					  		<% if @post.comments.size > 0 %>
 					  			<hr>
-								<%= nested_comments @comments %>
+								<%= nested_comments @post.comments.arrange(:order => :created_at) %>
 							<% end %>
 						</div>
 					</div>

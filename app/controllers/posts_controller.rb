@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
 
-	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :upvote, :downvote]
+	before_action :authenticate_user!, only: [ :upvote, :downvote]
+	before_action :check_editor, only: [ :new, :create, :destroy ]
+	before_action :check_user, only: [ :edit, :update, :destroy ]
 	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
-	before_action :check_user, except: [ :index, :show, :new, :create, :upvote, :downvote ]
 	
 	def index
 		@blog = Blog.find(params[:blog_id])
@@ -12,7 +13,6 @@ class PostsController < ApplicationController
 	def show
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		@comments = @post.comments.arrange(:order => :created_at)
 		@related_posts = Post.where.not(id: @post.id).tagged_with(@post.tag_list, any: true).order(:cached_weighted_average => :desc, :cached_votes_total => :desc, :impressions_count => :asc).first(3)
 	end
 
@@ -84,9 +84,15 @@ class PostsController < ApplicationController
 	end
 
 	private
+	def check_editor
+		@blog = Blog.find(params[:blog_id])
+		redirect_to blog_path(@blog) unless (@blog.user == current_user) || (@blog.editors == current_user.id)
+	end
+
+	private
 	def check_user
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		redirect_to blog_post_path(@blog, @post) unless @post.user == current_user
+		redirect_to blog_path(@blog) unless @post.user == current_user
 	end
 end
