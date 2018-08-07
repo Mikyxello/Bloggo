@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   	end
   end
 
+  root 'home#index'
+  get 'blogs/index'
   get 'blogs/:id/visited_view' => "blogs#visited_view", :as => :visited_view
   get 'blogs/:id/recent_view' => "blogs#recent_view", :as => :recent_view
   get 'blogs/:id/followed', to: 'blogs#follow', :as => :follow
@@ -25,12 +27,9 @@ Rails.application.routes.draw do
   post 'blogs/:id/remove_editors', to: 'blogs#remove_editors', :as => :remove_editor
   get 'admin_panel/index'
 
-
-
   resources :users
 
   resources :tags, only: [:index, :show, :destroy]
 
-  get 'blogs/index'
-  root 'home#index'
+  match '*path' => 'application#render_404', via: :all
 end
