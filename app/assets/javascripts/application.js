@@ -18,3 +18,7 @@
 //= require bootstrap
 //= require_tree .
 //= require froala_editor.min.js
+
+function playSound() {
+  document.getElementById('audio-vote').play();
+}

@@ -24,21 +24,23 @@
 									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %> ago</small>
 								</td>
 								<td align="right" valign="top">
-									<% if current_user == @post.user %>
-										<div class="dropdown">
-											<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>  
-												<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(@post.blog, @post), class: "dropdown-item" %>
+									<% if user_signed_in? %>
+										<% if current_user == @post.user %>
+											<div class="dropdown">
+												<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>  
+													<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(@post.blog, @post), class: "dropdown-item" %>
+												</div>
 											</div>
-										</div>
-									<% elsif (@blog.user == current_user) || (@blog.editors == current_user.id)  %>
-										<div class="dropdown">
-											<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+										<% elsif (@blog.user == current_user) || (@blog.editors == current_user.id)  %>
+											<div class="dropdown">
+												<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+												</div>
 											</div>
-										</div>
+										<% end %>
 									<% end %>
 								</td>
 							</tr>
@@ -75,12 +77,17 @@
 							</tr>
 							<tr>
 								<td align="left">
-									<%= link_to like_blog_post_path(@post.blog, @post), class: "post-link", method: :put do %>
-								    	<i class="fas fa-thumbs-up like"></i><small><%= @post.get_upvotes.size %></small>
-							    	<% end %>
-									<%= link_to dislike_blog_post_path(@post.blog, @post), class: "post-link", method: :put do %>
-										<i class="fas fa-angry angry"></i><small><%= @post.get_downvotes.size %></small>
-									<% end %>
+									<aside class="vote-count bind-<%= @post.id %>">
+										<%= link_to like_blog_post_path(@blog, @post), :remote => true, method: :put, class: 'vpos post-link' do %>
+											<i class="fas fa-thumbs-up like"></i>
+											<span class="vcount-<%= @post.id %>"><small><%= @post.get_upvotes.size %></small></span>
+										<% end %>
+										<%= link_to dislike_blog_post_path(@blog, @post), :remote => true, method: :put, class: 'npos post-link' do %>
+											<i class="fas fa-angry angry"></i>
+											<span class="ncount-<%= @post.id %>"><small><%= @post.get_downvotes.size %></small></span>
+										<% end %>
+									</aside>
+									<%= audio_tag asset_path('vote.mp3'), autoplay: false, controls: false, id: 'audio-vote' %>
 								</td>
 								<td align="left">
 									<small class="text-muted"><i class="fas fa-comment"></i> Comments <%= @post.comments.size.to_s %></small>

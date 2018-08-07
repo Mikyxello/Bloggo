@@ -63,19 +63,30 @@ class PostsController < ApplicationController
 	end
 
 	def upvote
+		flash[:danger] = 'You allready voted this entry'
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		@post.upvote_by current_user
-
-		redirect_back fallback_location: @post
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.json { head :no_content }
+			format.js { render :layout => false }
+			@post.cached_votes_total = @post.cached_votes_total + 1
+			@post.save
+			@post.upvote_by current_user
+		end
 	end
-
+	
 	def downvote
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
-		@post.downvote_by current_user
-
-		redirect_back fallback_location: @post
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.json { head :no_content }
+			format.js { render :layout => false }
+			@post.cached_votes_total = @post.cached_votes_total + 1
+			@post.save
+			@post.downvote_by current_user
+		end
 	end
 
 	private

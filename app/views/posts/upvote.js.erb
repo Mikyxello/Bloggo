@@ -1,0 +1,6 @@
+$('.vpos').bind('ajax:success', function() {
+	playSound();
+	
+	$('.vcount-<%= @post.id %>').html('<small><%= escape_javascript @post.get_upvotes.size.to_s %></small>');
+	$('.ncount-<%= @post.id %>').html('<small><%= escape_javascript @post.get_downvotes.size.to_s %></small>');
+});

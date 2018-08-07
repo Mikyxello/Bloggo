@@ -19,21 +19,23 @@
 			</small>
 		</td>
 		<td align="right" valign="top">
-			<% if current_user == comment.user %>
-				<div class="dropdown">
-					<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
-						<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "dropdown-item"%>
+			<% if user_signed_in? %>
+				<% if current_user == comment.user %>
+					<div class="dropdown">
+						<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+							<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "dropdown-item"%>
+						</div>
 					</div>
-				</div>
-			<% elsif ([comment.post.blog.user, comment.post.user].include? current_user) || (current_user.id = comment.post.blog.editors) %>
-				<div class="dropdown">
-					<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+				<% elsif ([comment.post.blog.user, comment.post.user].include? current_user) || (current_user.id = comment.post.blog.editors) %>
+					<div class="dropdown">
+						<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [comment.post.blog, comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
+						</div>
 					</div>
-				</div>
+				<% end %>
 			<% end %>
 		</td>
 	</tr>
