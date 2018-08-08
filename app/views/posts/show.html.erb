@@ -1,3 +1,22 @@
+<script>
+	$("head").append('<meta property="og:url"                content="<%= request.original_url %>" />');
+	$("head").append('<meta property="og:type"               content="website" />');
+	$("head").append('<meta property="og:title"              content="<%= @post.title %>" />');
+	$("head").append('<meta property="og:description"        content="<%= @post.subtitle %>" />');
+	$("head").append('<meta property="og:image"              content="<%= request.protocol + request.host_with_port + @post.file.url %>" />');
+</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v3.1&appId=849655068560418';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
 <div class="container">
 	<div class="jumbotron">
 		<table width="100%">
@@ -94,6 +113,13 @@
 								</td>
 								<td colspan="3" align="right">
 									<small class="text-muted"><i class="fas fa-eye"></i> <%= @post.impressions_count %> Views </small>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="5" align="right">
+									<div class="fb-share-button share-button" data-href="<%= request.original_url %>" data-layout="button" data-size="large" data-mobile-iframe="true">
+										<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Condividi</a>
+									</div>
 								</td>
 							</tr>
 						</table>
