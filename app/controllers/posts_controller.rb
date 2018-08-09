@@ -67,12 +67,21 @@ class PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 		respond_to do |format|
-			format.html { redirect_to :back }
-			format.json { head :no_content }
-			format.js { render :layout => false }
-			@post.cached_votes_total = @post.cached_votes_total + 1
-			@post.save
-			@post.upvote_by current_user
+			if current_user.voted_up_on? @post
+				format.html { redirect_to :back }
+				format.json { head :no_content }
+				format.js { render :layout => false }
+				@post.cached_votes_total = @post.cached_votes_total - 1
+				@post.save
+				@post.unliked_by current_user
+			else
+				format.html { redirect_to :back }
+				format.json { head :no_content }
+				format.js { render :layout => false }
+				@post.cached_votes_total = @post.cached_votes_total + 1
+				@post.save
+				@post.upvote_by current_user
+			end
 		end
 	end
 	
@@ -80,12 +89,21 @@ class PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 		respond_to do |format|
-			format.html { redirect_to :back }
-			format.json { head :no_content }
-			format.js { render :layout => false }
-			@post.cached_votes_total = @post.cached_votes_total + 1
-			@post.save
-			@post.downvote_by current_user
+			if current_user.voted_down_on? @post
+				format.html { redirect_to :back }
+				format.json { head :no_content }
+				format.js { render :layout => false }
+				@post.cached_votes_total = @post.cached_votes_total - 1
+				@post.save
+				@post.undisliked_by current_user
+			else
+				format.html { redirect_to :back }
+				format.json { head :no_content }
+				format.js { render :layout => false }
+				@post.cached_votes_total = @post.cached_votes_total + 1
+				@post.save
+				@post.downvote_by current_user
+			end
 		end
 	end
 
