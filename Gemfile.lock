@@ -6,6 +6,14 @@ GIT
     acts_as_follower (0.2.1)
       activerecord (>= 4.0)
 
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 712702f98fac85ed816618ff9f7fb80a5a1a9db8
+  branch: master
+  specs:
+    faker (1.9.1)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -347,6 +355,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_bot_rails
+  faker!
   haml
   impressionist
   jbuilder (~> 2.5)
