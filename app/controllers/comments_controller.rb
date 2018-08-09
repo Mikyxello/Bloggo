@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 	before_action :check_editor, only: [ :destroy ]
 	before_action :check_user, only: [ :edit, :update, :destroy ]
+	before_action :check_admin, only: [ :destroy ]
 	
 	def new
 		@post = Post.find(params[:post_id])
@@ -62,5 +63,11 @@ class CommentsController < ApplicationController
 		@post = Post.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
 		redirect_to blog_post_path(@post.blog, @post) unless @comment.user == current_user
+	end
+
+	private
+	def check_admin
+		@post = Post.find(params[:post_id])
+		redirect_to blog_post_path(@post.blog, @post) unless current_user.admin?
 	end
 end

@@ -3,8 +3,14 @@
 	$("head").append('<meta property="og:type"               content="website" />');
 	$("head").append('<meta property="og:title"              content="<%= @post.title %>" />');
 	$("head").append('<meta property="og:description"        content="<%= @post.subtitle %>" />');
-	$("head").append('<meta property="og:image"              content="<%= request.protocol + request.host_with_port + @post.file.url %>" />');
+	<% if @post.file.file.nil? %>
+		$("head").append('<meta property="og:image"              content="<%= request.protocol + request.host_with_port + asset_path('favicon.png') %>" />');
+	<% else %>
+		$("head").append('<meta property="og:image"              content="<%= request.protocol + request.host_with_port + @post.file.url %>" />');
+	<% end %>
 </script>
+
+
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -15,7 +21,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
-
 
 <div class="container">
 	<div class="jumbotron">
@@ -46,16 +51,16 @@
 									<% if user_signed_in? %>
 										<% if current_user == @post.user %>
 											<div class="dropdown">
-												<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-toggle" id="dropdownMenuSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuSettings">
 													<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>  
 													<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(@post.blog, @post), class: "dropdown-item" %>
 												</div>
 											</div>
-										<% elsif (@blog.user == current_user) || (@blog.editors == current_user.id)  %>
+										<% elsif (@blog.user == current_user) || (@blog.editors == current_user.id) || (current_user.admin?) %>
 											<div class="dropdown">
-												<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-toggle" id="dropdownMenuSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuSettings">
 													<%= link_to raw('<i class="fas fa-trash-alt"></i> Delete'), [@post.blog, @post], method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" %>
 												</div>
 											</div>
@@ -111,15 +116,14 @@
 								<td align="left">
 									<small class="text-muted"><i class="fas fa-comment"></i> Comments <%= @post.comments.size.to_s %></small>
 								</td>
-								<td colspan="3" align="right">
+								<td colspan="2" align="right">
 									<small class="text-muted"><i class="fas fa-eye"></i> <%= @post.impressions_count %> Views </small>
 								</td>
-							</tr>
-							<tr>
-								<td colspan="5" align="right">
+								<td align="right">
+									<g:plus action="share" data-href="<%= request.original_url %>" data-annotation="none" data-height="24" data-width="500"></g:plus>
 									<div class="fb-share-button share-button" data-href="<%= request.original_url %>" data-layout="button" data-size="large" data-mobile-iframe="true">
-										<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Condividi</a>
-									</div>
+										<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share on Facebook</a>
+									</div>							
 								</td>
 							</tr>
 						</table>

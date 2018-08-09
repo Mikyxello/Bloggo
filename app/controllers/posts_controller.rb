@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 	before_action :authenticate_user!, only: [ :upvote, :downvote]
 	before_action :check_editor, only: [ :new, :create, :destroy ]
 	before_action :check_user, only: [ :edit, :update, :destroy ]
+	before_action :check_admin, only: [ :destroy ]
 	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 	
 	def index
@@ -63,7 +64,6 @@ class PostsController < ApplicationController
 	end
 
 	def upvote
-		flash[:danger] = 'You allready voted this entry'
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 		respond_to do |format|
@@ -123,5 +123,11 @@ class PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 		redirect_to blog_path(@blog) unless @post.user == current_user
+	end
+
+	private
+	def check_admin
+		@blog = Blog.find(params[:blog_id])
+		redirect_to blog_path(@blog) unless current_user.admin?
 	end
 end
