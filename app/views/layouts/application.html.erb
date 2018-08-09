@@ -39,13 +39,13 @@
 
           </div>
           <div>
-           <%= link_to '<button type="button" class="btn btn-success"> Profile Page </button>'.html_safe, users_url %>
+           <%= link_to '<button type="button" class="btn btn-outline-primary"> Profile Page </button>'.html_safe, users_url %>
          </div>&nbsp;
-          <%= link_to '<button type="button" class="btn btn-success">Logout</button>'.html_safe, destroy_user_session_path, :method=>'delete'%>
+          <%= link_to '<button type="button" class="btn btn-outline-primary">Logout</button>'.html_safe, destroy_user_session_path, :method=>'delete'%>
         <% else %>
-            <%= link_to '<button type="button" class="btn btn-outline-light">Login</button>'.html_safe, "#loginModal", "data-toggle" => "modal" %>
+            <%= link_to '<button type="button" class="btn btn-outline-primary">Login</button>'.html_safe, "#loginModal", "data-toggle" => "modal" %>
             <!-- LOGIN BUTTON WITHOUT MODAL <%= link_to '<button type="button" class="btn btn-success">Login</button>'.html_safe, new_user_session_path %> -->
-            &nbsp;<%= link_to '<button type="button" class="btn btn-outline-light">Sign Up</button>'.html_safe, new_user_registration_path %>
+            &nbsp;<%= link_to '<button type="button" class="btn btn-outline-primary">Sign Up</button>'.html_safe, new_user_registration_path %>
             <!-- SIGNUP WITH MODAL <%= link_to '<button type="button" class="btn btn-outline-light">Sign Up</button>'.html_safe, "#signupModal", "data-toggle" => "modal"  %> -->
           <% end %>
       </form>
