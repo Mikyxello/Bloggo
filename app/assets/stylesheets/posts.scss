@@ -54,6 +54,9 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	transition: transform .2s;
+	&:hover {
+		transform: scale(2);
+	}
 }
 
 .like {
@@ -61,14 +64,22 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	transition: transform .2s;
+	&:hover {
+		transform: scale(2);
+	}
 }
 
-a > .like:hover {
-	transform: scale(2);
-}
-
-a > .angry:hover {
-	transform: scale(2);
+.post-favourite {
+	background: -webkit-linear-gradient(#A83F39, #990000);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	transition: transform .2s;
+	&:hover {
+		background: -webkit-linear-gradient(#FF0000, #CC0000);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-webkit-transform:scale(2);
+	}
 }
 
 
@@ -164,7 +175,7 @@ a > .angry:hover {
 }
 
 
-// Facebook Share
+// Facebook & Google Share
 
 .share-button {
 	margin-top: 2%;
