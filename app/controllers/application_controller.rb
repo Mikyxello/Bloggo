@@ -13,4 +13,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username,:name, :surname, :email, :birth_date, :password, :password_confirmation, :avatar_image])
     devise_parameter_sanitizer.permit(:account_update, keys: [:username,:name, :surname, :email, :birth_date, :password, :password_confirmation, :avatar_image, :current_password])
   end
+
+  #def banned?
+  #  if current_user.banned == true
+  #   sign_out current_user
+  #    flash[:error] = "This account has been suspended...."
+  #    root_path
+  #  end
+  #end
 end

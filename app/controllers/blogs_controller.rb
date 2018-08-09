@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
 
-	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow ]
+	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow, :favourite, :unfavourite]
 	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
 	def index
@@ -50,6 +50,18 @@ class BlogsController < ApplicationController
 		show
 	end
 
+	def favourite
+		@blog = Blog.find(params[:id])
+		current_user.favorite(@blog)
+		show
+	end
+
+	def unfavourite
+		@blog = Blog.find(params[:id])
+		current_user.remove_favorite(@blog)
+		show
+	end		
+
 	def visited_view
 		@filter == "Most Visited"
 		@shown_posts = @blog.posts.order(:counter).last(5)
@@ -87,12 +99,26 @@ class BlogsController < ApplicationController
 	def destroy
 		@blog = Blog.find(params[:id])
 		@blog.destroy
-		
+
 		if current_user.admin?
 			redirect_to admin_panel_index_path
 		else
 			redirect_to blogs_path
 		end
+	end
+
+	def change_suspended
+		@blog = Blog.find(params[:id])
+
+		if current_user.admin?
+			if @blog.suspended == true
+				@blog.suspended = false
+			else
+				@blog.suspended = true
+			end
+		end
+		@blog.save
+		redirect_to admin_panel_index_path
 	end
 
 	def create

@@ -15,6 +15,8 @@ class PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 		@related_posts = Post.where.not(id: @post.id).tagged_with(@post.tag_list, any: true).order(:cached_weighted_average => :desc, :cached_votes_total => :desc, :impressions_count => :asc).first(3)
+		render 'show'
+
 	end
 
 	def new
@@ -38,6 +40,20 @@ class PostsController < ApplicationController
 			render 'new'
 		end
 	end
+
+	def favourite
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+		current_user.favorite(@post)
+		show
+	end
+
+	def unfavourite
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+		current_user.remove_favorite(@post)
+		show
+	end	
 
 	def update
 		@blog = Blog.find(params[:blog_id])

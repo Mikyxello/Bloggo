@@ -126,6 +126,15 @@
 									</div>							
 								</td>
 							</tr>
+							<tr>
+								<td colspan="5" align="left">
+								<% if current_user.favorited?(@post) %>
+									<%= link_to 'Delete from Favourite Posts', unfavourite_post_path(@blog, @post), class: "btn btn-warning float-right", style: "margin-top: 15px;" %>
+								<% else %> 
+									<%= link_to 'Add to Favourite Posts', favourite_post_path(@blog, @post), class: "btn btn-warning float-right", style: "margin-top: 15px;" %>	
+								<% end %>		
+								</td>
+							</tr>
 						</table>
 
 						<% if user_signed_in? %>

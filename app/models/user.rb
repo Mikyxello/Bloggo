@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	acts_as_voter
   acts_as_follower
+	acts_as_favoritor	
 
 	mount_uploader :avatar_image, ImageUploader
 
@@ -8,7 +9,7 @@ class User < ApplicationRecord
 	has_many :posts
 	has_many :comments
 
-	validates_presence_of :name, :surname
+	validates_presence_of :name, :surname, :username
 
 	#validates_presence_of   :avatar_image
   validates_integrity_of  :avatar_image
@@ -35,14 +36,18 @@ class User < ApplicationRecord
 	 #end
 
 	 enum role: [:user, :bloggoer, :editor, :admin]
-   after_initialize :set_default_role, :if => :new_record?
+   after_initialize :set_default_role,:set_default_banned_status, :if => :new_record?
 
 	 def set_default_role
     	self.role ||= :user
   	end
 
-		def set_default_username
-			self.username ||= self.name + self.surname
+		def set_default_banned_status
+     	self.banned ||= false
+   	end
+
+		def active_for_authentication?
+			super && !self.banned
 		end
 
 	 def self.from_omniauth(auth)
@@ -52,6 +57,9 @@ class User < ApplicationRecord
 	    user.name = auth.info.first_name   # assuming the user model has a name
 			user.surname = auth.info.last_name
 			user.avatar_image = auth.info.image
+			user.username = auth.info.first_name + " " + auth.info.last_name
+			user.banned ||= false
+			user.role ||= :user
 			user.save!
 	    # If you are using confirmable and the provider(s) you use validate emails,
 	    # uncomment the line below to skip the confirmation emails.

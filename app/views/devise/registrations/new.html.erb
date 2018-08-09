@@ -16,6 +16,10 @@
       <th><%= f.text_field :surname %></th>
     </tr>
     <tr>
+      <th><%= f.label :birth_date %></th>
+      <th><%= f.date_select :birth_date, :start_year => 1900 %></th>
+    </tr>
+    <tr>
       <th><%= f.label :email %></th>
       <th><%= f.email_field :email, autocomplete: "email" %></th>
     </tr>
