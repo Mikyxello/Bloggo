@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_153855) do
+ActiveRecord::Schema.define(version: 2018_08_09_083500) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_08_07_153855) do
     t.integer "user_id"
     t.integer "impressions_count"
     t.integer "editors"
+    t.boolean "suspended"
     t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
@@ -163,6 +164,7 @@ ActiveRecord::Schema.define(version: 2018_08_07_153855) do
     t.integer "role"
     t.string "username"
     t.datetime "birth_date"
+    t.boolean "banned"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

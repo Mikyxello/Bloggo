@@ -12,6 +12,7 @@
             <th scope="col">Username</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Status</th>
             <th scope="col" colspan="3"></th>
             <th></th>
           </tr>
@@ -21,11 +22,19 @@
             <td><%= user.username %></td>
             <td><%= user.name %>&nbsp;<%= user.surname %></td>
             <td><%= user.email %></td>
+            <td><% if user.banned == true %>
+                  BANNED
+                <% else %>
+                  ACTIVE
+                <% end %>
+            </td>
             <td><%= link_to 'Show', user_path(user), class: "btn btn-sm btn-primary" %></td>
             <!-- <td><%= link_to 'Edit', edit_user_registration_path(user), class: "btn btn-sm btn-success" %></td> -->
             <td><%= link_to 'Destroy', user_path(user),
                     method: :delete,
                     data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger"  %></td>
+            <td><%= link_to '<button type="button" class="btn btn-sm btn-warning">Change Status</button>'.html_safe, change_status_path(user) %>
+            </td>
           </tr>
         <% end %>
       <% else %>
@@ -45,6 +54,7 @@
               <th scope="col">Name</th>
               <th scope="col">Description</th>
               <th scope="col">Author</th>
+              <th scope="col">Status</th>
               <th scope="col" colspan="3"></th>
               <th></th>
             </tr>
@@ -53,11 +63,18 @@
               <td><%= blog.name %></td>
               <td><%= blog.description %></td>
               <td>di <%= link_to blog.user.email, user_path(blog.user) %></td>
+              <td><% if blog.suspended == true %>
+                    SUSPENDED
+                  <% else %>
+                    ACTIVE
+                  <% end %>
+              </td>
               <td><%= link_to 'Show', blog_path(blog), class: "btn btn-sm btn-primary" %></td>
               <td><%= link_to 'Edit', edit_blog_path(blog), class: "btn btn-sm btn-success" %></td>
               <td><%= link_to 'Destroy', blog_path(blog),
                       method: :delete,
                       data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger"  %></td>
+              <td><%= link_to '<button type="button" class="btn btn-sm btn-warning">Change Status</button>'.html_safe, change_suspended_path(blog) %>
             </tr>
           <% end %>
         <% else %>

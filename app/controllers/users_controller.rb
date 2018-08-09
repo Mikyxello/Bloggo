@@ -18,6 +18,17 @@ class UsersController < ApplicationController
  		render 'index'
  	end
 
+  def change_status
+    @user = User.find(params[:id])
+    if @user.banned == true
+      @user.banned = false
+    else
+      @user.banned = true
+    end
+    @user.save
+    redirect_to admin_panel_index_path
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy

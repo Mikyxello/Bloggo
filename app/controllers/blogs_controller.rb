@@ -87,12 +87,26 @@ class BlogsController < ApplicationController
 	def destroy
 		@blog = Blog.find(params[:id])
 		@blog.destroy
-		
+
 		if current_user.admin?
 			redirect_to admin_panel_index_path
 		else
 			redirect_to blogs_path
 		end
+	end
+
+	def change_suspended
+		@blog = Blog.find(params[:id])
+
+		if current_user.admin?
+			if @blog.suspended == true
+				@blog.suspended = false
+			else
+				@blog.suspended = true
+			end
+		end
+		@blog.save
+		redirect_to admin_panel_index_path
 	end
 
 	def create
