@@ -33,6 +33,11 @@
 						<% else %>
 							<%= link_to 'Follow', follow_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
 						<% end %>
+						<% if current_user.favorited?(@blog) %>
+							<%= link_to 'Delete from Favourite Blogs', unfavourite_path(@blog), class: "btn btn-warning float-right", style: "margin-top: 50px; margin-bottom: -50px;"%>
+						<% else %> 
+							<%= link_to 'Add to Favourite Blogs', favourite_path(@blog), class: "btn btn-warning float-right", style: "margin-top: 50px; margin-bottom: -50px;"%>	
+						<% end %>			
 					<% end %>
 				<% end %>
 		<% else %>

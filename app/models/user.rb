@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	acts_as_voter
   acts_as_follower
+	acts_as_favoritor	
 
 	mount_uploader :avatar_image, ImageUploader
 

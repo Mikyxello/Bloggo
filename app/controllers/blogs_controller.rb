@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
 
-	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow ]
+	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow, :favourite, :unfavourite]
 	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
 	def index
@@ -49,6 +49,18 @@ class BlogsController < ApplicationController
 		current_user.stop_following(@blog)
 		show
 	end
+
+	def favourite
+		@blog = Blog.find(params[:id])
+		current_user.favorite(@blog)
+		show
+	end
+
+	def unfavourite
+		@blog = Blog.find(params[:id])
+		current_user.remove_favorite(@blog)
+		show
+	end		
 
 	def visited_view
 		@filter == "Most Visited"

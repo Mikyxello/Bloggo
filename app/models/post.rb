@@ -2,6 +2,7 @@ class Post < ApplicationRecord
 	acts_as_taggable_on :tags
 
 	acts_as_votable
+  acts_as_favoritable
 
 	is_impressionable :counter_cache => true, :column_name => :impressions_count
 
