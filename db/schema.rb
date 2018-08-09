@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_085022) do
+ActiveRecord::Schema.define(version: 2018_08_09_100346) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_085022) do
     t.integer "impressions_count"
     t.integer "editors"
     t.boolean "suspended"
+    t.string "header"
+    t.string "profile"
     t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 

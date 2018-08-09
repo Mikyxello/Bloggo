@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'blogs/index'
   get 'blogs/:id/visited_view' => "blogs#visited_view", :as => :visited_view
   get 'blogs/:id/recent_view' => "blogs#recent_view", :as => :recent_view
+  get 'blogs/:id/reacted_view' => "blogs#reacted_view", :as => :reacted_view
   get 'blogs/:id/followed', to: 'blogs#follow', :as => :follow
   get 'blogs/:id/unfollowed', to: 'blogs#unfollow', :as => :unfollow
   get 'blogs/:id/change_suspended', to:'blogs#change_suspended', :as => :change_suspended

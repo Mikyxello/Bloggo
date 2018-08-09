@@ -63,14 +63,23 @@ class BlogsController < ApplicationController
 	end		
 
 	def visited_view
-		@filter == "Most Visited"
-		@shown_posts = @blog.posts.order(:counter).last(5)
+		@filter = "Most Visited"
+		@posts = Post.where(blog_id: @blog)
+		@shown_posts = @blog.posts.order(:impressions_count).reverse.last(5)
 		render 'show'
 	end
 
 	def recent_view
 		@filter = "Most Recent"
+		@posts = Post.where(blog_id: @blog)
 		@shown_posts = @blog.posts.last(5)
+		render 'show'
+	end
+
+	def reacted_view
+		@filter = "Most Reacted"
+		@posts = Post.where(blog_id: @blog)
+		@shown_posts = @blog.posts.order(:cached_votes_total).reverse.last(5)
 		render 'show'
 	end
 
@@ -133,7 +142,7 @@ class BlogsController < ApplicationController
 
 	private
 	def blog_params
-		params.require(:blog).permit(:name, :description, :editors)
+		params.require(:blog).permit(:name, :description, :editors, :header, :profile)
 	end
 
 	private

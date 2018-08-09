@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="jumbotron container-fluid">
 
 <%= form_with model: @blog, local: true do |form| %>
  
@@ -16,18 +16,27 @@
     </div>
   <% end %>
   
-  <div class="form-group">
+  <div class="field">
     <%= form.label :name %><br>
     <%= form.text_field :name %>
   </div>
  
-  <div class="form-group">
+  <div class="field">
     <%= form.label :description %><br>
     <%= form.text_area :description %>
   </div>
- 
-  <div class="form-group">
-    <%= form.submit :class => 'btn btn-info' %>
+
+  <div class="field">
+    <%= form.label :profile %><br>
+    <%= form.file_field :profile %><br>
+  </div>
+  <div class="field">
+    <%= form.label :header %><br>
+    <%= form.file_field :header %><br>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
   </div>
  
 <% end %>
