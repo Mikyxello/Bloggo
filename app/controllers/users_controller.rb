@@ -4,11 +4,14 @@ class UsersController < ApplicationController
   def index
 	  @user = current_user
 		@blog = Blog.where(user_id: @user).last(5).reverse!
+    @favourite_blogs = current_user.favorited_by_type 'Blog'
+    @favourite_posts = current_user.favorited_by_type 'Post'
 		end
 
  	def show
 		@user = User.find(params[:id])
 		@blog = Blog.where(user_id: @user)
+    @favourite_blogs = @user.favorited_by_type 'Blog'
  	end
 
  	def upgrade
@@ -45,6 +48,6 @@ class UsersController < ApplicationController
 
  	private
  		def user_params
-		    params.require(:user).permit(:email,:name,:surname)
+		    params.require(:user).permit(:email,:name,:surname, :header, :profile)
 	  end
 end

@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
 
-	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow ]
+	before_action :check_user, except: [ :index, :show, :new, :create, :follow, :unfollow, :favourite, :unfavourite]
 	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
 	def index
@@ -50,15 +50,36 @@ class BlogsController < ApplicationController
 		show
 	end
 
+	def favourite
+		@blog = Blog.find(params[:id])
+		current_user.favorite(@blog)
+		show
+	end
+
+	def unfavourite
+		@blog = Blog.find(params[:id])
+		current_user.remove_favorite(@blog)
+		show
+	end		
+
 	def visited_view
-		@filter == "Most Visited"
-		@shown_posts = @blog.posts.order(:counter).last(5)
+		@filter = "Most Visited"
+		@posts = Post.where(blog_id: @blog)
+		@shown_posts = @blog.posts.order(:impressions_count).reverse.last(5)
 		render 'show'
 	end
 
 	def recent_view
 		@filter = "Most Recent"
+		@posts = Post.where(blog_id: @blog)
 		@shown_posts = @blog.posts.last(5)
+		render 'show'
+	end
+
+	def reacted_view
+		@filter = "Most Reacted"
+		@posts = Post.where(blog_id: @blog)
+		@shown_posts = @blog.posts.order(:cached_votes_total).reverse.last(5)
 		render 'show'
 	end
 
@@ -121,7 +142,7 @@ class BlogsController < ApplicationController
 
 	private
 	def blog_params
-		params.require(:blog).permit(:name, :description, :editors)
+		params.require(:blog).permit(:name, :description, :editors, :header, :profile)
 	end
 
 	private

@@ -1,7 +1,9 @@
-<div class="container">
-	<div class="jumbotron" style="margin-top: 20px;">
+	<div class="jumbotron header_background" style="margin-top: 20px;">
+		<div class="jumbotron transbox" style="margin-top: 20px;">
 
-		<img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> 
+
+
+		<%= image_tag (@blog.profile.url.to_s) , class: "ext-center rounded mx-auto d-block", size: "300x300", alt: "Profile Pic"%>
 		<h1 class="text-center"><%= @blog.name %></h1>
 
 		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
@@ -15,10 +17,12 @@
     	</div>
     	<div class="col-sm text-center">
       	<h3> Visits</h3>
-      	<h6> <%= "#{@blog.impressionist_count} views so far!" %> </h6>
+      	<h6> <%= "#{@blog.impressionist_count}" %> </h6>
 
     	</div>
   	</div>
+
+
   	<% if user_signed_in? %>
   			<% if current_user.id == @blog.user_id %>
 					<%= link_to 'Edit', edit_blog_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
@@ -33,6 +37,11 @@
 						<% else %>
 							<%= link_to 'Follow', follow_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
 						<% end %>
+						<% if current_user.favorited?(@blog) %>
+							<%= link_to 'Delete from Favourite Blogs', unfavourite_path(@blog), class: "btn btn-warning float-right", style: "margin-top: 50px; margin-bottom: -50px;"%>
+						<% else %> 
+							<%= link_to 'Add to Favourite Blogs', favourite_path(@blog), class: "btn btn-warning float-right", style: "margin-top: 50px; margin-bottom: -50px;"%>	
+						<% end %>			
 					<% end %>
 				<% end %>
 		<% else %>
@@ -40,6 +49,9 @@
 		<!-- qua ci va la funzione subscribe --> 
 		<% end %>
 	</div>
+</div>
+<div class="container">
+
 	<h6><%= @blog.description %></h6>
   <div class="dropdown float-right" style="margin-top: 120px;">
 	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> <%= @filter %>
@@ -47,7 +59,7 @@
 		  <ul class="dropdown-menu">
 		    <li><%= link_to "Most Recent", recent_view_path %></li>
 		    <li><%= link_to "Most Visited", visited_view_path %></li>
-		    <li><%= link_to "Most Reacted -not working-", visited_view_path %></li>
+		    <li><%= link_to "Most Reacted", reacted_view_path %></li>
 			  </ul>
 	</div> 
 	<div class="row">
@@ -59,12 +71,6 @@
     </div>
 
   </div>
-
-
-		<%= link_to 'Edit Blog', edit_blog_path(@blog), class: "btn btn-warning" %>  
-		<%= link_to 'Back to Bloggoes', blogs_path, class: "btn btn-dark" %>  
-		<%= link_to 'New Post', new_blog_post_path(@blog), class: "btn btn-info" %>
-
 </div>
 
 
@@ -83,3 +89,16 @@
     </div>
   </div>
 </div>
+
+<style>
+ .header_background{
+ 	background-image: url(<%= @blog.header.url.to_s %>);
+ }
+
+ .transbox {
+    margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.9;
+}
+</style>

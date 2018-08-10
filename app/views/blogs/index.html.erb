@@ -16,10 +16,12 @@
           <td><%= blog.description %></td>
           <td>di <%= link_to blog.user.email, user_path(blog.user) %></td>
           <td><%= link_to 'Show', blog_path(blog) %></td>
-          <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-          <td><%= link_to 'Destroy', blog_path(blog),
-                  method: :delete,
-                  data: { confirm: 'Are you sure?' } %></td>
+          <% if current_user == blog.user %>
+            <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+            <td><%= link_to 'Destroy', blog_path(blog),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         </tr>
       <% end %>
     <% else %>

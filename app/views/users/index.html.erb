@@ -13,8 +13,8 @@
     		<!-- <img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> -->
     		<h1 class="text-center"><%= @user.name %> <%= @user.surname %></h1>
 
-    		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
-        	<div class="col-sm text-center">
+    		<div class="row text-center">
+        	<div class="col-sm-12 text-center">
           	<h3> Blogs</h3>
           	<h6> <%= @blog.count %></h6>
         	</div>
@@ -85,7 +85,26 @@
           <h2>Favourite Bloggoes</h2>
         </div>
         <div class="card-body">
-          <h3> No Bloggoes found! </h3>
+        <% if @favourite_blogs != nil && @favourite_blogs.count != 0%>
+          <table class="table">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Author</th>
+              <th scope="col">Visits</th>
+            </tr>
+            <% @favourite_blogs.each do |blog| %>
+            <tr>
+              <td><%= link_to blog.name, blog_path(blog) %></td>
+              <td><%= blog.description %></td>
+              <td><%= link_to blog.user.name, user_path(blog.user) %></td>
+              <td><%= link_to blog.impressionist_count%></td>
+            </tr>
+            <% end %>
+          </table>
+          <% else %>
+            <h3> No bloggoes found! </h3>
+        <% end %>
         </div>
       </div>
     <div class="col-6">
@@ -94,7 +113,11 @@
           <h2>Favourite Postoes</h2>
         </div>
         <div class="card-body">
-          <h3> No Postoes found! </h3>
+        <% if @favourite_posts != nil && @favourite_posts.count != 0%>
+          <%= render @favourite_posts %>
+        <% else %>
+          <h3> No bloggoes found! </h3>
+        <% end %>
         </div>
       </div>
     </div>
