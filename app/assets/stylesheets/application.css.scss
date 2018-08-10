@@ -74,12 +74,20 @@ h6 {
 
 
 // Footer
-
+html, body {
+    height: 100%;
+}
 .pastel_colour_footer{
 	background: #FFB145 ;
 }
 
 .footer {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
 	text-align: center;
 	padding-top: 2%;
 	padding-bottom: 1%;
