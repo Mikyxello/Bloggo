@@ -68,20 +68,37 @@
       <tr>
         <td align="left">
           <div class="custom-file post-form-file">
-            <%= form.file_field :file, class: "custom-file-input", 'aria-describedby' => "fileHelp" %>
+            <%= form.file_field :file, class: "custom-file-input", 'aria-describedby' => "fileHelp", accept: 'image/png,image/gif,image/jpeg,image/jpg,video/mp4' %>
             <label class="custom-file-label" for="post_file">
               <% if @post.file.file.nil? %>
                 <i class="fas fa-file-upload"></i> Add File
               <% else %>
-                <%= @post.file.file.filename %>
+                <% if @post.file.file.extension.downcase == 'mp4' %>
+                  <i class="fas fa-file-video"></i> <%= @post.file.file.filename %>
+                <% else %>
+                  <i class="fas fa-file-image"></i> <%= @post.file.file.filename %>
+                <% end %>
               <% end %>
             </label>
           </div>
           <small id="fileHelp" class="form-text text-muted post-form-file-helper">File must be 'jpeg', 'jpg', 'png', 'gif' or 'mp4'</small>
         </td>
         <td colspan="2" align="center">
-          <img id="filePreview" width="100px" class="post-form-file-preview"/>
-        </td>
+          <%= video_tag('', width: '100px', id: 'videoPreview', style: 'display: none;') %>
+          <%= image_tag('', width: '100px', id: 'imagePreview', style: 'display: none;') %>
+          <% if !@post.file.file.nil? %>
+            <% if @post.file.file.extension.downcase == 'mp4' %>
+              <script>
+                $('#videoPreview').attr('src', '<%= @post.file.url %>');
+                $('#videoPreview').css('display', '');
+              </script>
+            <% else %> 
+              <script>
+                $('#imagePreview').attr('src', '<%= @post.file.url %>');
+                $('#imagePreview').css('display', '');
+              </script>
+            <% end %>
+          <% end %>
         <td>
           <div class="form-group post-form-buttons">
             <% if @post.id.present? %>
@@ -109,6 +126,9 @@
     var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
     var extension = filename.substr( (filename.lastIndexOf('.') +1) );
     switch(extension) {
+        case '':
+            $('.custom-file-label').html('<i class="fas fa-file-upload"></i> Add File');
+        break;
         case 'jpeg':
         case 'jpg':
         case 'png':
@@ -120,17 +140,38 @@
         break;
         default:
             $('.custom-file-label').html('<i class="fas fa-exclamation-triangle"></i> Extension not allowed!');
+        break;
     }
   });
 
   function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
-
       reader.onload = function (e) {
-        $('#filePreview').attr('src', e.target.result);
-      }
+        var src = e.target.result;
+        var filename = input.files[0].name;
+        var ext = filename.substr( (filename.lastIndexOf('.') +1) );
 
+        if (ext == 'mp4') {
+          $('#videoPreview').attr('src', src);
+          $('#videoPreview').css('display', '');
+          $('#imagePreview').attr('src', '');
+          $('#imagePreview').css('display', 'none');
+        }
+        else if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
+          $('#imagePreview').attr('src', src);
+          $('#imagePreview').css('display', '');
+          $('#videoPreview').attr('src', '');
+          $('#videoPreview').css('display', 'none');
+
+        }
+        else {
+          $('#imagePreview').attr('src', '');
+          $('#imagePreview').css('display', 'none');
+          $('#videoPreview').attr('src', '');         
+          $('#videoPreview').css('display', 'none');
+        }
+      }
       reader.readAsDataURL(input.files[0]);
     }
   }

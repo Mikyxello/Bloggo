@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
 
-	before_action :authenticate_user!, only: [ :upvote, :downvote]
+	before_action :authenticate_user!, only: [ :upvote, :downvote ]
 	before_action :check_editor, only: [ :new, :create, :destroy ]
 	before_action :check_user, only: [ :edit, :update, :destroy ]
 	before_action :check_admin, only: [ :destroy ]
-	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
+	impressionist actions: [ :show ], unique: [ :impressionable_type, :impressionable_id, :session_hash ]
 	
 	def index
 		@blog = Blog.find(params[:blog_id])
