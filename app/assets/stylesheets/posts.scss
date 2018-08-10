@@ -132,6 +132,13 @@
 	width: 100px;	
 }
 
+.remove-file-button {
+	color: #FF0000 !important;
+	&:hover{
+		cursor: pointer;
+	}
+}
+
 
 // User View
 

@@ -86,6 +86,7 @@
         <td colspan="2" align="center">
           <%= video_tag('', width: '100px', id: 'videoPreview', style: 'display: none;') %>
           <%= image_tag('', width: '100px', id: 'imagePreview', style: 'display: none;') %>
+          <%= form.check_box :remove_file, style: 'display: none;' %> <i class="fas fa-times-circle" id="delete-icon" style="display: none;"> Remove</i>
           <% if !@post.file.file.nil? %>
             <% if @post.file.file.extension.downcase == 'mp4' %>
               <script>
@@ -98,6 +99,10 @@
                 $('#imagePreview').css('display', '');
               </script>
             <% end %>
+            <script>
+              $('#post_remove_file').css('display', '');
+              $('#delete-icon').css('display', '');
+            </script>
           <% end %>
         <td>
           <div class="form-group post-form-buttons">
@@ -171,10 +176,25 @@
           $('#videoPreview').attr('src', '');         
           $('#videoPreview').css('display', 'none');
         }
+        $('#post_remove_file').css('display', '');
+        $('#post_remove_file').prop('checked', false);
+        $('#delete-icon').css('display', '');
       }
       reader.readAsDataURL(input.files[0]);
     }
   }
+
+  $('#post_remove_file').on('change', function() {
+    if($('#post_remove_file').prop('checked')) {
+      $('#imagePreview').attr('src', '');
+      $('#imagePreview').css('display', 'none');
+      $('#videoPreview').attr('src', '');         
+      $('#videoPreview').css('display', 'none');
+      $('#post_remove_file').css('display', 'none');
+      $('#delete-icon').css('display', 'none');
+      $('.custom-file-label').html('<i class="fas fa-file-upload"></i> Add File');
+    }
+  });
 
   $("#post_file").change(function () {
     readURL(this);

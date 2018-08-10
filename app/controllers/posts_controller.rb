@@ -59,6 +59,10 @@ class PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
 
+		if params[:remove_file]
+			@post.remove_file!
+		end
+
 		if @post.update(post_params)
 			redirect_to blog_post_path(@blog, @post)
 		else
@@ -125,7 +129,7 @@ class PostsController < ApplicationController
 
 	private
 	def post_params
-		params.require(:post).permit(:title, :subtitle, :content, :tag_list, :file)
+		params.require(:post).permit(:title, :subtitle, :content, :tag_list, :file, :remove_file)
 	end
 
 	private
