@@ -1,21 +1,6 @@
 <%- if controller_name != 'sessions' %>
-  If you are already registered: <%= link_to '<button type="button" class="btn btn-outline-primary">Login</button>'.html_safe, "#loginModal", "data-toggle" => "modal" %> <br />
+  If you are already registered: <%= link_to "Log in", new_session_path(resource_name) %> <br />
 <% end -%>
-<div class="modal" id="loginModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Login</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= render "devise/sessions/new" %>
-      </div>
-    </div>
-  </div>
-</div>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   Haven't an account yet? <%= link_to "Sign up", new_registration_path(resource_name) %> <br />
