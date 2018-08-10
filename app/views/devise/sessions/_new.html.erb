@@ -26,9 +26,14 @@
   <% end -%>
 
   <div class="actions" style="text-align:center;">
-    <%= f.submit "Login", class: "btn btn-success" %>
-    <%= link_to '<button type="button" class="btn btn-danger">Login with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>
-    <%= link_to '<button type="button" class="btn btn-primary">Login with Facebook</button>'.html_safe, user_facebook_omniauth_authorize_path %>
+    <div style="width:358px; float:none; margin:0 auto;">
+      <%= f.submit "Login", class: "btn btn-primary btn-block" %>
+    </div>
+    <!--<%= link_to '<button type="button" class="btn btn-danger">Login with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>-->
+    <div style="margin-top:10px;">
+      <%= link_to image_tag(asset_path("google-sign-in.png"), height: '40px;', width: "166px"), user_google_oauth2_omniauth_authorize_path%>
+      <%= link_to image_tag(asset_path("facebook-login.png"), height: '35px;', width: "190px"), user_facebook_omniauth_authorize_path%>
+    </div>
   </div>
   <div>
 
