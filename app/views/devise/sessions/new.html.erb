@@ -1,4 +1,4 @@
-<h2 style="text-align:center;">Log in</h2>
+<h2 style="text-align:center;">Login</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <table class="table">
@@ -26,12 +26,18 @@
       <%= f.label :remember_me %>
     </div>
   <% end -%>
-
-  <div class="actions" style="text-align:center;">
-    <%= f.submit "Login", class: "btn btn-primary" %>
-    <%= link_to '<button type="button" class="btn btn-danger">Login with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>
-    <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
+    <div class="actions" style="text-align:center;">
+      <div style="width:358px; float:none; margin:0 auto;">
+        <%= f.submit "Login", class: "btn btn-primary btn-block" %>
+      </div>
+      <!--<%= link_to '<button type="button" class="btn btn-danger">Login with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>-->
+      <div style="margin-top:10px;">
+        <%= link_to image_tag(asset_path("google-sign-in.png"), height: '40px;', width: "166px"), user_google_oauth2_omniauth_authorize_path%>
+        <%= link_to image_tag(asset_path("facebook-login.png"), height: '35px;', width: "190px"), user_facebook_omniauth_authorize_path%>
+      </div>
+    </div>
   </div>
+
   </div>
 <% end %>
 
