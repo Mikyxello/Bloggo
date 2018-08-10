@@ -10,16 +10,15 @@
 	<% end %>
 </script>
 
-
-
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v3.1&appId=849655068560418';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+<script>
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = 'https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v3.1&appId=849655068560418';
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 </script>
 
 <div class="container">
@@ -30,7 +29,7 @@
 					<div class="card post-card">
 						<table width="100%" align="center">
 							<tr>
-								<td colspan="4" align="left" valign="top">
+								<td colspan="4" align="left" valign="top" width="100%">
 									<% if @post.user.avatar_image? %>
 										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, class: "image-link") %>
 									<% else %>
@@ -38,7 +37,7 @@
 									<% end %>
 									<strong><%= @post.title %></strong>
 									<small class="text-muted"> posted on </small>
-									<%= link_to @post.blog.name, blog_path(@post.blog), class: "post-link" %>
+									<%= link_to @blog.name, blog_path(@blog), class: "post-link" %>
 									<small class="text-muted"> by </small>
 									<% if @post.user.username %>
 										<%= link_to @post.user.username, user_path(@post.user), class: "post-link" %>
@@ -99,7 +98,7 @@
 							</tr>
 							<tr>
 							</tr>
-							<tr>
+							<tr valign="top">
 								<td align="left">
 									<aside class="vote-count bind-<%= @post.id %>">
 										<%= link_to like_blog_post_path(@blog, @post), :remote => true, method: :put, class: 'vpos post-link' do %>
@@ -119,20 +118,24 @@
 								<td colspan="2" align="right">
 									<small class="text-muted"><i class="fas fa-eye"></i> <%= @post.impressions_count %> Views </small>
 								</td>
-								<td align="right">
-									<g:plus action="share" data-href="<%= request.original_url %>" data-annotation="none" data-height="24" data-width="500"></g:plus>
-									<div class="fb-share-button share-button" data-href="<%= request.original_url %>" data-layout="button" data-size="large" data-mobile-iframe="true">
-										<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share on Facebook</a>
-									</div>							
+								<td align="right" width="100%">
+									<g:plus action="share" data-href="<%= request.original_url %>" data-annotation="none"></g:plus><br/>
+									<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Condividi</a></div>						
 								</td>
 							</tr>
 							<tr>
-								<td colspan="5" align="center">
-									<% if current_user.favorited?(@post) %>
-										<%= link_to '<i class="far fa-heart post-favourite"></i>'.html_safe, unfavourite_post_path(@blog, @post) %>
-									<% else %> 
-										<%= link_to '<i class="fas fa-heart post-favourite"></i>'.html_safe, favourite_post_path(@blog, @post) %>	
-									<% end %>		
+								<td colspan="5" align="center" class="favourite">
+									<% if user_signed_in? %>
+										<% if current_user.favorited?(@post) %>
+											<%= link_to unfavourite_post_path(@blog, @post), method: :get, remote: true, class: 'unfavourite-post' do %>
+												<i class="far fa-heart post-favourite"></i>
+											<% end %>
+										<% else %>
+											<%= link_to favourite_post_path(@blog, @post), method: :get, remote: true, class: 'favourite-post' do %>
+												<i class="fas fa-heart post-favourite"></i>
+											<% end %>
+										<% end %>
+									<% end %>	
 								</td>
 							</tr>
 						</table>
@@ -152,37 +155,47 @@
 					</div>
 				</td>
 				<td valign="top" width="30%">
-					<div class="card user-card" id="user_card">
+					<div class="card blog-card" id="blog_card">
 						<div class="tg-wrap">
 							<table width="100%">
 								<tr>
-									<% if @post.user.avatar_image? %>
-										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, class: "image-link") %>
-									<% else %>
-										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, class: "image-link") %>
-									<% end %>
-									<small class="card-title">
-										<%= link_to raw(@post.user.name + "&nbsp;" + @post.user.surname), user_path(@post.user), class: "post-link" %>
-										<% if @post.user.username %>
-											<small class="text-muted"> aka </small><%= link_to @post.user.username, user_path(@post.user), class: "post-link" %>
+									<td colspan="2">
+										<% if @blog.profile? %>
+											<%= image_tag(@blog.profile.url, alt: @blog.profile.identifier, class: "image-link") %>
+										<% else %>
+											<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @blog.name, class: "image-link") %>
 										<% end %>
-									</small>
+										<small class="card-title">
+											<%= link_to @blog.name, blog_path(@blog), class: "post-link" %>
+										</small>
+									</td>
 								</tr>
-								<tr>
+								<tr align="center">
 									<td>
-										<small class="card-subtitle mb-2 text-muted"><%= @post.user.posts.size %> Post</small>
+										Follower
+									</td>
+									<td>
+										Posts
+									</td>
+								</tr>
+								<tr align="center">
+									<td>
+										<small class="card-subtitle mb-2 text-muted"><%= @blog.followers_count %></small>
+									</td>
+									<td>
+										<small class="card-subtitle mb-2 text-muted"><%= @blog.posts.size %></small>
 									</td>
 								</tr>
 								<tr>
-								    <td>
-								    	<p class='user-description'><%= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper augue ut imperdiet vehicula. Sed felis leo, consequat sit amet malesuada et, commodo vitae quam." %></p>
+								    <td colspan="2">
+								    	<p class='blog-description'><%= @blog.description %></p>
 								    </td>
 								</tr>
 							</table>
 						</div>
 					</div>
 					<div id="related_posts" class="related-posts">
-						<% if @related_posts %>
+						<% if @related_posts.size > 0 %>
 							<small class="text-muted related-posts-title">Related Posts</small>
 							<div class="related-posts-show"><%= render @related_posts %></div>
 						<% end %>

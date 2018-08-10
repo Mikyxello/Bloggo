@@ -29,7 +29,6 @@
 	object-fit: cover;
 	width: 2.5rem;
 	height: 2.5rem;
-	
 	&:hover {
 		opacity: 0.7;
 	}
@@ -140,14 +139,15 @@
 }
 
 
-// User View
+// Bloggo View
 
-.user-description {
+.blog-description {
+	margin-top: 2%;
 	font-size: 0.8rem;
 }
 
-.user-card {
-	padding: 5%;
+.blog-card {
+	padding: 4%;
 }
 
 

@@ -1,0 +1,6 @@
+$('.unfavourite-post').bind('ajax:success', function(){
+	playSound();
+
+	$(this).closest('.unfavourite-post').hide();
+	$(this).closest('.favourite').html('<%= link_to '<i class="fas fa-heart post-favourite"></i>'.html_safe, favourite_post_path(@blog, @post), method: :get, remote: true, class: 'favourite-post' %>');
+});

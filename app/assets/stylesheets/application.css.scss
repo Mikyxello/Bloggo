@@ -25,10 +25,22 @@
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:200,300,400,600);
 
+html {
+    height: 100%;
+}
+
 body {
+  height: 100%;
 	font-family: 'Roboto';
 	font-size: 15px;
 	font-weight: 300;
+}
+
+.container {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto;
 }
 
 h1, h2, h3, h4, h5{
@@ -74,23 +86,16 @@ h6 {
 
 
 // Footer
-html, body {
-    height: 100%;
-}
+
 .pastel_colour_footer{
 	background: #FFB145 ;
 }
 
 .footer {
-	position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 100px;
-    width: 100%;
-    overflow: hidden;
 	text-align: center;
 	padding-top: 2%;
 	padding-bottom: 1%;
+  clear: both;
 }
 
 .smGlobalBtn { /* global button class */

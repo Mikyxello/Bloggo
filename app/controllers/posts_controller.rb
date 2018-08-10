@@ -41,20 +41,6 @@ class PostsController < ApplicationController
 		end
 	end
 
-	def favourite
-		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
-		current_user.favorite(@post)
-		show
-	end
-
-	def unfavourite
-		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
-		current_user.remove_favorite(@post)
-		show
-	end	
-
 	def update
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.find(params[:id])
@@ -126,6 +112,31 @@ class PostsController < ApplicationController
 			end
 		end
 	end
+
+	def favourite
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+		current_user.favorite(@post)
+
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.json { head :no_content }
+			format.js { render :layout => false }
+		end
+	end
+
+	def unfavourite
+		@blog = Blog.find(params[:blog_id])
+		@post = @blog.posts.find(params[:id])
+		current_user.remove_favorite(@post)
+
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.json { head :no_content }
+			format.js { render :layout => false }
+		end
+	end	
+
 
 	private
 	def post_params
