@@ -1,28 +1,47 @@
 <h2 style="text-align:center;">Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= notice %>
+<%= form_for(resource, as: resource_name, :html => {:multipart => true}, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <table class="table">
     <tr>
+      <th><%= f.label :username %></th>
+      <th><%= f.text_field :username, id: 'username'  %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :name %></th>
+      <th><%= f.text_field :name, id: 'name'  %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :surname %></th>
+      <th><%= f.text_field :surname, id: 'surname'  %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :birth_date %></th>
+      <th><%= f.date_select :birth_date, :start_year => 1900 %></th>
+    </tr>
+    <tr>
       <th><%= f.label :email %></th>
-      <th><%= f.email_field :email, autofocus: true, autocomplete: "email" %></th>
+      <th><%= f.email_field :email, autocomplete: "email", id: 'emailp' %></th>
     </tr>
     <tr>
       <th><%= f.label :password %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %></th>
-      <th><%= f.password_field :password, autocomplete: "off" %></th>
+      <th><%= f.password_field :password, autocomplete: "off", id: 'password'  %></th>
     </tr>
     <tr>
       <th><%= f.label :password_confirmation %></th>
-      <th><%= f.password_field :password_confirmation, autocomplete: "off" %></th>
+      <th><%= f.password_field :password_confirmation, autocomplete: "off", id: 'password_confirmation'  %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :avatar_image %></th>
+      <th><%= f.file_field :avatar_image, id: 'avatar_image_p'  %></th>
     </tr>
   </table>
 
   <div class="actions" style="text-align:center;">
-    <%= f.submit "Sign up", class: "btn btn-primary"%>
-    <%= link_to '<button type="button" class="btn btn-danger">Signin with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>
+    <%= f.submit "Sign up", class: "btn btn-primary", id: 'signup'%>
   </div>
 <% end %>
 

@@ -1,47 +1,47 @@
 <h2 style="text-align:center;">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, :html => {:multipart => true}, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, :html => {:multipart => true}, url: registration_path(resource_name)) do |f|%>
   <%= devise_error_messages! %>
   <table class="table">
     <tr>
       <th><%= f.label :username %></th>
-      <th><%= f.text_field :username %></th>
+      <th><%= f.text_field :username, id: 'username' %></th>
     </tr>
     <tr>
       <th><%= f.label :name %></th>
-      <th><%= f.text_field :name %></th>
+      <th><%= f.text_field :name, id: 'name' %></th>
     </tr>
     <tr>
       <th><%= f.label :surname %></th>
-      <th><%= f.text_field :surname %></th>
+      <th><%= f.text_field :surname, id: 'surname' %></th>
     </tr>
     <tr>
       <th><%= f.label :birth_date %></th>
-      <th><%= f.date_select :birth_date, :start_year => 1900 %></th>
+      <th><%= f.date_select :birth_date, :start_year => 1900, id: 'user[birth_date]'  %></th>
     </tr>
     <tr>
       <th><%= f.label :email %></th>
-      <th><%= f.email_field :email, autocomplete: "email" %></th>
+      <th><%= f.email_field :email, autocomplete: "email", id: 'email' %></th>
     </tr>
     <tr>
       <th><%= f.label :password %>
       <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %></th>
-      <th><%= f.password_field :password, autocomplete: "off" %></th>
+      <th><%= f.password_field :password, autocomplete: "off", id: 'password'  %></th>
     </tr>
     <tr>
       <th><%= f.label :password_confirmation %></th>
-      <th><%= f.password_field :password_confirmation, autocomplete: "off" %></th>
+      <th><%= f.password_field :password_confirmation, autocomplete: "off", id: 'user[password_confirmation]'  %></th>
     </tr>
     <tr>
       <th><%= f.label :avatar_image %></th>
-      <th><%= f.file_field :avatar_image %></th>
+      <th><%= f.file_field :avatar_image, id: 'user[avatar_image]'  %></th>
     </tr>
   </table>
 
   <div class="actions" style="text-align:center;">
-    <%= f.submit "Sign up", class: "btn btn-primary"%>
+    <%= f.submit "Sign up", class: "btn btn-primary", id: 'signupp'%>
   </div>
 <% end %>
 
