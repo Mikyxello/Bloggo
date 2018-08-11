@@ -9,10 +9,15 @@ World(WithinHelpers)
 
 Given("I am a registered user") do
   @user = create(:user)
+  visit "login"
+  fill_in "loginemail", :with => @user.email
+  fill_in "loginpassword", :with => @user.password
+  click_button('loginbutton').click
 end
 
 Given ("There is at least one blog") do
-  @blog = create(:blog, user_id: @user.id)
+  @user = User.take
+  @blog = create(:blog, user: @user)
 end
 
 Given("I am the owner of the blog") do

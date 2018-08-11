@@ -13,10 +13,13 @@ module NavigationHelpers
       '/'
 
     when /^the blog page$/
-      "/blogs/#{@blog.id}"
+      blog_path(@blog)
+
+    when /^the new post page$/
+      new_blog_post_path(@blog)
 
     when /^the post page$/
-      "/blogs/#{@blog.id}/posts/#{@post.id}"
+      blog_post_path(@blog, Post.take)
 
     when /^the sign up page$/
       '/users/sign_up'

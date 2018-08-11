@@ -8,11 +8,11 @@ Scenario: Create a new post
 	And There is at least one blog
 	And I am the owner of the blog
 	And I am on the blog page
-	When I click Create Postoes
+	When I follow "Create Postoes"
 	Given I am on the new post page
-	And I fill in "title" with "Post title"
-	And I fill in "subtitle" with "Post subtitle"
-	And I fill in "tag_list" with "post, test, tags"
-	And I fill in "content" with "The post content"
-	When I click Publish
+	And I fill in "post_title" with "Post title"
+	And I fill in "post_subtitle" with "Post subtitle"
+	And I fill in "post_tag_list" with "post, test, tags"
+	And I fill in "post_content" with "The post content"
+	When I press "Publish"
 	Then I should be on the post page
