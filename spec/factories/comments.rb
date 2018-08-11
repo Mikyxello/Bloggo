@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :comment do
-    content "MyText"
-    post nil
-  end
+	require 'faker'
+	factory :comment do
+		content Faker::Lorem.words(20)
+	end
 end

@@ -1,5 +1,7 @@
 FactoryBot.define do
-  factory :blog do
-    
-  end
+	require 'faker'
+	factory :blog do
+        name Faker::String.random
+        description Faker::String.random
+    end
 end

@@ -26,11 +26,11 @@
   	<% if user_signed_in? %>
   			<% if current_user.id == @blog.user_id %>
 					<%= link_to 'Edit', edit_blog_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
-					<%= link_to 'Create Postoes', new_blog_post_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
+					<%= link_to 'Create Postoes', new_blog_post_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;" %> 
 					<%= link_to 'Add new editor', "#editorModal", "data-toggle" => "modal", class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
 				<% else %>
 	  			<% if current_user.id == @blog.editors %>
-						<%= link_to 'Create Postoes', new_blog_post_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
+						<%= link_to 'Create Postoes', new_blog_post_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;" %> 
 					<% else %>
 				  	<% if current_user.following?(@blog) %>
 							<%= link_to 'Unfollow', unfollow_path(@blog), class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 

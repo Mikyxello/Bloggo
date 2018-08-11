@@ -1,3 +1,5 @@
+require 'uri'
+
 module WithinHelpers
   def with_scope(locator)
     locator ? within(*selector_for(locator)) { yield } : yield
@@ -5,9 +7,24 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+Given("I am a registered user") do
+  @user = create(:user)
+end
+
+Given ("There is at least one blog") do
+  @blog = create(:blog, user_id: @user.id)
+end
+
+Given("I am the owner of the blog") do
+  expect(@user).to be == @blog.user
+end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
+end
+
+When /^I click (.*)/ do |element|
+  click_on(element)
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|

@@ -17,9 +17,6 @@ class Blog < ApplicationRecord
 	belongs_to :user
 
 	validates :name, presence: true, length: { minimum: 5 }
-	validates :header, presence: true
-	validates :profile, presence: true
-
 
 	before_create do
 		self.suspended = false

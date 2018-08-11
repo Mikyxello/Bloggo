@@ -1,14 +1,18 @@
-Feature: I want to create a new post
-	As a user
-	I want to create a new post
-	Such that I can see the post on the blog page
+Feature: User can create a new post
+	As a USER
+	I want to CREATE A NEW POST
+	So that I can SEE THE POST ON THE BLOG PAGE
 
-Scenario: create a new post
-	Given There is at least one blog
+Scenario: Create a new post
+	Given I am a registered user
+	And There is at least one blog
+	And I am the owner of the blog
 	And I am on the blog page
-	And I am the creator of the blog
-	When I click on "Create new post"
+	When I click Create Postoes
 	Given I am on the new post page
-	And I fill all the fields
-	When I click on "Publish"
-	Then I should see the post on the blog page
+	And I fill in "title" with "Post title"
+	And I fill in "subtitle" with "Post subtitle"
+	And I fill in "tag_list" with "post, test, tags"
+	And I fill in "content" with "The post content"
+	When I click Publish
+	Then I should be on the post page
