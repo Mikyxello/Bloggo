@@ -16,6 +16,14 @@ Given("There are at least two registered user") do
   @user_aux = create(:user)
 end
 
+Given("I am a registered user") do
+  @user = create(:user)
+  visit "login"
+  fill_in "loginemail", :with => @user.email
+  fill_in "loginpassword", :with => @user.password
+  click_button('loginbutton').click
+end
+
 Given ("I am logged in") do
   visit "login"
   fill_in "loginemail", :with => @user.email
