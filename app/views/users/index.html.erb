@@ -20,7 +20,7 @@
         	</div>
       	</div>
     		<% if @user.id == current_user.id %>
-    			<%= link_to '<button type="button" class="btn btn-primary">Edit Profile</button>'.html_safe, "#editModal", "data-toggle" => "modal" %>
+    			<%= link_to '<button type="button" class="btn btn-primary" id="editprofile">Edit Profile</button>'.html_safe, "#editModal", "data-toggle" => "modal", id: "editprofile" %>
     			<% if @user.bloggoer? || @user.admin? %>
     				<%= link_to '<button type="button" class="btn btn-primary">Create Bloggoes</button>'.html_safe, new_blog_path %>
     			<% else %>

@@ -7,7 +7,7 @@
       <th>
 
       </th>
-      <th><%= f.email_field :email, autofocus: true, autocomplete: "email", id:"loginemail" %></th>
+      <th><%= f.email_field :email, autofocus: true, autocomplete: "email", id:"loginemail2" %></th>
     </tr>
     <tr>
       <th><%= f.label :password %></th>
@@ -16,7 +16,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </th>
-      <th><%= f.password_field :password, autocomplete: "off", id: 'loginpassword' %></th>
+      <th><%= f.password_field :password, autocomplete: "off", id: 'loginpassword2' %></th>
     </tr>
   </table>
 
@@ -28,7 +28,7 @@
   <% end -%>
     <div class="actions" style="text-align:center;">
       <div style="width:358px; float:none; margin:0 auto;">
-        <%= f.submit "Login", class: "btn btn-primary btn-block" %>
+        <%= f.submit "Login", class: "btn btn-primary btn-block", id:"loginbutton2"%>
       </div>
       <!--<%= link_to '<button type="button" class="btn btn-danger">Login with Google</button>'.html_safe, user_google_oauth2_omniauth_authorize_path %>-->
       <div style="margin-top:10px;">
