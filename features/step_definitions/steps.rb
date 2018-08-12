@@ -15,6 +15,15 @@ Given("I am a registered user") do
   click_button('loginbutton').click
 end
 
+Given("I am a banned user") do
+  @user = create(:user, :banned => true)
+  @user.banned = true
+  visit "login"
+  fill_in "loginemail", :with => @user.email
+  fill_in "loginpassword", :with => @user.password
+  click_button('loginbutton').click
+end
+
 Given ("There is at least one blog") do
   @user = User.take
   @blog = create(:blog, user: @user)
@@ -28,9 +37,34 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+When ("I try to delete an account of others") do
+  @user = create(:user, :email => "pippo@gmail.com")
+  submit :delete, "/users/#{@user.id}",{}
+end
+
 When /^I click (.*)/ do |element|
   click_on(element)
 end
+
+When /^I log in$/ do
+  steps %Q{
+    Given I am on the login page
+    When I fill in "loginemail" with "simonestaffa96@gmail.com"
+    And I fill in "loginpassword" with "staffa"
+    And I press "loginbutton"
+    Then I should be on the home page
+    And I should see "Logout"
+  }
+end
+
+When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
+  attach_file(field, File.expand_path(path))
+end
+
+And /^I should see the image$/ do
+  User.last.avatar_image != nil
+end
+
 
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
