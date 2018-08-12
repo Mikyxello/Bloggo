@@ -7,21 +7,50 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given("I am a registered user") do
+Given("There is at least a registered user") do
   @user = create(:user)
+end
+
+Given("There are at least two registered user") do
+  @user = create(:user)
+  @user_aux = create(:user)
+end
+
+Given ("I am logged in") do
   visit "login"
   fill_in "loginemail", :with => @user.email
   fill_in "loginpassword", :with => @user.password
   click_button('loginbutton').click
 end
 
+Given ("I am not logged in") do
+  page.driver.submit :delete, "/users/sign_out", {}
+end
+
 Given ("There is at least one blog") do
-  @user = User.take
   @blog = create(:blog, user: @user)
 end
 
+Given ("The blog has at least one post") do
+  @post = create(:post, user: @user, blog: @blog)
+end
+
 Given("I am the owner of the blog") do
-  expect(@user).to be == @blog.user
+	visit "login"
+	fill_in "loginemail", :with => @user.email
+	fill_in "loginpassword", :with => @user.password
+	click_button('loginbutton').click
+
+	expect(@user).to be == @blog.user
+end
+
+Given("I am not the owner of the blog") do
+	visit "login"
+	fill_in "loginemail", :with => @user_aux.email
+	fill_in "loginpassword", :with => @user_aux.password
+	click_button('loginbutton').click
+	
+	expect(@user_aux).not_to be == @blog.user
 end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|

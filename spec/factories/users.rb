@@ -5,7 +5,7 @@ FactoryBot.define do
         surname Faker::Name.last_name
         username Faker::Internet.username(5..8)
         birth_date Faker::Date.birthday(18, 65)
-        email Faker::Internet.email
+        email { Faker::Internet.safe_email }
         password "password"
         password_confirmation "password"
     end
