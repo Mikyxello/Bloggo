@@ -1,4 +1,8 @@
 <%= form_with model: [ @post.blog, @post, @comment ], local: true do |form| %>
+  <% if @comment.parent.nil? %>
+    <h1>New Comment</h1>
+  <% end %>
+
   <%= form.hidden_field :parent_id %>
 
   <% if @comment.errors.any? %>
@@ -37,6 +41,7 @@
     </div>
 
     <table width="100%">
+      <% if !@comment.parent.nil? %>
       <tr>
         <td>
           <div class="card">
@@ -49,6 +54,7 @@
           </div>
         </td>
       </tr>
+      <% end %>
       <tr>
         <td>
           <div class="form-group">
@@ -57,10 +63,15 @@
           </div>
         </td>
       </tr>
+
       <tr>
         <td>
           <div class="form-group">
-            <%= button_tag(type: 'submit', class: "btn btn-primary btn-sm") do %><i class='fas fa-reply'></i> Reply<% end %>
+            <% if !@comment.parent.nil? %>
+              <%= button_tag(type: 'submit', class: "btn btn-primary btn-sm") do %><i class='fas fa-reply'></i> Reply<% end %>
+            <% else %>
+              <%= button_tag(type: 'submit', class: "btn btn-primary btn-sm") do %><i class="fas fa-share-square"></i> Comment<% end %>
+            <% end %>
           </div>
         </td>
       </tr>

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
         sessions: 'users/sessions',
         omniauth_callbacks: "users/omniauth_callbacks",
         registrations: "users/registrations"
-      }
+  }
+
+  resources :users
+
+  resources :tags, only: [:index, :show, :destroy]
 
   resources :blogs do
   	resources :posts do
@@ -33,10 +37,6 @@ Rails.application.routes.draw do
   post 'blogs/:id/remove_editors', to: 'blogs#remove_editors', :as => :remove_editor
   get 'admin_panel/index'
   get 'users/:id/change_status', to:'users#change_status', :as => :change_status
-
-  resources :users
-
-  resources :tags, only: [:index, :show, :destroy]
 
   match '*path' => 'application#render_404', via: :all
 end
