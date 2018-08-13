@@ -1,14 +1,14 @@
 # Bloggo
 
-Bloggo is a social network Web App that allows its user to create "Bloggos" for creating content (Posts) and receive feedbacks from other users with Comments and Reactions (like or dislike). Also provide some stats of the social network, like the most used Tags on the entire database and the most upvoted Posts.  
+Bloggo is a social network Web App that allows its user to create blogs for creating content (posts) and receive feedbacks from other users with comments and reactions (like or dislike). Also provide some stats of the social network, like the most used Tags on the entire database and the most upvoted Posts. Users can also follow their favorites blogs for receiving notifications about new posts in these blogs. A user that creates a blog is called "Bloggoer", and can appoint "Editor" other users, who can create content in the blog they are editor of.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 ### Prerequisites
 
-Needed `ruby-2.5.1` and the gem `rails-5.2.0` for running this project
+Needed `ruby-2.5.1` and the gem `rails-5.2.1` for running this project
 
 ### Installing
 
@@ -35,10 +35,17 @@ Puma starting in single mode...
 * Listening on tcp://0.0.0.0:3000
 Use Ctrl-C to stop
 ```
+Then you can try to navigate using your browser using the URL `localhost:3000/`
 
 ## Running the tests
 
-For running `rspec` test user 
+For running `cucumber` test use
+
+```
+rake cucumber
+```
+
+For running `rspec` test use
 
 ```
 bundle exec rspec
@@ -47,11 +54,10 @@ bundle exec rspec
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org/) - The web framework used for backend
-* [Bootstrap](https://getbootstrap.com/) - Frontend library
+* [Bootstrap](https://getbootstrap.com/) - Frontend library (CSS and JS)
 * [Unsplash](https://unsplash.com/) - External API for letting users get free images to use
 * [Photoeditor](https://www.photoeditorsdk.com/) - External API for letting users modify images
 * [Agor](https://www.open-agora.com/en/products/api) - External API for letting users make polls
-* [FroalaEditor](https://www.froala.com/wysiwyg-editor) - External API for personalized text area
 
 ## Authors
 
