@@ -66,7 +66,7 @@ Given("I am not the owner of the blog") do
 	fill_in "loginemail", :with => @user_aux.email
 	fill_in "loginpassword", :with => @user_aux.password
 	click_button('loginbutton').click
-	
+
 	expect(@user_aux).not_to be == @blog.user
 end
 
@@ -76,7 +76,7 @@ end
 
 When ("I try to delete an account of others") do
   @user = create(:user, :email => "pippo@gmail.com")
-  submit :delete, "/users/#{@user.id}",{}
+  page.driver.submit :delete, "/users/#{@user.id}",{}
 end
 
 When /^I click (.*)/ do |element|
