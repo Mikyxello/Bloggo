@@ -1,8 +1,6 @@
 	<div class="jumbotron header_background" style="margin-top: 20px;">
 		<div class="jumbotron transbox" style="margin-top: 20px;">
 
-
-
 		<%= image_tag (@blog.profile.url.to_s) , class: "ext-center rounded mx-auto d-block", size: "300x300", alt: "Profile Pic"%>
 		<h1 class="text-center"><%= @blog.name %></h1>
 
@@ -21,7 +19,6 @@
 
     	</div>
   	</div>
-
 
   	<% if user_signed_in? %>
   			<% if current_user.id == @blog.user_id %>
@@ -46,7 +43,6 @@
 				<% end %>
 		<% else %>
 				<%= link_to 'Sign in to follow', "#loginModal", "data-toggle" => "modal" , class: "btn btn-warning", style: "margin-top: 50px; margin-bottom: -50px;"%> 
-		<!-- qua ci va la funzione subscribe --> 
 		<% end %>
 	</div>
 </div>

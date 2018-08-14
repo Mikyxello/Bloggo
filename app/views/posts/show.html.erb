@@ -172,7 +172,7 @@
 								</tr>
 								<tr align="center">
 									<td>
-										Follower
+										Followers
 									</td>
 									<td>
 										Posts
@@ -180,15 +180,15 @@
 								</tr>
 								<tr align="center">
 									<td>
-										<small class="card-subtitle mb-2 text-muted"><%= @blog.followers_count %></small>
+										<small class="card-subtitle mb-2 text-muted"><i class="fas fa-users"></i> <%= @blog.followers_count %></small>
 									</td>
 									<td>
-										<small class="card-subtitle mb-2 text-muted"><%= @blog.posts.size %></small>
+										<small class="card-subtitle mb-2 text-muted"><i class="fas fa-newspaper"></i> <%= @blog.posts.size %></small>
 									</td>
 								</tr>
 								<tr>
 								    <td colspan="2">
-								    	<p class='blog-description'><%= @blog.description %></p>
+								    	<p class='blog-description'><i class="fas fa-angle-double-right"></i> <%= @blog.description %></p>
 								    </td>
 								</tr>
 							</table>

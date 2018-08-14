@@ -64,33 +64,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="card" style="width: 50rem; height:20rem;">
-  <div class="card-header bg-success" style="text-align:center;">
-    <h2>Featured Posts</h2>
-  </div>
-  <% if @posts != nil && @posts.count != 0%>
-    <table class="table">
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Image</th>
-        <th scope="col">Author</th>
-        <th scope="col" colspan="3">Blog</th>
-      </tr>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.title, blog_posts_path(post) %></td>
-        <td>
-          <%= image_tag(post.file.url, alt: post.file.identifier, width:'40px',height:'40px') if post.file? %>
-
-        </td>
-        <td><%= link_to post.user.name, user_path(post.user) %></td>
-        <td><%= link_to post.blog.name, blog_path(post.blog) %>
-        </td>
-      </tr>
-    <% end %>
-  <% else %>
-    <h3> No blogs found! </h3>
-  <% end %>
-</table>
-</div> -->
