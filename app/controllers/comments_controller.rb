@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
 
-	before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-	before_action :check_editor, only: [ :destroy ]
-	before_action :check_user, only: [ :edit, :update, :destroy ]
-	before_action :check_admin, only: [ :destroy ]
+	before_action :authenticate_user!, only: [ :new, :create ]
+	before_action :check_user, only: [ :edit, :update ]
+	before_action :check_destroy, only: [ :destroy ]
 	
 	def new
 		@post = Post.find(params[:post_id])
@@ -52,13 +51,6 @@ class CommentsController < ApplicationController
 	end
 
 	private
-	def check_editor
-		@post = Post.find(params[:post_id])
-		@comment = @post.comments.find(params[:id])
-		redirect_to blog_post_path(@post.blog, @post) unless ([@comment.user, @post.user, @post.blog.user].include? current_user) || (@post.blog.editors == current_user.id)
-	end
-
-	private
 	def check_user
 		@post = Post.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
@@ -66,8 +58,9 @@ class CommentsController < ApplicationController
 	end
 
 	private
-	def check_admin
+	def check_destroy
 		@post = Post.find(params[:post_id])
-		redirect_to blog_post_path(@post.blog, @post) unless current_user.admin?
+		@comment = @post.comments.find(params[:id])
+		redirect_to blog_post_path(@post.blog, @post) unless ([@post.user, @post.blog.user].include? current_user) || (@post.blog.editors == current_user.id) || (current_user.admin?) || (!@comment.nil? && @comment.user == current_user) 
 	end
 end

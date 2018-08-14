@@ -13,8 +13,9 @@ class Post < ApplicationRecord
 
 	has_many :comments, dependent: :destroy
 
-	validates :title, presence: true, length: { minimum: 5 }
-	validates :content, presence: true, length: { minimum: 1 }
+	validates :title, presence: true, length: { minimum: 5, maximum: 100 }
+	validates :subtitle, length: { maximum: 200 }
+	validates :content, presence: true, length: { minimum: 1, maximum: 1000 }
 	validates :user_id, presence: true
 
 	validate :tag_list_count

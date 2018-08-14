@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
 
 	before_action :authenticate_user!, only: [ :upvote, :downvote ]
-	before_action :check_editor, only: [ :new, :create, :destroy ]
-	before_action :check_user, only: [ :edit, :update, :destroy ]
-	before_action :check_admin, only: [ :destroy ]
+	before_action :check_editor, only: [ :new, :create ]
+	before_action :check_user, only: [ :edit, :update ]
+	before_action :check_destroy, only: [ :destroy ]
 	impressionist actions: [ :show ], unique: [ :impressionable_type, :impressionable_id, :session_hash ]
 	
 	def index
@@ -66,7 +66,6 @@ class PostsController < ApplicationController
 		else
 			redirect_to blog_path(@blog)
 		end
-
 	end
 
 	def upvote
@@ -157,8 +156,9 @@ class PostsController < ApplicationController
 	end
 
 	private
-	def check_admin
+	def check_destroy
 		@blog = Blog.find(params[:blog_id])
-		redirect_to blog_path(@blog) unless current_user.admin?
+		@post = @blog.posts.find(params[:id])
+		redirect_to blog_path(@blog) unless (current_user.admin?) || (@blog.user == current_user) || (@blog.editors == current_user.id) || (!@post.nil? && @post.user == current_user)
 	end
 end
