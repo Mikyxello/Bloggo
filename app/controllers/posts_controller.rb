@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-	before_action :authenticate_user!, only: [ :upvote, :downvote ]
+	before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy, :upvote, :downvote, :favourite, :unfavourite ]
 	before_action :check_editor, only: [ :new, :create ]
 	before_action :check_user, only: [ :edit, :update ]
 	before_action :check_destroy, only: [ :destroy ]
@@ -73,14 +73,14 @@ class PostsController < ApplicationController
 		@post = @blog.posts.find(params[:id])
 		respond_to do |format|
 			if current_user.voted_up_on? @post
-				format.html { redirect_to :back }
+				format.html { redirect_back fallback_location: root_path }
 				format.json { head :no_content }
 				format.js { render :layout => false }
 				@post.cached_votes_total = @post.cached_votes_total - 1
 				@post.save
 				@post.unliked_by current_user
 			else
-				format.html { redirect_to :back }
+				format.html { redirect_back fallback_location: root_path }
 				format.json { head :no_content }
 				format.js { render :layout => false }
 				@post.cached_votes_total = @post.cached_votes_total + 1
@@ -95,14 +95,14 @@ class PostsController < ApplicationController
 		@post = @blog.posts.find(params[:id])
 		respond_to do |format|
 			if current_user.voted_down_on? @post
-				format.html { redirect_to :back }
+				format.html { redirect_back fallback_location: root_path }
 				format.json { head :no_content }
 				format.js { render :layout => false }
 				@post.cached_votes_total = @post.cached_votes_total - 1
 				@post.save
 				@post.undisliked_by current_user
 			else
-				format.html { redirect_to :back }
+				format.html { redirect_back fallback_location: root_path }
 				format.json { head :no_content }
 				format.js { render :layout => false }
 				@post.cached_votes_total = @post.cached_votes_total + 1
@@ -118,7 +118,7 @@ class PostsController < ApplicationController
 		current_user.favorite(@post)
 
 		respond_to do |format|
-			format.html { redirect_to :back }
+			format.html { redirect_back fallback_location: root_path }
 			format.json { head :no_content }
 			format.js { render :layout => false }
 		end
@@ -130,7 +130,7 @@ class PostsController < ApplicationController
 		current_user.remove_favorite(@post)
 
 		respond_to do |format|
-			format.html { redirect_to :back }
+			format.html { redirect_back fallback_location: root_path }
 			format.json { head :no_content }
 			format.js { render :layout => false }
 		end

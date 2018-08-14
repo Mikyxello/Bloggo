@@ -47,6 +47,7 @@ RSpec.describe PostsController, type: :controller do
 	describe "GET #new" do
 		context "with valid user" do
 			it "returns a success response" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@owner)
 				get :new, params: {:blog_id => @blog.id}
 				expect(response).to be_successful
@@ -55,6 +56,7 @@ RSpec.describe PostsController, type: :controller do
 
 		context "with invalid user" do
 			it "go back to blog page" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
 				get :new, params: {:blog_id => @blog.id}
 				expect(response).to redirect_to(@blog)
@@ -66,6 +68,7 @@ RSpec.describe PostsController, type: :controller do
 	describe "GET #edit" do
 		context "with valid user" do
 			it "returns a success response" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@owner)
 				get :edit, params: {:blog_id => @blog.id, :id => @post.id}
 				expect(response).to be_successful
@@ -74,6 +77,7 @@ RSpec.describe PostsController, type: :controller do
 
 		context "with invalid user" do
 			it "go back to blog page" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
 				get :edit, params: {:blog_id => @blog.id, :id => @post.id}
 				expect(response).to redirect_to(@blog)
@@ -84,28 +88,18 @@ RSpec.describe PostsController, type: :controller do
 	describe "POST #create" do
 		context "with valid params" do
 			it "creates a new Post" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@owner)
 				expect { post :create, params: {blog_id: @blog.id, post: @post_attr} }.to change(Post, :count).by(1)
-			end
-
-			it "redirects to the created post" do
-				allow(controller).to receive(:current_user).and_return(@owner)
-				expect{ post :create, params: {blog_id: @blog.id, post: @post_attr} }.to change(Post, :count).by(+1)
 				expect(response).to redirect_to(blog_post_path(@blog, Post.last))
 			end
 		end
 		context "with invalid user" do
 			it "returns a unsuccess response" do
-				@user = FactoryBot.create(:user)
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
 				expect{ post :create, params: {:blog_id => @blog.id, post: @post_attr} }.not_to change(Post, :count)
 				expect(response).not_to be_successful
-			end
-
-			it "redirects to the blog page" do
-				@user = FactoryBot.create(:user)
-				allow(controller).to receive(:current_user).and_return(@user)
-				post :create, params: {:blog_id => @blog.id, post: @post_attr}
 				expect(response).to redirect_to(@blog)
 			end
 		end
@@ -115,6 +109,7 @@ RSpec.describe PostsController, type: :controller do
 		let!(:new_attr) { FactoryBot.attributes_for(:post) }
 		context "with valid user" do
 			it "allows a post to be updated" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@owner)
 				put :update, params: {:blog_id => @blog.id, :id => @post.id, :post => new_attr}
 				@post.reload
@@ -127,6 +122,7 @@ RSpec.describe PostsController, type: :controller do
 
 		context "with invalid user" do
 			it "not allows a post to be updated" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
 				put :update, params: {:blog_id => @blog.id, :id => @post.id, :post => new_attr}
 				@post.reload
@@ -141,6 +137,7 @@ RSpec.describe PostsController, type: :controller do
 	describe "DELETE #destroy" do
 		context "with valid user" do
 			it "allows to destroy the requested post" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@owner)
 				expect { delete :destroy, params: {:blog_id => @blog.id, :id => @post.id} }.to change(Post, :count).by(-1)
 				expect(response).to redirect_to(@blog)
@@ -149,6 +146,7 @@ RSpec.describe PostsController, type: :controller do
 
 		context "with invalid user" do
 			it "not allows to destroy the requested post" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
 				post = @blog.posts.create! @post_attr
 				expect { delete :destroy, params: {:blog_id => @blog.id, :id => post.id} }.not_to change(Post, :count)
@@ -156,4 +154,102 @@ RSpec.describe PostsController, type: :controller do
 			end
 		end
 	end
+
+	describe "PUT #upvote" do
+		context "with valid user" do
+			it "allows to put upvote" do
+				expect(@user.voted_on?(@post)).to be false
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				put :upvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.voted_on?(@post)).to be true
+			end
+
+			it "allows to cancel vote" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				put :upvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.voted_on?(@post)).to be true
+				put :upvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.voted_on?(@post)).to be false
+			end
+		end
+
+		context "with not logged user" do
+			it "do not allows to put upvote" do
+				expect(controller.user_signed_in?).to be false
+				put :upvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(response).to redirect_to(new_user_session_path)
+			end
+		end
+	end
+
+	describe "PUT #downvote" do
+		context "with valid user" do
+			it "allows to put downvote" do
+				expect(@user.voted_on?(@post)).to be false
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				put :downvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.voted_on?(@post)).to be true
+			end
+
+			it "allows to cancel vote" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				put :downvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.voted_on?(@post)).to be true
+				put :downvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.voted_on?(@post)).to be false
+			end
+		end
+
+		context "with not logged user" do
+			it "do not allows to put downvote" do
+				expect(controller.user_signed_in?).to be false
+				put :downvote, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(response).to redirect_to(new_user_session_path)
+			end
+		end
+	end
+
+	describe "GET #favourite" do
+		context "with logged user" do
+			it "allows to favourite the post" do
+				expect(@user.favorited? @post).to be false
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				get :favourite, params: {:blog_id => @blog.id, :id => @post.id}
+			end
+		end
+
+		context "with not logged user" do
+			it "do not allows to favourite the post" do
+				expect(controller.user_signed_in?).to be false
+				get :favourite, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(response).to redirect_to(new_user_session_path)
+			end
+		end
+	end
+
+	describe "GET #unfavourite" do
+		context "with logged user" do
+			it "allows to unfavourite the post" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				get :favourite, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.favorited? @post).to be true
+				get :unfavourite, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(@user.favorited? @post).to be false
+			end
+		end
+
+		context "with not logged user" do
+			it "do not allows to unfavourite the post" do
+				expect(controller.user_signed_in?).to be false
+				get :unfavourite, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(response).to redirect_to(new_user_session_path)
+			end
+		end
+	end	
 end
