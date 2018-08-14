@@ -11,7 +11,7 @@
 				</td>
 				<td colspan="2" align="left" valign="center" class="post-title-aux">
 					<h5 class="post-title">
-            <%= link_to blog.name, blogs_path(blog), class: "blog-link" %> <small class="text-muted"> by </small>
+            <%= link_to blog.name, blog_path(blog), class: "blog-link" %> <small class="text-muted"> by </small>
 						<% if blog.user.username %>
 							<%= link_to blog.user.username, user_path(blog.user), class: "blog-link" %>
 						<% else %>
