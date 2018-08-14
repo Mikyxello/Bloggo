@@ -19,9 +19,30 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "New user without name" do
+    it "should be invalid" do
+      user = User.new(:username => "Pincopallino", :surname => "Staffa", :email => "simo@gmail.com", :password => "staffa", :password_confirmation => "staffa")
+      expect(user).not_to be_valid
+    end
+  end
+
+  describe "New user without surname" do
+    it "should be invalid" do
+      user = User.new(:username => "Pincopallino", :name => "Simone", :email => "simo@gmail.com", :password => "staffa", :password_confirmation => "staffa")
+      expect(user).not_to be_valid
+    end
+  end
+
   describe "New user without email" do
     it "should be invalid" do
       user = User.new(:username => "Pincopallino", :name => "Simone", :surname => "Staffa", :password => "staffa", :password_confirmation => "staffa")
+      expect(user).not_to be_valid
+    end
+  end
+
+  describe "New user without password" do
+    it "should be invalid" do
+      user = User.new(:username => "Pincopallino", :name => "Simone", :surname => "Staffa", :email => "simo@gmail.com", :password_confirmation => "staffa")
       expect(user).not_to be_valid
     end
   end

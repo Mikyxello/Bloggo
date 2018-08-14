@@ -18,7 +18,7 @@ RSpec.describe PostsController, type: :controller do
 			end
 		end
 
-		context "with invalid id" do 
+		context "with invalid id" do
 			it "returns a unsuccess response" do
 				id = Blog.count + 1
 				get :index, params: {blog_id: id}

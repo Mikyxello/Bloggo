@@ -1,0 +1,29 @@
+<div class="card" style="width: 100%; height: 50%;">
+	<div class="card-body tg-wrap" style="width: 100%;">
+		<table width="100%" height="50%">
+			<tr>
+				<td colspan="2" align="left"  valign="top">
+					<% if blog.profile? %>
+						<%= image_tag(blog.profile.url, alt: blog.profile.identifier, class: 'image-link-aux') %>
+					<% else %>
+						<%= image_tag(asset_path('blog_profile_example.jpg'), alt: blog.user.name, class: 'image-link-aux')  %>
+					<% end %>
+				</td>
+				<td colspan="2" align="left" valign="center" class="post-title-aux">
+					<h5 class="post-title">
+            <%= link_to blog.name, blogs_path(blog), class: "blog-link" %> <small class="text-muted"> by </small>
+						<% if blog.user.username %>
+							<%= link_to blog.user.username, user_path(blog.user), class: "blog-link" %>
+						<% else %>
+							<%= link_to blog.user.name, user_path(blog.user), class: "blog-link" %>
+						<% end %>
+					</h5>
+          <h6>
+            <%= blog.description %>
+          </h6>
+				</td>
+			</tr>
+
+		</table>
+	</div>
+</div>

@@ -1,36 +1,21 @@
 <div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
   <div class="row container-fluid">
-    <div class="col" style="max-width:50%; max-height:50%;">
+    <div class="col" style="max-width:60%; max-height:50%;">
       <div class="card">
         <div class="card-header pastel_colour_blue" style="text-align:center;">
           <h2>Top Trending Bloggoes</h2>
         </div>
         <% if @most_viewed != nil && @most_viewed.count != 0%>
-          <table class="table">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Author</th>
-              <th scope="col">Visits</th>
-            </tr>
-          <% @most_viewed.each do |blog| %>
-            <tr>
-              <td><%= link_to blog.name, blog_path(blog) %></td>
-              <td><%= blog.description %></td>
-              <td><%= link_to blog.user.name, user_path(blog.user) %></td>
-              <td><%= link_to blog.impressionist_count%></td>
-            </tr>
-          <% end %>
+          <%= render @most_viewed %>
         <% else %>
         <div class="card-body">
           <h3> No bloggoes found! </h3>
         </div>
         <% end %>
-      </table>
       </div>
     </div>
 
-    <div class="col" style="max-width:50%; max-height:50%;">
+    <div class="col" style="max-width:40%; max-height:50%;">
       <div class="card">
       <div class="card-header pastel_colour_yellow" style="text-align:center; ">
         <h2>Top Trending Taggoes</h2>
@@ -47,25 +32,13 @@
 
     <div class="w-100"></div>
 
-    <div class="col" style="margin-top:10px; max-width:50%; max-height:50%;">
+    <div class="col" style="margin-top:10px; max-width:40%; max-height:50%;">
       <div class="card">
         <div class="card-header pastel_colour_red" style="text-align:center;">
           <h2>Bloggoes Showcase</h2>
         </div>
         <% if @blogs != nil && @blogs.count != 0 %>
-          <table class="table">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Author</th>
-            </tr>
-          <% @blogs.each do |blog| %>
-            <tr>
-              <td><%= link_to blog.name, blog_path(blog) %></td>
-              <td><%= blog.description %></td>
-              <td><%= link_to blog.user.name, user_path(blog.user) %></td>
-            </tr>
-          <% end %>
+          <%= render @blogs %>
           <% else %>
           <div class="card-body">
             <h3> No bloggoes found! </h3>
@@ -75,33 +48,13 @@
       </div>
     </div>
 
-    <div class="col" style="margin-top:10px; max-width:50%;">
-      <div class="card" style="width:100%; height:100%;">
+    <div class="col" style="margin-top:10px; max-width:60%; max-height:50%;">
+      <div class="card">
           <div class="card-header pastel_colour_green" style="text-align:center;">
             <h2>Top Trending Postoes</h2>
           </div>
             <% if @posts != nil && @posts.count != 0 %>
-              <!-- <div class="card-group">
-                <% @posts.each do |post| %>
-                  <div class="card">
-                    <% if post.file? %>
-                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="<%= post.file %>" alt="Card file cap">
-                    <% else %>
-                      <img class="card-img-top" style="height:300px; object-fit: contain;" src="http://via.placeholder.com/1920x1080" alt="Card file cap">
-                    <%end %>
-                    <div class="card-body">
-                      <h5 class="card-title"><%= link_to post.title, blog_post_path(post.blog, post) %></h5>
-                      <p class="card-text"><%= truncate(post.content.html_safe, length: 100, :escape => false) %></br> <%= link_to 'Read more', blog_post_path(post.blog, post) %></p>
-                    </div>
-                    <div class="card-footer">
-                      <small class="text-muted font-weight-bold"><%= link_to post.user.name, user_path(post.user) %></small>
-                      -
-                      <small class="text-muted font-italic"><%= link_to post.blog.name, blog_path(post.blog) %></small>
-                    </div>
-                  </div>
-                <% end %>
-            </div> -->
-            <%= render @posts %>
+              <%= render @posts %>
             <% else %>
               <div class="card-body">
                 <h3> No postoes found</h3>
