@@ -8,5 +8,9 @@ FactoryBot.define do
         email { Faker::Internet.safe_email }
         password "password"
         password_confirmation "password"
+				role 'user'
+				banned false
     end
+
+
 end
