@@ -19,7 +19,14 @@ module NavigationHelpers
       new_blog_post_path(@blog)
 
     when /^the post page$/
-      blog_post_path(@blog, Post.take)
+      if (@post.nil?)
+        blog_post_path(@blog, Post.take)
+      else 
+        blog_post_path(@blog, @post)
+      end
+
+    when /^the post edit page$/
+      edit_blog_post_path(@blog, Post.take)
 
     when /^the sign up page$/
       '/users/sign_up'

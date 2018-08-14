@@ -24,4 +24,3 @@ Scenario: Cannot create a new post
 	And I am not the owner of the blog
 	And I am on the blog page
 	Then I should not see "Create Postoes"
-	

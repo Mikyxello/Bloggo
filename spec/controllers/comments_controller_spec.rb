@@ -69,6 +69,18 @@ RSpec.describe CommentsController, type: :controller do
 				expect(response).to redirect_to(blog_post_path(@blog, @post))
 			end
 		end
+
+		context "with valid params and parent id" do
+			it "creates a new Reply" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@owner)
+				@comment_attr[:parent_id] = @comment
+				expect { post :create, params: {blog_id: @blog.id, post_id: @post.id, comment: @comment_attr} }.to change(Comment, :count).by(1)
+				expect(response).to redirect_to(blog_post_path(@blog, @post))
+				expect(assigns(:comment).parent).to eql @comment
+				expect(assigns(:comment).content).to eql @comment_attr[:content]
+			end
+		end
 		
 		context "with not logged user" do
 			it "returns a unsuccess response" do
@@ -145,3 +157,4 @@ RSpec.describe CommentsController, type: :controller do
 		end
 	end
 end
+

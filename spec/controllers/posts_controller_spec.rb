@@ -22,7 +22,16 @@ RSpec.describe PostsController, type: :controller do
 			it "returns a unsuccess response" do
 				id = Blog.count + 1
 				get :index, params: {blog_id: id}
+				expect(response).to render_template(:file => "#{Rails.root}/public/404.html")
 				expect(response).not_to be_successful
+			end
+		end
+
+		context "with not logged user" do
+			it "returns a success response" do
+				expect(controller.user_signed_in?).to be false
+				get :index, params: {blog_id: @blog.id}
+				expect(response).to be_successful
 			end
 		end
 	end
@@ -63,6 +72,15 @@ RSpec.describe PostsController, type: :controller do
 				expect(response).not_to be_successful
 			end
 		end
+
+		context "with not logged user" do
+			it "go to login page" do
+				expect(controller.user_signed_in?).to be false
+				get :new, params: {:blog_id => @blog.id}
+				expect(response).to redirect_to(new_user_session_path)
+				expect(response).not_to be_successful
+			end
+		end
 	end
 
 	describe "GET #edit" do
@@ -83,6 +101,15 @@ RSpec.describe PostsController, type: :controller do
 				expect(response).to redirect_to(@blog)
 			end
 		end
+
+		context "with not logged user" do
+			it "go to login page" do
+				expect(controller.user_signed_in?).to be false
+				get :edit, params: {:blog_id => @blog.id, :id => @post.id}
+				expect(response).to redirect_to(new_user_session_path)
+				expect(response).not_to be_successful
+			end
+		end
 	end
 
 	describe "POST #create" do
@@ -94,6 +121,7 @@ RSpec.describe PostsController, type: :controller do
 				expect(response).to redirect_to(blog_post_path(@blog, Post.last))
 			end
 		end
+
 		context "with invalid user" do
 			it "returns a unsuccess response" do
 				allow(controller).to receive(:authenticate_user!).and_return(true)
@@ -101,6 +129,15 @@ RSpec.describe PostsController, type: :controller do
 				expect{ post :create, params: {:blog_id => @blog.id, post: @post_attr} }.not_to change(Post, :count)
 				expect(response).not_to be_successful
 				expect(response).to redirect_to(@blog)
+			end
+		end
+
+		context "with not logged user" do
+			it "go to login page" do
+				expect(controller.user_signed_in?).to be false
+				expect{ post :create, params: {:blog_id => @blog.id, post: @post_attr} }.not_to change(Post, :count)
+				expect(response).to redirect_to(new_user_session_path)
+				expect(response).not_to be_successful
 			end
 		end
 	end
@@ -132,6 +169,19 @@ RSpec.describe PostsController, type: :controller do
 				expect(@post.content).not_to eql new_attr[:content]
 			end
 		end
+
+		context "with not logged user" do
+			it "go to login page" do
+				expect(controller.user_signed_in?).to be false
+				put :update, params: {:blog_id => @blog.id, :id => @post.id, :post => new_attr}
+				@post.reload
+				expect(@post.title).not_to eql new_attr[:title]
+				expect(@post.subtitle).not_to eql new_attr[:subtitle]
+				expect(@post.content).not_to eql new_attr[:content]
+				expect(response).to redirect_to(new_user_session_path)
+				expect(response).not_to be_successful
+			end
+		end
 	end
 
 	describe "DELETE #destroy" do
@@ -151,6 +201,15 @@ RSpec.describe PostsController, type: :controller do
 				post = @blog.posts.create! @post_attr
 				expect { delete :destroy, params: {:blog_id => @blog.id, :id => post.id} }.not_to change(Post, :count)
 				expect(response).to redirect_to(@blog)
+			end
+		end
+
+		context "with not logged user" do
+			it "go to login page" do
+				expect(controller.user_signed_in?).to be false
+				expect { delete :destroy, params: {:blog_id => @blog.id, :id => @post.id} }.not_to change(Post, :count)
+				expect(response).to redirect_to(new_user_session_path)
+				expect(response).not_to be_successful
 			end
 		end
 	end

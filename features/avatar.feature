@@ -9,7 +9,7 @@ Scenario: Add an avatar
   Then I should be on the home page
   Then I follow "Profile Page"
   Then I follow "Edit Profile"
-  And I attach the file "/Users/simonestaffa/Desktop/CV/foto-cv-min.jpg" to "avatarimage"
+  And I attach the file "404_robot.png" to "avatarimage"
   And I press "update"
   Then I should be on the home page
   And I should see "Profile Page"

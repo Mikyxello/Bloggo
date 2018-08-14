@@ -10,7 +10,7 @@ RSpec.describe Post, type: :model do
 	describe "Creating a invalid post" do
 		context "When i put a blank title" do
 			it "should not be valid" do
-				post = @blog.posts.build(:title => '', :subtitle => 'Rspec subtitle', :tag_list => 'tag, list', :content => 'Rspec post content testing', :user => @user)
+				post = @blog.posts.build(:title => '2', :subtitle => 'Rspec subtitle', :tag_list => 'tag, list', :content => 'Rspec post content testing', :user => @user)
 				expect(post).not_to be_valid
 			end
 		end
