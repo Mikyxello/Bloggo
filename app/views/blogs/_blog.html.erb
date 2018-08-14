@@ -22,8 +22,16 @@
             <%= blog.description %>
           </h6>
 				</td>
-			</tr>
 
+			</tr>
+      <tr>
+        <td colspan="2" align="left">
+            <i class="fas fa-newspaper" style="margin-top: 5px; margin-left:20px;"></i>&nbsp;<%= blog.posts.count %>
+        </td>
+        <td colspan="2" align="left">
+            <i class="fas fa-users" style="margin-top: 5px; margin-left:5px;"></i>&nbsp;<%= blog.followers_count %>
+        </td>
+      </tr>
 		</table>
 	</div>
 </div>
