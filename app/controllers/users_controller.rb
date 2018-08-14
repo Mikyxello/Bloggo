@@ -22,21 +22,25 @@ class UsersController < ApplicationController
  	end
 
   def change_status
-    @user = User.find(params[:id])
-    if @user.banned == true
-      @user.banned = false
+    if current_user.admin?
+      @user = User.find(params[:id])
+      if @user.banned == true
+        @user.banned = false
+      else
+        @user.banned = true
+      end
+      @user.save
+      redirect_to admin_panel_index_path
     else
-      @user.banned = true
+      redirect_to root_path
     end
-    @user.save
-    redirect_to admin_panel_index_path
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
     if current_user.admin?
-		    redirect_to admin_panel_index_path
+      @user = User.find(params[:id])
+      @user.destroy
+		  redirect_to admin_panel_index_path
     else
       redirect_to root_path
     end
