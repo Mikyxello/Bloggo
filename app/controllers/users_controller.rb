@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 		@blog = Blog.where(user_id: @user).last(5).reverse!
     @favourite_blogs = current_user.favorited_by_type 'Blog'
     @favourite_posts = current_user.favorited_by_type 'Post'
-		end
+	end
 
  	def show
 		@user = User.find(params[:id])
