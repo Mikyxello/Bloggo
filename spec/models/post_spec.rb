@@ -27,5 +27,19 @@ RSpec.describe Post, type: :model do
 				expect(post).not_to be_valid
 			end
 		end
+
+		describe "When i put a blank content" do
+			it "should not be valid" do
+				post = @blog.posts.build(:title => 'Rspec title test', :subtitle => '', :tag_list => '', :content => '', :user => @user)
+				expect(post).not_to be_valid
+			end
+		end
+
+		describe "When it has no user" do
+			it "should not be valid" do
+				post = @blog.posts.build(:title => 'Rspec title test', :subtitle => 'Rspec subtitle', :tag_list => 'tag, list', :content => 'Rspec post content testing')
+				expect(post).not_to be_valid
+			end
+		end
 	end
 end
