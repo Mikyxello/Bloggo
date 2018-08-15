@@ -24,6 +24,22 @@ Given /^I am a registered user$/ do
   click_button('loginbutton').click
 end
 
+Given /^I am an admin user$/ do
+  @user = create(:user, :role => :admin)
+  visit "login"
+  fill_in "loginemail", :with => @user.email
+  fill_in "loginpassword", :with => @user.password
+  click_button('loginbutton').click
+end
+
+Given /^I am a bloggoer user$/ do
+  @user = create(:user, :role => :bloggoer)
+  visit "login"
+  fill_in "loginemail", :with => @user.email
+  fill_in "loginpassword", :with => @user.password
+  click_button('loginbutton').click
+end
+
 Given /^I am logged in$/ do
   visit "login"
   fill_in "loginemail", :with => @user.email
@@ -102,6 +118,10 @@ And /^I should see the image$/ do
   expect(User.last.avatar_image).not_to be nil
 end
 
+When /^I visit the user_index page$/ do
+  visit users_path
+end
+
 
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
@@ -121,6 +141,10 @@ end
 
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
+end
+
+Then ("user count should decrease") do
+  expect(User.destroy(User.last.id)).to change(User, :count).by(-1)
 end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|

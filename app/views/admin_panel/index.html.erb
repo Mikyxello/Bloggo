@@ -28,11 +28,10 @@
                   ACTIVE
                 <% end %>
             </td>
-            <td><%= link_to 'Show', user_path(user), class: "btn btn-sm btn-primary" %></td>
-            <!-- <td><%= link_to 'Edit', edit_user_registration_path(user), class: "btn btn-sm btn-success" %></td> -->
+            <td><%= link_to 'Show', user_path(user), class: "btn btn-sm btn-primary", id:"show" %></td>
             <td><%= link_to 'Destroy', user_path(user),
                     method: :delete,
-                    data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger"  %></td>
+                    data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger", id:"destroy"  %></td>
             <td><%= link_to '<button type="button" class="btn btn-sm btn-warning">Change Status</button>'.html_safe, change_status_path(user) %>
             </td>
           </tr>
