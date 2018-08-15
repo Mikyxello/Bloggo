@@ -24,6 +24,18 @@
 	font-size: 0.7rem;
 }
 
+.post-content {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
 .image-link {
 	border-radius: 50%;
 	object-fit: cover;
@@ -95,6 +107,18 @@
 	height: 4.5rem;
 }
 
+.post-content-aux {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
 .read-more {
 	font-family: 'Roboto';
 	font-size: 0.7rem;
@@ -125,15 +149,12 @@
 	margin-top:10px;
 }
 
-.post-form-file-preview {
-	width: 100px;	
+.post-content-form {
+	text-align: left;
 }
 
-.remove-file-button {
-	color: #FF0000 !important;
-	&:hover{
-		cursor: pointer;
-	}
+.post-content-form-div {
+	max-width: 80vw;
 }
 
 

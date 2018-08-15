@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Bloggo</title>
@@ -7,7 +8,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
 
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer>
+      {lang: 'it'}
+    </script>
   </head>
 
   <body>
@@ -34,7 +37,7 @@
             <%= current_user.username %> &nbsp;
           <% else %>
             <%= current_user.name %> <%= current_user.surname %> &nbsp;
-          <%end%>
+          <% end %>
           <div>
             <%= link_to '<button type="button" class="btn btn-outline-primary id="profilepage"> Profile Page </button>'.html_safe, users_url, id: 'profilepage' %>
           </div>&nbsp;

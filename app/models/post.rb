@@ -1,6 +1,5 @@
 class Post < ApplicationRecord
 	acts_as_taggable_on :tags
-
 	acts_as_votable
 	acts_as_favoritable
 
@@ -15,7 +14,7 @@ class Post < ApplicationRecord
 
 	validates :title, presence: true, length: { minimum: 5, maximum: 100 }
 	validates :subtitle, length: { maximum: 200 }
-	validates :content, presence: true, length: { minimum: 1, maximum: 1000 }
+	validates :content, presence: true, length: { minimum: 1 }
 	validates :user_id, presence: true
 
 	validate :tag_list_count

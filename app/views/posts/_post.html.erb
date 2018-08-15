@@ -28,10 +28,10 @@
 			</tr>
 			<tr>
 				<td colspan="5" align="left" valign="center">
-					<div class="fr-view">
+					<div class="fr-view post-content-aux">
 						<%= 
 							truncate(post.content.html_safe, 
-							:length => 200, 
+							:length => 300, 
 							:separator => '<a', 
 	  						:omission => "... #{link_to 'Read more', blog_post_path(post.blog, post), class: 'post-link read-more'}".html_safe,
 	  						:escape => false)
