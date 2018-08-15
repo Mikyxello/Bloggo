@@ -24,7 +24,7 @@
     			<% if @user.bloggoer? || @user.admin? %>
     				<%= link_to '<button type="button" class="btn btn-primary">Create Bloggoes</button>'.html_safe, new_blog_path %>
     			<% else %>
-    				<%= link_to '<button type="button" class="btn btn-primary">Become a Bloggoer!</button>'.html_safe, upgrade_path(current_user)%>
+    				<%= link_to '<button type="button" class="btn btn-primary">Become a Bloggoer!</button>'.html_safe, upgrade_path %>
     			<% end %>
     		<% end %>
     	</div>

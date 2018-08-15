@@ -16,9 +16,8 @@ class UsersController < ApplicationController
 
  	def upgrade
  		@user = current_user
-		@blog = Blog.where(user_id: @user)
  		@user.bloggoer!
- 		render 'index'
+    redirect_to users_url
  	end
 
   def change_status
