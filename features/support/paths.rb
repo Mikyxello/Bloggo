@@ -13,7 +13,7 @@ module NavigationHelpers
       '/'
 
     when /^the blog page$/
-      blog_path(@blog)
+      blog_path(Blog.take)
 
     when /^the new post page$/
       new_blog_post_path(@blog)

@@ -32,6 +32,14 @@ Given /^I am an admin user$/ do
   click_button('loginbutton').click
 end
 
+Given /^I am a bloggoer user$/ do
+  @user = create(:user, :role => :bloggoer)
+  visit "login"
+  fill_in "loginemail", :with => @user.email
+  fill_in "loginpassword", :with => @user.password
+  click_button('loginbutton').click
+end
+
 Given /^I am logged in$/ do
   visit "login"
   fill_in "loginemail", :with => @user.email
@@ -108,6 +116,10 @@ end
 
 And /^I should see the image$/ do
   expect(User.last.avatar_image).not_to be nil
+end
+
+When /^I visit the user_index page$/ do
+  visit users_path
 end
 
 
