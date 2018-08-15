@@ -2,7 +2,7 @@ RSpec.describe UsersController, :type => :controller do
 
   before(:each) do
 		@user = FactoryBot.create(:user)
-    @test_user = FactoryBot.create(:user, :banned => false)
+    @test_user = FactoryBot.create(:user, :banned => false, :role => :user)
     @admin_user = FactoryBot.create(:user, :role => :admin)
 	end
 
@@ -12,7 +12,7 @@ RSpec.describe UsersController, :type => :controller do
         allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
         get :index
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe UsersController, :type => :controller do
         allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
         get :index, params: {:user_id => @test_user.id}
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -55,7 +55,12 @@ RSpec.describe UsersController, :type => :controller do
       it "change the users status and redirects to admin_panel_index_path" do
         allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@admin_user)
-        expect { get :change_status, params: {:id => @test_user.id} }.to change(@test_user, :banned).from(false).to(true)
+        expect(@admin_user.admin?).to be true
+        expect(@test_user.banned?).to be false
+        get :change_status, params: {:id => @test_user.id}
+        @test_user.reload
+        expect(@test_user.banned?).to be true
+        expect(response).to redirect_to(admin_panel_index_path)
       end
     end
 
@@ -64,7 +69,7 @@ RSpec.describe UsersController, :type => :controller do
         allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
         get :change_status, params: {:id => @test_user.id}
-        expect(response).not_to be_success
+        expect(response).not_to be_successful
       end
     end
 
@@ -92,7 +97,7 @@ RSpec.describe UsersController, :type => :controller do
         allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@user)
         post :destroy, params: {:id => @test_user.id}
-        expect(response).not_to be_success
+        expect(response).not_to be_successful
       end
     end
 

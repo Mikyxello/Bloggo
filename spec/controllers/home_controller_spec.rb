@@ -10,7 +10,7 @@ RSpec.describe HomeController, type: :controller do
     context "user logged in" do
       it "renders the homepage" do
         get :index
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

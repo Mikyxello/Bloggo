@@ -13,7 +13,7 @@ RSpec.describe AdminPanelController, type: :controller do
         allow(controller).to receive(:authenticate_user!).and_return(true)
 				allow(controller).to receive(:current_user).and_return(@admin_user)
         get :index
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

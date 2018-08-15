@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def change_status
     if current_user.admin?
       @user = User.find(params[:id])
-      if @user.banned == true
+      if @user.banned?
         @user.banned = false
       else
         @user.banned = true
