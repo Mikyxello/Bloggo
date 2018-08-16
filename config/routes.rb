@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get 'blogs/:id/change_suspended', to:'blogs#change_suspended', :as => :change_suspended
   get 'blogs/:id/favourite', to: 'blogs#favourite', :as => :favourite
   get 'blogs/:id/unfavourite', to:'blogs#unfavourite', :as => :unfavourite
-  get 'users/upgrade', to: 'users#upgrade', :as => :upgrade
+  get 'users/upgrade/:id', to: 'users#upgrade', :as => :upgrade
   post 'blogs/:id/add_editors', to: 'blogs#add_editors', :as => :add_editor
   post 'blogs/:id/remove_editors', to: 'blogs#remove_editors', :as => :remove_editor
   get 'admin_panel/index'

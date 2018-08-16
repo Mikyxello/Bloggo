@@ -15,28 +15,28 @@
       </ul>
     </div>
   <% end %>
-  
-  <div class="field">
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </div>
- 
-  <div class="field">
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </div>
 
-  <div class="field">
-    <%= form.label :profile %><br>
-    <%= form.file_field :profile %><br>
-  </div>
-  <div class="field">
-    <%= form.label :header %><br>
-    <%= form.file_field :header %><br>
-  </div>
+   <table class="table">
+    <tr>
+      <th><%= form.label :name %></th>
+      <th><%= form.text_field :name, id: 'name' %></th>
+    </tr>
+    <tr>
+      <th><%= form.label :description %></th>
+      <th><%= form.text_field :description, id: 'description' %></th>
+    </tr>
+    <tr>
+      <th><%= form.label :profile %></th>
+      <th><%= form.file_field :profile, id: 'profile'  %></th>
+    </tr>
+    <tr>
+      <th><%= form.label :header %></th>
+      <th><%= form.file_field :header, id: 'header' %></th>
+    </tr>
+  </table> 
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions float-right">
+    <%= form.submit "✔ Create Bloggo", class: "btn btn-primary", id: 'createBloggo'%>
   </div>
  
 <% end %>

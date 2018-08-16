@@ -1,6 +1,4 @@
-<div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
 <div class="row container-fluid">
-  <% if user_signed_in? %>
     <div class="col" style="max-width:60%; max-height:50%;">
       <div class="card">
         <div class="card-header pastel_colour_blue" style="text-align:center;">
@@ -63,49 +61,4 @@
             <% end %>
           </div>
     </div>
-  <% else %>
-    <div class="col" style="max-width:60%; max-height:100%;">
-      <div class="card">
-        <div class="card-header pastel_colour_blue" style="text-align:center;">
-          <h2>Top Trending Bloggoes</h2>
-        </div>
-        <% if @most_viewed != nil && @most_viewed.count != 0%>
-          <%= render @most_viewed %>
-        <% else %>
-        <div class="card-body">
-          <h3> No bloggoes found! </h3>
-        </div>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="col" style="max-width:40%; max-height:100%;">
-      <div class="card" style="height:15%">
-      <div class="card-header pastel_colour_yellow" style="text-align:center; ">
-        <h2>Top Trending Taggoes</h2>
-      </div>
-      <div class="card-body">
-        <% if @tags != nil && @tags.count != 0%>
-          <%= render @tags %>
-        <% else %>
-          <h3> No taggoes found! </h3>
-        <% end %>
-      </div>
-    </div>
-      <div class="card" style="height:85%; margin-top: 15px;">
-          <div class="card-header pastel_colour_green" style="text-align:center;">
-            <h2>Top Trending Postoes</h2>
-          </div>
-            <% if @posts != nil && @posts.count != 0 %>
-              <%= render @posts %>
-            <% else %>
-              <div class="card-body">
-                <h3> No postoes found</h3>
-              </div>
-            <% end %>
-          </div>
-    </div>
-  <% end %>
   </div>
-</div>
-  

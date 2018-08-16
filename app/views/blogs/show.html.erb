@@ -52,10 +52,10 @@
   <div class="dropdown float-right" style="margin-top: 120px;">
 	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> <%= @filter %>
 		  <span class="caret"></span></button>
-		  <ul class="dropdown-menu">
-		    <li><%= link_to "Most Recent", recent_view_path %></li>
-		    <li><%= link_to "Most Visited", visited_view_path %></li>
-		    <li><%= link_to "Most Reacted", reacted_view_path %></li>
+		  <ul class="dropdown-menu" id="dropdown_view">
+		    <li id="Most_Recent"><%= link_to "Most Recent", recent_view_path %></li>
+		    <li id="Most_Visited"><%= link_to "Most Visited", visited_view_path %></li>
+		    <li id="Most_Reacted"><%= link_to "Most Reacted", reacted_view_path %></li>
 			  </ul>
 	</div> 
 	<div class="row">

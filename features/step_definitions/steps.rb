@@ -68,6 +68,14 @@ Given /^The blog has at least one post$/ do
   @post = create(:post, user: @user, blog: @blog)
 end
 
+Given /^The blog has at least 5 post$/ do
+  @post1 = create(:post, user: @user, blog: @blog)
+  @post2 = create(:post, user: @user, blog: @blog)
+  @post3 = create(:post, user: @user, blog: @blog)
+  @post4 = create(:post, user: @user, blog: @blog)
+  @post5 = create(:post, user: @user, blog: @blog)
+end
+
 Given /^I am the owner of the blog$/ do
 	visit "login"
 	fill_in "loginemail", :with => @user.email
