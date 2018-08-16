@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   def index
     @blogs = if params[:blog]
-			         Blog.where('name LIKE ?',"%#{params[:blog]}%")
+			         Blog.where('name LIKE ?',"%#{params[:blog]}%").last(5)
 		         else
               Blog.last(5)
 		              end
