@@ -4,10 +4,10 @@ class HomeController < ApplicationController
     @blogs = if params[:blog]
 			         Blog.where('name LIKE ?',"%#{params[:blog]}%")
 		         else
-              Blog.all
+              Blog.last(5)
 		              end
     @most_viewed = Blog.order('impressions_count DESC').last(5)
-    @posts = Post.all
+    @posts = Post.order(:cached_weighted_average => :desc, :cached_votes_total => :desc, :impressions_count => :asc).first(5)
     @tags = ActsAsTaggableOn::Tag.most_used.order("taggings_count").first(5)
   end
 
