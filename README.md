@@ -10,6 +10,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 Needed `ruby-2.5.1` and the gem `rails-5.2.1` for running this project
 
+For installing Ruby see https://www.ruby-lang.org/en/documentation/installation/
+
 ### Installing
 
 Just clone the repository with `git clone https://github.com/Mikyxello/Bloggo.git`, install all needed gems with 
@@ -17,7 +19,19 @@ Just clone the repository with `git clone https://github.com/Mikyxello/Bloggo.gi
 ```
 bundle install
 ```
-and execute the server with
+Run database's migrations with
+
+```
+rake db:migrate
+```
+
+Then setup the database (it will take a few minutes) with
+
+```
+rake db:setup
+```
+
+And run the server with
 
 ```
 rails server
@@ -37,15 +51,17 @@ Use Ctrl-C to stop
 ```
 Then you can try to navigate using your browser using the URL `localhost:3000/`
 
+And stop it anytime with `Ctrl-C`
+
 ## Running the tests
 
-For running `cucumber` test use
+For running `cucumber` tests use
 
 ```
 rake cucumber
 ```
 
-For running `rspec` test use
+For running `rspec` tests use
 
 ```
 bundle exec rspec
