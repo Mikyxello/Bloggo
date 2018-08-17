@@ -7,7 +7,7 @@
           <h2>New Postoes from Followed Bloggoes</h2>
         </div>
         <% if @updated_posts != nil && @updated_posts.count != 0%>
-          <%= render partial: 'posts', collection: @updated_posts.last(1) %>
+          <%= render @updated_posts %>
         <% else %>
         <div class="card-body">
           <h3> No bloggoes found! </h3>
