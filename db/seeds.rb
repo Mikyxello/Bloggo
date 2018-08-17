@@ -1,8 +1,12 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
-20.times do
-	usernames = [Faker::Artist.name, Faker::LordOfTheRings.character, Faker::Hobbit.thorins_company, Faker::GameOfThrones.character, Faker::Pokemon.name ]
+#Generating Users
+puts "Start seeding the database"
+puts "Now generating Users..."
+
+5.times do
+	usernames = [Faker::Artist.name, Faker::LordOfTheRings.character, Faker::Hobbit.thorins_company, Faker::GameOfThrones.character, Faker::Pokemon.name, Faker::DragonBall.character, Faker::DcComics.hero, Faker::StarWars.character]
 
 	User.create!(
 		:email => 					Faker::Internet.unique.safe_email,
@@ -19,7 +23,12 @@ end
 user_count = User.count
 users = User.all
 
-10.times do
+puts "Users generated!"
+puts "Now generating Blogs..."
+
+# Generating Blogs
+
+5.times do
 	editor_id = Faker::Number.between(0, user_count)
 	if editor_id == 0
 		editor_id = nil
@@ -38,7 +47,12 @@ end
 blog_count = Blog.count
 blogs = Blog.all
 
-70.times do
+puts "Blogs generated!"
+puts "Now generating Posts..."
+
+# Generating Posts
+
+20.times do
 	tag_list = Faker::Number.between(1, 5).times.map { Faker::Internet.user_name(3..15) }
 	subtitles = [Faker::Hipster.sentence(2),  Faker::Lorem.sentence(2)]
 	blog_id = Faker::Number.between(1, blog_count)
@@ -64,8 +78,13 @@ end
 post_count = Post.count
 posts = Post.all
 
-35.times do
-	contents = [Faker::HarryPotter.quote, Faker::Hobbit.quote, Faker::Lebowski.quote, Faker::GreekPhilosophers.quote, Faker::RickAndMorty.quote, Faker::VForVendetta.quote]
+puts "Posts generated!"
+puts "Now generating Comments..."
+
+# Generating Comments
+
+10.times do
+	contents = [Faker::HarryPotter.quote, Faker::Hobbit.quote, Faker::Lebowski.quote, Faker::GreekPhilosophers.quote, Faker::RickAndMorty.quote, Faker::VForVendetta.quote, Faker::StarWars.quote]
 
 	Comment.create!(
 		:content => 	contents.sample,
@@ -76,8 +95,13 @@ end
 
 comments = Comment.all
 
-20.times do
-	contents = [Faker::HarryPotter.quote, Faker::Hobbit.quote, Faker::Lebowski.quote, Faker::GreekPhilosophers.quote, Faker::RickAndMorty.quote, Faker::VForVendetta.quote]
+puts "Comments generated!"
+puts "Now generating Replies..."
+
+# Generating Replies
+
+5.times do
+	contents = [Faker::HarryPotter.quote, Faker::Hobbit.quote, Faker::Lebowski.quote, Faker::GreekPhilosophers.quote, Faker::RickAndMorty.quote, Faker::VForVendetta.quote, Faker::StarWars.quote]
 	parent = comments.sample
 
 	Comment.create!(
@@ -88,6 +112,10 @@ comments = Comment.all
 	)
 end
 
+puts "Replies generated!"
+puts "Now generating Reactions..."
+
+# Generating Reactions on Posts
 
 posts.each do |post|
 	like = Faker::Number.between(0, user_count)
@@ -101,6 +129,11 @@ posts.each do |post|
 		post.downvote_by users.sample
 	end
 end
+
+puts "Reactions generated!"
+puts "Now generating Follows and Favorites..."
+
+# Generating Follows on Blogs, Favorites Blogs and Favorites Post
 
 users.each do |user|
 	follows = Faker::Number.between(0, blog_count)
@@ -119,3 +152,6 @@ users.each do |user|
 		user.favorite(posts.sample)
 	end
 end
+
+puts "Follows and Favorites generated!"
+puts "Finished to seed the database!"

@@ -15,9 +15,9 @@ RSpec.describe Comment, type: :model do
 			end
 		end
 
-		context "When i put a content that is too long" do
+		context "When there is no user" do
 			it "should not be valid" do
-				comment = @post.comments.build(:content => Faker::String.random(1001), :user => @user )
+				comment = @post.comments.build(:content => '')
 				expect(comment).not_to be_valid
 			end
 		end
@@ -32,7 +32,7 @@ RSpec.describe Comment, type: :model do
 	describe "Creating a valid comment" do
 		context "When i put valid content" do
 			it "should be valid" do
-				comment = @post.comments.build(:content => Faker::String.random(1..1000), :user => @user)
+				comment = @post.comments.build(:content => Faker::String.random(1..50), :user => @user)
 				expect(comment).to be_valid
 			end
 		end
@@ -40,7 +40,7 @@ RSpec.describe Comment, type: :model do
 		context "When i put valid content and ancestry" do
 			it "should be valid" do
 				@comment = FactoryBot.create(:comment, :post => @post, :user => @user)
-				comment = @post.comments.build(:content => Faker::String.random(1..1000), :user => @user, :parent_id => @comment.id)
+				comment = @post.comments.build(:content => Faker::String.random(1..50), :user => @user, :parent_id => @comment.id)
 				expect(comment.parent).to eql @comment
 				expect(comment).to be_valid
 			end

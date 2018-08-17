@@ -15,7 +15,6 @@ gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -44,9 +43,10 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'rspec-rails'
-  gem 'shoulda-matchers'
-  gem 'database_cleaner'
+  gem 'rubocop-rspec'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
+  gem 'database_cleaner'
 end
 
 group :development do
