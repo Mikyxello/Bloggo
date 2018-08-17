@@ -6,10 +6,10 @@ FactoryBot.define do
         username { Faker::Internet.username(5..8) }
         birth_date { Faker::Date.birthday(18, 99) }
         email { Faker::Internet.safe_email }
-        password "password"
-        password_confirmation "password"
-				role 'user'
-				banned false
+        password { "password" }
+        password_confirmation { "password" }
+		role { 'user' }
+		banned { false }
     end
 
 

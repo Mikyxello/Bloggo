@@ -43,6 +43,9 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'rspec-rails'
+  gem 'rubocop-rspec'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
   gem 'database_cleaner'
 end
 
