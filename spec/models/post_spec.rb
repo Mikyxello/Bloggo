@@ -36,6 +36,13 @@ RSpec.describe Post, type: :model do
 			end
 		end
 
+		context "When i put a file that has not valid extension" do
+			it "should not be valid" do
+				post = @blog.posts.build(:title => 'Rspec title test', :subtitle => '', :tag_list => '', :content => 'Content', :remote_file_url => 'https://www.eecs.yorku.ca/course_archive/2003-04/W/3311/sectionM/case_studies/money/KentBeck_TDD_byexample.pdf', :user => @user)
+				expect(post).not_to be_valid
+			end
+		end
+
 		context "When it has no user" do
 			it "should not be valid" do
 				post = @blog.posts.build(:title => 'Rspec title test', :subtitle => 'Rspec subtitle', :tag_list => 'tag, list', :content => 'Rspec post content testing')
@@ -46,8 +53,15 @@ RSpec.describe Post, type: :model do
 
 	describe "Creating a valid post" do
 		context "When i put a blank title" do
-			it "should not be valid" do
+			it "should be valid" do
 				post = @blog.posts.build(:title => 'Rspec post title', :subtitle => 'Rspec subtitle', :tag_list => 'tag, list', :content => 'Rspec post content testing', :user => @user)
+				expect(post).to be_valid
+			end
+		end
+
+		context "When i put a valid file" do
+			it "should be valid" do
+				post = @blog.posts.build(:title => 'Rspec post title', :subtitle => 'Rspec subtitle', :tag_list => 'tag, list', :content => 'Rspec post content testing', :remote_file_url => 'https://commons.wikimedia.org/wiki/File:JPEG_example_JPG_RIP_100.jpg', :user => @user)
 				expect(post).to be_valid
 			end
 		end
