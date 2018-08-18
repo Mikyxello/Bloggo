@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Bloggo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -33,11 +34,13 @@
               <% else %>
                 <%= asset_path('user-placeholder.jpeg') %>
               <% end %>" />
+          <span class="username">
           <% if current_user.username? %>
             <%= current_user.username %> &nbsp;
           <% else %>
             <%= current_user.name %> <%= current_user.surname %> &nbsp;
           <% end %>
+          </span>
           <div>
             <%= link_to '<button type="button" class="btn btn-outline-primary id="profilepage"> Profile Page </button>'.html_safe, users_url, id: 'profilepage' %>
           </div>&nbsp;

@@ -5,7 +5,7 @@
 puts "Start seeding the database"
 puts "Now generating Users..."
 
-5.times do
+10.times do
 	usernames = [Faker::Artist.name, Faker::LordOfTheRings.character, Faker::Hobbit.thorins_company, Faker::GameOfThrones.character, Faker::Pokemon.name, Faker::DragonBall.character, Faker::DcComics.hero, Faker::StarWars.character]
 
 	User.create!(
@@ -28,7 +28,7 @@ puts "Now generating Blogs..."
 
 # Generating Blogs
 
-5.times do
+10.times do
 	editor_id = Faker::Number.between(0, user_count)
 	if editor_id == 0
 		editor_id = nil
@@ -52,7 +52,7 @@ puts "Now generating Posts..."
 
 # Generating Posts
 
-20.times do
+30.times do
 	tag_list = Faker::Number.between(1, 5).times.map { Faker::Internet.user_name(3..15) }
 	subtitles = [Faker::Hipster.sentence(2),  Faker::Lorem.sentence(2)]
 	blog_id = Faker::Number.between(1, blog_count)
@@ -83,7 +83,7 @@ puts "Now generating Comments..."
 
 # Generating Comments
 
-10.times do
+30.times do
 	contents = [Faker::HarryPotter.quote, Faker::Hobbit.quote, Faker::Lebowski.quote, Faker::GreekPhilosophers.quote, Faker::RickAndMorty.quote, Faker::VForVendetta.quote, Faker::StarWars.quote]
 
 	Comment.create!(
@@ -100,7 +100,7 @@ puts "Now generating Replies..."
 
 # Generating Replies
 
-5.times do
+10.times do
 	contents = [Faker::HarryPotter.quote, Faker::Hobbit.quote, Faker::Lebowski.quote, Faker::GreekPhilosophers.quote, Faker::RickAndMorty.quote, Faker::VForVendetta.quote, Faker::StarWars.quote]
 	parent = comments.sample
 

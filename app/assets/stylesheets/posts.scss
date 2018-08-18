@@ -17,14 +17,32 @@
 }
 
 .post-title {
-	font-size: 0.9rem;
+	font-size: 1.3vw;
 }
 
 .post-subtitle {
-	font-size: 0.7rem;
+	font-size: 1.2vw;
+}
+
+.post-file {
+	width: 100%;
+	padding: 1%;
+}
+
+.post-tags {
+	line-height: 1.2;
+}
+
+.post-stats {
+	font-size: 1vw;
+}
+
+.post-share-buttons {
+	width: 10vw;
 }
 
 .post-content {
+	font-size: 1vw;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	-ms-word-break: break-all;
@@ -39,23 +57,19 @@
 .image-link {
 	border-radius: 50%;
 	object-fit: cover;
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 3vw;
+	height: 3vw;
 	&:hover {
-		opacity: 0.7;
+		opacity: 0.8;
 	}
 }
 
 .post-link {
+	font-size: 1vw;
 	&:hover {
 		text-decoration: none;
 		opacity: 0.9;
 	}
-}
-
-.post-file {
-	width: 100%;
-	padding: 1%;
 }
 
 .angry {
@@ -79,6 +93,7 @@
 }
 
 .post-favourite {
+	font-size: 1.5vw;
 	background: -webkit-linear-gradient(#A83F39, #990000);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -103,26 +118,12 @@
 .image-link-aux {
 	border-radius: 50%;
 	object-fit:cover;
-	width: 4.5rem;
-	height: 4.5rem;
-}
-
-.post-content-aux {
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	-ms-word-break: break-all;
-	word-break: break-all;
-	word-break: break-word;
-	-ms-hyphens: auto;
-	-moz-hyphens: auto;
-	-webkit-hyphens: auto;
-	hyphens: auto;
+	width: 5vw;
+	height: 5vw;
 }
 
 .read-more {
-	font-family: 'Roboto';
-	font-size: 0.7rem;
-	font-weight: 300;
+	font-size: 0.7vw;
 }
 
 
@@ -162,7 +163,7 @@
 
 .blog-description {
 	margin-top: 2%;
-	font-size: 0.8rem;
+	font-size: 0.9vw;
 }
 
 .blog-card {
@@ -177,11 +178,12 @@
 }
 
 .related-posts-title {
+	font-size: 1vw;
 	padding: 2px;
 }
 
 .related-posts-show {
-	font-size: 0.7rem;
+	font-size: 0.9vw;
 }
 
 
@@ -195,14 +197,9 @@
   margin-left: 0;
 }
 
-.reply-link {
-	font-size: 0.7rem;
-	color: #909090;
-}
-
-
 // Facebook & Google Share
 
 .share-button {
+	font-size: 2vw;
 	margin-top: 2%;
 }

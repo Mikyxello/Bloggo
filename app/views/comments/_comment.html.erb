@@ -2,7 +2,7 @@
 	<tr>
 		<td colspan="2" align="left" valign="top">
 			<% if comment.has_parent? %>
-				<small class="text-muted"><i class="fas fa-reply"></i> Reply to <% if comment.parent.user.username %><%= comment.parent.user.username %><% else %><%= comment.parent.user.name %><% end %> by </small>
+				<small class="text-muted text-small"><i class="fas fa-reply"></i> Reply to <% if comment.parent.user.username %><%= comment.parent.user.username %><% else %><%= comment.parent.user.name %><% end %> by </small>
 			<% end %>
 			<% if comment.user.avatar_image? %>
 				<%= image_tag(comment.user.avatar_image.url, alt: comment.user.avatar_image.identifier, class: "image-link")  %>
@@ -15,7 +15,7 @@
 				<% else %>
 					<%= link_to raw(comment.user.name + "&nbsp;" + comment.user.surname), user_path(comment.user), class: 'post-link' %>
 				<% end %>
-				<small class="text-muted">&#8226; <%= time_ago_in_words(comment.created_at) %> ago</small>
+				<small class="text-muted text-small">&#8226; <%= time_ago_in_words(comment.created_at) %> ago</small>
 			</small>
 		</td>
 		<td align="right" valign="top">

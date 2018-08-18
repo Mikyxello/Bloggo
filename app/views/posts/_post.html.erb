@@ -10,7 +10,7 @@
 					<% end %>
 				</td>
 				<td colspan="2" align="left" valign="center" class="post-title-aux">
-					<h5 class="post-title"><%= link_to truncate(post.title, length: 20, omission: "..."), blog_post_path(post.blog, post), class: "post-link" %> <small class="text-muted"> by </small>
+					<h5 class="post-title"><%= link_to truncate(post.title, length: 20, omission: "..."), blog_post_path(post.blog, post), class: "post-link" %> <small class="text-muted text-small"> by </small>
 						<% if post.user.username %>
 							<%= link_to post.user.username, user_path(post.user), class: "post-link" %>
 						<% else %>
@@ -19,7 +19,7 @@
 					</h5>
 					<h6 class="text-muted post-subtitle"><%= truncate(post.subtitle, length: 25, omission: "...") %></h6>
 				</td>
-				<td align="right" valign="top">
+				<td align="right" valign="top" class="post-tags">
 					<%= render post.tags %>
 				</td>
 			</tr>
@@ -28,7 +28,7 @@
 			</tr>
 			<tr>
 				<td colspan="5" align="left" valign="center">
-					<div class="fr-view post-content-aux">
+					<div class="fr-view post-content">
 						<%= 
 							truncate(post.content.html_safe, 
 							:length => 300, 
@@ -56,7 +56,7 @@
 					</aside>
 					<%= audio_tag asset_path('vote.mp3'), autoplay: false, controls: false, id: 'audio-vote' %>
 				</td>
-				<td colspan="2" align="left">
+				<td colspan="2" align="left" class="post-comment">
 					<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"></i> Comments ').concat(post.comments.size.to_s).concat(raw('</small>')), blog_post_path(post.blog, post), class: "post-link" %>
 				</td>
 				<td colspan="1" align="right">

@@ -35,16 +35,16 @@
 									<% else %>
 										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, class: "image-link") %>
 									<% end %>
-									<strong><%= @post.title %></strong>
-									<small class="text-muted"> posted on </small>
+									<strong class="post-title"><%= @post.title %></strong>
+									<small class="text-muted text-small"> posted on </small>
 									<%= link_to @blog.name, blog_path(@blog), class: "post-link" %>
-									<small class="text-muted"> by </small>
+									<small class="text-muted text-small"> by </small>
 									<% if @post.user.username %>
 										<%= link_to @post.user.username, user_path(@post.user), class: "post-link" %>
 									<% else %>
 										<%= link_to @post.user.name, user_path(@post.user), class: "post-link" %> 
 									<% end %>
-									<small class="text-muted"> &#8226; <%= time_ago_in_words(@post.created_at) %> ago</small>
+									<small class="text-muted text-small"> &#8226; <%= time_ago_in_words(@post.created_at) %> ago</small>
 								</td>
 								<td align="right" valign="top">
 									<% if user_signed_in? %>
@@ -82,9 +82,9 @@
 							</tr>
 							<tr>
 								<td colspan="3" align="left">
-									<h6 class="card-subtitle mb-2 text-muted"><%= @post.subtitle %></h6>
+									<h6 class="card-subtitle post-subtitle mb-2 text-muted"><%= @post.subtitle %></h6>
 								</td>
-								<td colspan="2" align="right">
+								<td colspan="2" align="right" class="post-tags">
 									<%= render @post.tags %>
 								</td>
 							</tr>
@@ -98,7 +98,7 @@
 							</tr>
 							<tr>
 							</tr>
-							<tr valign="top">
+							<tr valign="top" class="post-stats">
 								<td align="left">
 									<aside class="vote-count bind-<%= @post.id %>">
 										<%= link_to like_blog_post_path(@blog, @post), :remote => true, method: :put, class: 'vpos post-link' do %>
@@ -118,8 +118,8 @@
 								<td colspan="2" align="right">
 									<small class="text-muted"><i class="fas fa-eye"></i> <%= @post.impressions_count %> Views </small>
 								</td>
-								<td align="right" width="100%">
-									<div class="g-plus" data-action="share" data-height="24" data-href="<%= request.original_url %>" data-annotation="none" ></div>
+								<td align="right" class="post-share-buttons" >
+									<div class="g-plus" data-action="share" data-href="<%= request.original_url %>" data-annotation="none" ></div>
 									<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Condividi</a></div>						
 								</td>
 							</tr>
@@ -170,7 +170,7 @@
 										</small>
 									</td>
 								</tr>
-								<tr align="center">
+								<tr align="center" class="text-small">
 									<td>
 										Followers
 									</td>
@@ -180,10 +180,10 @@
 								</tr>
 								<tr align="center">
 									<td>
-										<small class="card-subtitle mb-2 text-muted"><i class="fas fa-users"></i> <%= @blog.followers_count %></small>
+										<small class="card-subtitle mb-2 text-muted text-small"><i class="fas fa-users"></i> <%= @blog.followers_count %></small>
 									</td>
 									<td>
-										<small class="card-subtitle mb-2 text-muted"><i class="fas fa-newspaper"></i> <%= @blog.posts.size %></small>
+										<small class="card-subtitle mb-2 text-muted text-small"><i class="fas fa-newspaper"></i> <%= @blog.posts.size %></small>
 									</td>
 								</tr>
 								<tr>

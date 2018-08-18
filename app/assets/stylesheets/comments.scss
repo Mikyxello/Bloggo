@@ -7,6 +7,7 @@
 
 .comment-content {
 	padding: 1%;
+	font-size: 1vw;
 }
 
 .comments-show {
@@ -21,6 +22,12 @@
 	-webkit-hyphens: auto;
 	hyphens: auto;
 }
+
+.reply-link {
+	font-size: 1vw;
+	color: #909090;
+}
+
 
 // Comment Form (views/comments/_form_new.html.erb)
 
@@ -45,6 +52,7 @@
 }
 
 .comment-form-parent-content {
+	font-size: 1vw;
 	margin-left: 1%;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
@@ -55,4 +63,8 @@
 	-moz-hyphens: auto;
 	-webkit-hyphens: auto;
 	hyphens: auto;
+}
+
+.comment-button {
+	font-size: 1.3vw;
 }
