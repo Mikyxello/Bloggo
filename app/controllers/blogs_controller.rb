@@ -4,11 +4,10 @@ class BlogsController < ApplicationController
 	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
 	def index
-		@blogs = if params[:blog]
-			Blog.where('name LIKE ?',"%#{params[:blog]}%")
-		else
-			Blog.all
-		end
+	end
+
+	def search
+		@blogs = Blog.search(params)
 	end
 
 	def show
@@ -60,7 +59,7 @@ class BlogsController < ApplicationController
 		@blog = Blog.find(params[:id])
 		current_user.remove_favorite(@blog)
 		show
-	end		
+	end
 
 	def visited_view
 		@filter = "Most Visited"

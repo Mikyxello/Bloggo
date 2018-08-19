@@ -8,11 +8,16 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :search
+
   resources :tags, only: [:index, :show, :destroy]
 
   resources :blogs do
   	resources :posts do
   		resources :comments
+  collection do
+    get 'search'
+  end
       member do
         put 'like', to: 'posts#upvote'
         put 'dislike', to: 'posts#downvote'

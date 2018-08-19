@@ -18,8 +18,8 @@
     <nav class="navbar navbar-dark pastel_colour_navbar">
       <%= link_to 'Bloggo', root_path, class: "navbar-brand" %>
 
-      <%= form_tag(blogs_path, {class: 'form-inline', method: :get}) do %>
-      <%= text_field_tag :blog, nil, placeholder: 'Search Bloggoes', class: "form-control mr-sm-2" %>
+      <%= form_tag(search_index_path, {class: 'form-inline', method: :get}) do %>
+      <%= text_field_tag :search, nil, placeholder: 'Search Something...', class: "form-control mr-sm-2" %>
       <%= submit_tag 'Search', class: "btn my-2 my-sm-0" %>
       <% end %>
 

@@ -21,4 +21,8 @@ class Blog < ApplicationRecord
 	before_create do
 		self.suspended = false
 	end
+
+	def self.search(params)
+		blog = Blog.where('name LIKE ?',"%#{params[:search]}%")
+	end
 end
