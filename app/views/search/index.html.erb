@@ -1,89 +1,89 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
+<div class="row container-fluid">
+  <% if user_signed_in? %>
+    <div class="col" style="max-width:60%; max-height:100%;">
+      <div class="card">
+        <div class="card-header pastel_colour_blue" style="text-align:center;">
+          <h2>Researched Postoes</h2>
+        </div>
+        <% if @updated_posts != nil && @updated_posts.count != 0%>
+          <%= render @updated_posts %>
+        <% else %>
+        <div class="card-body">
+          <h3> No bloggoes found! </h3>
+        </div>
+        <% end %>
+      </div>
+    </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-                <h1>jQuery Searchable Plugin</h1>
-            </div>
-            <p>You can find the source of this plugin at <a href="http://github.com/stidges/jquery-searchable" target="_blank">Github</a> (http://github.com/stidges/jquery-searchable)!</p>
-        </div>
+    <div class="col" style="max-width:40%; max-height:100%;">
+      <div class="card" style="height:15%">
+      <div class="card-header pastel_colour_yellow" style="text-align:center; ">
+        <h2>Top Trending Taggoes</h2>
+      </div>
+      <div class="card-body">
+        <% if @tags != nil && @tags.count != 0%>
+          <%= render @tags %>
+        <% else %>
+          <h3> No taggoes found! </h3>
+        <% end %>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h3>Table / Fuzzy search example</h3>
-        </div>
+      <div class="card" style="height:85%; margin-top: 15px;">
+          <div class="card-header pastel_colour_green" style="text-align:center;">
+            <h2>Top Trending Postoes</h2>
+          </div>
+            <% if @posts != nil && @posts.count != 0 %>
+              <%= render @posts %>
+            <% else %>
+              <div class="card-body">
+                <h3> No postoes found</h3>
+              </div>
+            <% end %>
+          </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-lg-offset-4">
-            <input type="search" id="search" value="" class="form-control" placeholder="Search using Fuzzy searching">
+  <% else %>
+    <div class="col" style="max-width:60%; max-height:100%;">
+      <div class="card">
+        <div class="card-header pastel_colour_blue" style="text-align:center;">
+          <h2>Top Trending Bloggoes</h2>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <table class="table" id="table">
-                <thead>
-                    <tr>
-                        <th>First column</th>
-                        <th>Second column</th>
-                        <th>Third column</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Introducing</td>
-                        <td>jQuery</td>
-                        <td>Searchable</td>
-                    </tr>
-                    <tr>
-                        <td>Lorem</td>
-                        <td>Ipsum</td>
-                        <td>Dolor</td>
-                    </tr>
-                    <tr>
-                        <td>Some</td>
-                        <td>More</td>
-                        <td>Data</td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr>
+        <% if @most_viewed != nil && @most_viewed.count != 0%>
+          <%= render @most_viewed %>
+        <% else %>
+        <div class="card-body">
+          <h3> No bloggoes found! </h3>
         </div>
+        <% end %>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h3>Non-table example</h3>
-        </div>
+
+    <div class="col" style="max-width:40%; max-height:100%;">
+      <div class="card" style="height:15%">
+      <div class="card-header pastel_colour_yellow" style="text-align:center; ">
+        <h2>Top Trending Taggoes</h2>
+      </div>
+      <div class="card-body">
+        <% if @tags != nil && @tags.count != 0%>
+          <%= render @tags %>
+        <% else %>
+          <h3> No taggoes found! </h3>
+        <% end %>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-lg-offset-4">
-            <input type="search" id="container-search" value="" class="form-control" placeholder="Search...">
-        </div>
+      <div class="card" style="height:85%; margin-top: 15px;">
+          <div class="card-header pastel_colour_green" style="text-align:center;">
+            <h2>Top Trending Postoes</h2>
+          </div>
+            <% if @posts != nil && @posts.count != 0 %>
+              <%= render @posts %>
+            <% else %>
+              <div class="card-body">
+                <h3> No postoes found</h3>
+              </div>
+            <% end %>
+          </div>
     </div>
+  <% end %>
+  </div>
 </div>
-<div class="container" id="searchable-container">
-    <div class="row row-padding">
-        <div class="col-xs-4">Col 1</div>
-        <div class="col-xs-4">Col 2</div>
-        <div class="col-xs-4">Col 3</div>
-    </div>
-    <div class="row row-padding">
-        <div class="col-xs-4">Another row</div>
-        <div class="col-xs-4">With some</div>
-        <div class="col-xs-4">Other data</div>
-    </div>
-    <div class="row row-padding">
-        <div class="col-xs-4">Lorem</div>
-        <div class="col-xs-4">Ipsum</div>
-        <div class="col-xs-4">Dolor</div>
-    </div>
-    <div class="row row-padding">
-        <div class="col-xs-4">Foo</div>
-        <div class="col-xs-4">Bar</div>
-        <div class="col-xs-4">Baz</div>
-    </div>
-</div>
-<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>

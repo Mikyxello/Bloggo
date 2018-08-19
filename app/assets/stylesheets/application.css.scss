@@ -55,6 +55,9 @@ h6 {
 	font-size: 20px;
 }
 
+
+
+
 .pastel_colour_blue {
 	background : #006EB2;
 	color: white;
@@ -78,6 +81,32 @@ h6 {
 .pastel_colour_navbar {
 	background: #FFB145;
 }
+.pastel_colour_orange {
+  background: #FFB145;
+}
+
+.pastel_colour_white {
+  background: #FFFFFF;
+}
+
+#container-post-search {
+  background-color: #FFB145;
+  height: 30%;
+  text-align: center;
+  margin-right: 5%;
+}
+#container-tag-search{
+  background-color: #FFB145;
+  text-align: center;
+}
+#container-blog-search{
+  background-color: #FFB145;
+  text-align: center;
+  margin-top: 5%;
+  margin-right: 5%;
+}
+
+
 
 .navbar {
   font-size: 2vw;

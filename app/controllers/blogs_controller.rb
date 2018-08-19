@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
 	impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
 	def index
+		@blogs = Blog.all
 	end
 
 	def search
