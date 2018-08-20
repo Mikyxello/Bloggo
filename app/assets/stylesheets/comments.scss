@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.comment-container {
+	padding: 1%;
+}
+
 // Comment Show (views/comments/_comment.html.erb)
 
 .comment-content {
@@ -66,5 +70,5 @@
 }
 
 .comment-button {
-	font-size: 1.3vw;
+	font-size: 1.1vw !important;
 }

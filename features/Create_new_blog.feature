@@ -8,9 +8,9 @@ Scenario: Create a new blog
 	When I visit the user_index page
 	When I follow "Create Bloggoes"
 	Given I am on the new blog page
-	And I fill in "blog_name" with "Blog Name"
-	And I fill in "blog_description" with "Blog Description"
-	And I attach the file "404_robot.png" to "blog_header"
-	And I attach the file "404_robot.png" to "blog_profile"
+	And I fill in "blog[name]" with "Blog Name"
+	And I fill in "blog[description]" with "Blog Description"
+	And I attach the file "404_robot.png" to "blog[header]"
+	And I attach the file "404_robot.png" to "blog[profile]"
 	When I press "Create Blog"
 	Then I should be on the blog page

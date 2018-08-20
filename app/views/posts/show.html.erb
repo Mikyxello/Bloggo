@@ -1,12 +1,12 @@
 <script>
-	$("head").append('<meta property="og:url"                content="<%= request.original_url %>" />');
-	$("head").append('<meta property="og:type"               content="website" />');
-	$("head").append('<meta property="og:title"              content="<%= @post.title %>" />');
-	$("head").append('<meta property="og:description"        content="<%= @post.subtitle %>" />');
+	$("head").append('<meta property="og:url"				content="<%= request.original_url %>" />');
+	$("head").append('<meta property="og:type"				content="website" />');
+	$("head").append('<meta property="og:title"				content="<%= @post.title %>" />');
+	$("head").append('<meta property="og:description"		content="<%= @post.subtitle %>" />');
 	<% if @post.file.file.nil? %>
-		$("head").append('<meta property="og:image"              content="<%= request.protocol + request.host_with_port + asset_path('favicon.png') %>" />');
+		$("head").append('<meta property="og:image"			content="<%= request.protocol + request.host_with_port + asset_path('favicon.png') %>" />');
 	<% else %>
-		$("head").append('<meta property="og:image"              content="<%= request.protocol + request.host_with_port + @post.file.url %>" />');
+		$("head").append('<meta property="og:image"			content="<%= request.protocol + request.host_with_port + @post.file.url %>" />');
 	<% end %>
 </script>
 
@@ -23,13 +23,13 @@
 
 <div class="container">
 	<div class="jumbotron">
-		<table width="100%">
+		<table class="table-post-show">
 			<tr>
-				<td rowspan="2" width="70%" valign="top">
+				<td rowspan="2" class="post-td" valign="top">
 					<div class="card post-card">
-						<table width="100%" align="center">
+						<table class="post-table" align="center">
 							<tr>
-								<td colspan="4" align="left" valign="top" width="100%">
+								<td colspan="4" align="left" valign="top" class="post-title-td">
 									<% if @post.user.avatar_image? %>
 										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, class: "image-link") %>
 									<% else %>
@@ -154,10 +154,10 @@
 						</div>
 					</div>
 				</td>
-				<td valign="top" width="30%">
+				<td valign="top" class="blog-td">
 					<div class="card blog-card" id="blog_card">
 						<div class="tg-wrap">
-							<table width="100%">
+							<table class="blog-table">
 								<tr>
 									<td colspan="2">
 										<% if @blog.profile? %>

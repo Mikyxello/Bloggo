@@ -12,12 +12,36 @@
 
 // Post Show (views/posts/show.html.erb)
 
+.table-post-show {
+	width: 100%;
+}
+	
+.post-td {
+	width: 70%;
+}
+
+.blog-td {
+	width: 30%;
+}
+
+.post-table {
+	width: 100%;
+}
+
+.blog-table {
+	width: 100%;
+}
+
 .post-card {
 	padding: 2%;
 }
 
 .post-title {
 	font-size: 1.3vw;
+}
+
+.post-title-td {
+	width: 100%;
 }
 
 .post-subtitle {
@@ -200,6 +224,6 @@
 // Facebook & Google Share
 
 .share-button {
-	font-size: 2vw;
+	font-size: 2vw !important;
 	margin-top: 2%;
 }

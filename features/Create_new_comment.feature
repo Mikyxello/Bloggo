@@ -9,7 +9,7 @@ Scenario: Create a new comment
 	And There is at least one blog
 	And The blog has at least one post
 	And I am on the post page
-	And I fill in "comment_content" with "Comment content"
+	And I fill in "comment[content]" with "Comment content"
 	When I press "Comment"
 	Then I should be on the post page
 	Then I should see "Comment content"
@@ -20,4 +20,4 @@ Scenario: Cannot create a new comment
 	And There is at least one blog
 	And The blog has at least one post
 	And I am on the post page
-	And I should not see "comment_content"
+	And I should not see "comment[content]"
