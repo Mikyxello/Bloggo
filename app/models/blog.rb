@@ -22,7 +22,7 @@ class Blog < ApplicationRecord
 		self.suspended = false
 	end
 
-	def self.search(params)
-		blog = Blog.where('name LIKE ?',"%#{params[:search]}%")
-	end
+	
+
+
 end

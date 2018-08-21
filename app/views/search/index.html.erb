@@ -1,89 +1,63 @@
 <div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
 <div class="row container-fluid">
-  <% if user_signed_in? %>
     <div class="col" style="max-width:60%; max-height:100%;">
       <div class="card">
         <div class="card-header pastel_colour_blue" style="text-align:center;">
-          <h2>Researched Postoes</h2>
+          <h2>Researched Bloggoes</h2>
+          </div>
+          <div class="card-body">
+            <% if (@blogs) %>
+              <% if (@blogs.empty?) %>
+            <h2>No Bloggoes found.<h2>
+              <% else %>
+                <% @blogs.each do |blog| %>
+                  <%= render blog %>
+                    <% end %>
+                      <% end %>
+                <% else %>
+                <p>Use the search form to search for stuff.</p>
+            <% end %>
         </div>
-        <% if @updated_posts != nil && @updated_posts.count != 0%>
-          <%= render @updated_posts %>
-        <% else %>
-        <div class="card-body">
-          <h3> No bloggoes found! </h3>
-        </div>
-        <% end %>
+
       </div>
     </div>
-
     <div class="col" style="max-width:40%; max-height:100%;">
-      <div class="card" style="height:15%">
+      <div class="card" style="min-height: 22%;max-height: 22%">
       <div class="card-header pastel_colour_yellow" style="text-align:center; ">
-        <h2>Top Trending Taggoes</h2>
+        <h2> Researched Taggoes</h2>
       </div>
       <div class="card-body">
-        <% if @tags != nil && @tags.count != 0%>
-          <%= render @tags %>
-        <% else %>
-          <h3> No taggoes found! </h3>
-        <% end %>
-      </div>
-    </div>
-      <div class="card" style="height:85%; margin-top: 15px;">
-          <div class="card-header pastel_colour_green" style="text-align:center;">
-            <h2>Top Trending Postoes</h2>
-          </div>
-            <% if @posts != nil && @posts.count != 0 %>
-              <%= render @posts %>
+        <% if (@tags) %>
+          <% if (@tags.empty?) %>
+        <h2>No Bloggoes found.<h2>
+          <% else %>
+            <% @tags.each do |tag| %>
+              <%= render tag %>
+                <% end %>
+                  <% end %>
             <% else %>
-              <div class="card-body">
-                <h3> No postoes found</h3>
-              </div>
-            <% end %>
-          </div>
-    </div>
-  <% else %>
-    <div class="col" style="max-width:60%; max-height:100%;">
-      <div class="card">
-        <div class="card-header pastel_colour_blue" style="text-align:center;">
-          <h2>Top Trending Bloggoes</h2>
-        </div>
-        <% if @most_viewed != nil && @most_viewed.count != 0%>
-          <%= render @most_viewed %>
-        <% else %>
-        <div class="card-body">
-          <h3> No bloggoes found! </h3>
-        </div>
+            <p>Use the search form to search for stuff.</p>
         <% end %>
-      </div>
-    </div>
 
-    <div class="col" style="max-width:40%; max-height:100%;">
-      <div class="card" style="height:15%">
-      <div class="card-header pastel_colour_yellow" style="text-align:center; ">
-        <h2>Top Trending Taggoes</h2>
+        </div>
       </div>
-      <div class="card-body">
-        <% if @tags != nil && @tags.count != 0%>
-          <%= render @tags %>
-        <% else %>
-          <h3> No taggoes found! </h3>
-        <% end %>
-      </div>
-    </div>
-      <div class="card" style="height:85%; margin-top: 15px;">
+      <div class="card" style="min-height: 45%; max-height:85%; margin-top: 15px;">
           <div class="card-header pastel_colour_green" style="text-align:center;">
-            <h2>Top Trending Postoes</h2>
+            <h2>Researched Postoes</h2>
           </div>
-            <% if @posts != nil && @posts.count != 0 %>
-              <%= render @posts %>
-            <% else %>
-              <div class="card-body">
-                <h3> No postoes found</h3>
-              </div>
+          <% if (@posts) %>
+              <% if (@posts.empty?) %>
+            <h2>No Postoes found.<h2>
+          <% else %>
+          <% @posts.each do |post| %>
+              <%= render post %>
             <% end %>
+          <% end %>
+        <% else %>
+          <p>Use the search form to search for stuff.</p>
+         <% end %>
+
           </div>
     </div>
-  <% end %>
   </div>
 </div>

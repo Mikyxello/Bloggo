@@ -19,7 +19,7 @@
       <%= link_to 'Bloggo', root_path, class: "navbar-brand" %>
 
       <%= form_tag(search_index_path, {class: 'form-inline', method: :get}) do %>
-      <%= text_field_tag :search, nil, placeholder: 'Search Something...', class: "form-control mr-sm-2" %>
+      <%= text_field_tag :q, nil, placeholder: 'Search Something...', class: "form-control mr-sm-2" %>
       <%= submit_tag 'Search', class: "btn my-2 my-sm-0" %>
       <% end %>
 

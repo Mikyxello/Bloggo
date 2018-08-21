@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'blogs/index'
+  get 'search/index'
   get 'blogs/:id/visited_view' => "blogs#visited_view", :as => :visited_view
   get 'blogs/:id/recent_view' => "blogs#recent_view", :as => :recent_view
   get 'blogs/:id/reacted_view' => "blogs#reacted_view", :as => :reacted_view
