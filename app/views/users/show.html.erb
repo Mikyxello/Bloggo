@@ -7,12 +7,28 @@
 					<% else %>
 						<%= asset_path('user-placeholder.jpeg') %>
 					<% end %>" />
-		<h1 class="text-center"><%= @user.name %></h1>
+		<h1 class="text-center"><%= @user.username %></h1>
 
 		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
     	<div class="col-sm text-center">
-      	<h3> Blogs</h3>
-      	<h6> <%= @blog.count %></h6>
+    		<table align="center" style="width: 100%;">
+    			<tr>
+    				<th>
+    					<h3>Blogs</h3>
+    				</th>
+    				<th>
+    					<h3>Posts</h3>
+    				</th>
+    			</tr>
+    			<tr>
+		      		<td>
+		      			<h6><%= @blogs.count %></h6>
+		      		</td>
+		      		<td>
+		      			<h6><%= @posts.size %></h6>
+		      		</td>
+		      	</tr>
+		    </table>
     	</div>
   	</div>
 	</div>
@@ -22,7 +38,7 @@
 		<div class="col-sm">
 			<div class="jumbotron" >
       	<h3 class="text-center" style="margin-bottom: 20px;"> Lastest Bloggoes</h3>
-  	      <% @blog.last(5).each do |blog| %>
+  	      <% @blogs.last(5).each do |blog| %>
       	<div class="jumbotron" style="background: white">
   	      <h3 class="text-center" style: "color: black"> <%= link_to blog.name, blog_path(blog)%> </h3>
   	      <h6 class="text-center" style: "color: black"> <%= blog.description %> </h6>
