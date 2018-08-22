@@ -31,7 +31,11 @@
 							<tr>
 								<td colspan="4" align="left" valign="top" class="post-title-td">
 									<% if @post.user.avatar_image? %>
-										<%= image_tag(@post.user.avatar_image.url, alt: @post.user.avatar_image.identifier, class: "image-link") %>
+										<% if !@post.user.avatar_image.thumb.nil? %>
+											<%= image_tag(@post.user.avatar_image.thumb.url, alt: @post.user.name, class: "image-link") %>
+										<% else %>
+											<%= image_tag(@post.user.avatar_image.url, alt: @post.user.name, class: "image-link") %>
+										<% end %>
 									<% else %>
 										<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @post.user.name, class: "image-link") %>
 									<% end %>
@@ -161,7 +165,11 @@
 								<tr>
 									<td colspan="2">
 										<% if @blog.profile? %>
-											<%= image_tag(@blog.profile.url, alt: @blog.profile.identifier, class: "image-link") %>
+											<% if !@blog.profile.thumb.nil? %>
+												<%= image_tag(@blog.profile.thumb.url, alt: @blog.name, class: "image-link") %>
+											<% else %>
+												<%= image_tag(@blog.profile.url, alt: @blog.name, class: "image-link") %>
+											<% end %>
 										<% else %>
 											<%= image_tag(asset_path('user-placeholder.jpeg'), alt: @blog.name, class: "image-link") %>
 										<% end %>

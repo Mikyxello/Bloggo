@@ -26,9 +26,6 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -60,18 +57,17 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 gem 'bootstrap'
 gem 'jquery-rails'
-gem 'haml'
 gem 'devise'
 gem 'omniauth-facebook'
-gem "omniauth-google-oauth2"
+gem 'omniauth-google-oauth2'
 gem 'canard', '~> 0.5.0.pre'
 gem "wysiwyg-rails"
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 gem 'impressionist'
 gem 'notifications', '~> 0.6.0'
 gem 'will_paginate', '~> 3.1.0'

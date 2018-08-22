@@ -2,7 +2,7 @@ class Blog < ApplicationRecord
 
 	is_impressionable
 	acts_as_followable
-  acts_as_favoritable
+  	acts_as_favoritable
 	is_impressionable :counter_cache => true, :column_name => :impressions_count
 	has_many :posts, dependent: :destroy
 

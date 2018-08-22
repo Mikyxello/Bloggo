@@ -1,12 +1,16 @@
-<div class="card" style="width: 100%;">
-	<div class="card-body tg-wrap" style="width: 100%;">
-		<table width="100%">
+<div class="card card-post-aux">
+	<div class="card-body tg-wrap card-body-post-aux">
+		<table class="table-post-aux">
 			<tr>
 				<td colspan="2" align="left"  valign="top">
 					<% if post.user.avatar_image? %>
-						<%= image_tag(post.user.avatar_image.url, alt: post.user.avatar_image.identifier, class: 'image-link-aux') %>
+						<% if !post.user.avatar_image.thumb.nil? %>
+							<%= image_tag(post.user.avatar_image.thumb.url, alt: post.user.username, class: 'image-link-aux') %>
+						<% else %>
+							<%= image_tag(post.user.avatar_image.url, alt: post.user.username, class: 'image-link-aux') %>
+						<% end %>
 					<% else %>
-						<%= image_tag(asset_path('user-placeholder.jpeg'), alt: post.user.name, class: 'image-link-aux')  %>
+						<%= image_tag(asset_path('user-placeholder.jpeg'), alt: post.user.username, class: 'image-link-aux')  %>
 					<% end %>
 				</td>
 				<td colspan="2" align="left" valign="center" class="post-title-aux">
