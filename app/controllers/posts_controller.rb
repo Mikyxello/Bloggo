@@ -13,9 +13,8 @@ class PostsController < ApplicationController
 
 	def show
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		@related_posts = Post.where.not(id: @post.id).tagged_with(@post.tag_list, any: true).order(:cached_weighted_average => :desc, :cached_votes_total => :desc, :impressions_count => :asc).first(3)
-		render 'show'
 	end
 
 	def new
@@ -25,7 +24,7 @@ class PostsController < ApplicationController
 
 	def edit
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 	end
 
 	def create
@@ -42,7 +41,7 @@ class PostsController < ApplicationController
 
 	def update
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 
 		if params[:remove_file]
 			@post.remove_file!
@@ -57,7 +56,7 @@ class PostsController < ApplicationController
 
 	def destroy
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		@post.destroy
 
 		if current_user.admin?
@@ -69,7 +68,7 @@ class PostsController < ApplicationController
 
 	def upvote
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		respond_to do |format|
 			if current_user.voted_up_on? @post
 				format.html { redirect_back fallback_location: root_path }
@@ -91,7 +90,7 @@ class PostsController < ApplicationController
 	
 	def downvote
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		respond_to do |format|
 			if current_user.voted_down_on? @post
 				format.html { redirect_back fallback_location: root_path }
@@ -113,7 +112,7 @@ class PostsController < ApplicationController
 
 	def favourite
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		current_user.favorite(@post)
 
 		respond_to do |format|
@@ -125,7 +124,7 @@ class PostsController < ApplicationController
 
 	def unfavourite
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		current_user.remove_favorite(@post)
 
 		respond_to do |format|
@@ -150,14 +149,14 @@ class PostsController < ApplicationController
 	private
 	def check_user
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		redirect_to blog_path(@blog) unless @post.user == current_user
 	end
 
 	private
 	def check_destroy
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		redirect_to blog_path(@blog) unless (current_user.admin?) || (@blog.user == current_user) || (@blog.editors == current_user.id) || (!@post.nil? && @post.user == current_user)
 	end
 end

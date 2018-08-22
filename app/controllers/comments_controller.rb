@@ -5,17 +5,17 @@ class CommentsController < ApplicationController
 	before_action :check_destroy, only: [ :destroy ]
 	
 	def new
-		@post = Post.find(params[:post_id])
+		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.build(:parent_id => params[:parent_id])
 	end
 
 	def edit
-		@post = Post.find(params[:post_id])
+		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
 	end
 
 	def update
-		@post = Post.find(params[:post_id])
+		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
 
 		if @comment.update(comment_params)
@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
 	end
 
 	def create
-		@post = Post.find(params[:post_id])
+		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.create(comment_params)
 		@comment.user = current_user
 
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
-		@post = Post.find(params[:post_id])
+		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
 		@comment.destroy
 
@@ -52,14 +52,14 @@ class CommentsController < ApplicationController
 
 	private
 	def check_user
-		@post = Post.find(params[:post_id])
+		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
 		redirect_to blog_post_path(@post.blog, @post) unless @comment.user == current_user
 	end
 
 	private
 	def check_destroy
-		@post = Post.find(params[:post_id])
+		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
 		redirect_to blog_post_path(@post.blog, @post) unless ([@post.user, @post.blog.user].include? current_user) || (@post.blog.editors == current_user.id) || (current_user.admin?) || (!@comment.nil? && @comment.user == current_user) 
 	end

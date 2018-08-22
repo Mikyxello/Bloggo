@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+	include Friendlyable
+	
 	acts_as_taggable_on :tags
 	acts_as_votable
 	acts_as_favoritable
