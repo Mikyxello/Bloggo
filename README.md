@@ -82,7 +82,7 @@ bundle exec rspec
 * **Andrea Misuraca** - *Profile and Blog handling* - [andreamisu](https://github.com/andreamisu)
 * **Simone Silvestri** - *Bloggo Search and API interaction* - [mrPsycox](https://github.com/mrPsycox)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Mikyxello/Bloggo/contributors) who participated in this project.
 
 ## License
 
