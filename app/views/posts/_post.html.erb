@@ -60,7 +60,7 @@
 					</aside>
 					<%= audio_tag asset_path('vote.mp3'), autoplay: false, controls: false, id: 'audio-vote' %>
 				</td>
-				<td colspan="2" align="left" class="post-comment">
+				<td colspan="2" align="left" class="post-comment-counter-aux">
 					<%= link_to raw('<small class="text-muted"><i class="fas fa-comment"></i> Comments ').concat(post.comments.size.to_s).concat(raw('</small>')), blog_post_path(post.blog, post), class: "post-link" %>
 				</td>
 				<td colspan="1" align="right">

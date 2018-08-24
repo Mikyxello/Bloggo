@@ -37,6 +37,7 @@
 
 .comment-form-content {
 	width: 100%;
+	font-size: 1.3vw;
 	resize: none;
 	margin-bottom: 1%;
 	overflow-wrap: break-word;
@@ -71,4 +72,7 @@
 
 .comment-button {
 	font-size: 1.1vw !important;
+	text-align: center !important;
+	valign: middle !important;
+	padding: 3px !important;
 }

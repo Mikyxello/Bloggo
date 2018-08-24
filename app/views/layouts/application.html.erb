@@ -2,21 +2,21 @@
 <html>
   <head>
     <title>Bloggo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
 
-    <script src="https://apis.google.com/js/platform.js" async defer>
-      {lang: 'it'}
-    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
 
   <body>
-    <nav class="navbar navbar-dark pastel_colour_navbar">
-      <%= link_to 'Bloggo', root_path, class: "navbar-brand" %>
+    <nav class="navbar collapse.navbar-collapse navbar-dark pastel_colour_navbar">
+      <%= link_to (root_path), class: "navbar-brand" do %>
+        <%= image_tag(asset_path('favicon.png'), alt: 'Bloggo', class: "brand-image") %> Bloggo
+      <% end %>
 
       <%= form_tag(search_index_path, {class: 'form-inline', method: :get}) do %>
       <%= text_field_tag :q, nil, placeholder: 'Search Something...', class: "form-control mr-sm-2" %>
@@ -34,16 +34,16 @@
               <% else %>
                 <%= asset_path('user-placeholder.jpeg') %>
               <% end %>" />
-          <span class="username">
+          <span class="username navbar-text">
           <% if current_user.username? %>
             <%= current_user.username %> &nbsp;
           <% else %>
             <%= current_user.name %> <%= current_user.surname %> &nbsp;
           <% end %>
           </span>
-          <div>
+          
             <%= link_to '<button type="button" class="btn btn-outline-primary id="profilepage"> Profile Page </button>'.html_safe, users_url, id: 'profilepage' %>
-          </div>&nbsp;
+          &nbsp;
           <%= link_to '<button type="button" class="btn btn-outline-primary">Logout</button>'.html_safe, destroy_user_session_path, :method => 'delete' %>
         <% else %>
           <%= link_to '<button type="button" class="btn btn-outline-primary">Login</button>'.html_safe, "#loginModal", "data-toggle" => "modal" %>

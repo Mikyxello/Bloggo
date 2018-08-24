@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-	extend FriendlyId
-	friendly_id :username, :use => :slugged
+	#extend FriendlyId
+	#friendly_id :username, :use => :slugged
 
 	acts_as_voter
   	acts_as_follower
@@ -8,9 +8,9 @@ class User < ApplicationRecord
 
 	mount_uploader :avatar_image, ImageUploader
 
-	has_many :blogs
-	has_many :posts
-	has_many :comments
+	has_many :blogs, dependent: :destroy
+	has_many :posts, dependent: :destroy
+	has_many :comments, dependent: :destroy
 
 	validates_presence_of :name, :surname, :username
 
@@ -41,13 +41,13 @@ class User < ApplicationRecord
 	enum role: [:user, :bloggoer, :editor, :admin]
 	after_initialize :set_default_role,:set_default_banned_status, :if => :new_record?
 
-	def should_generate_new_friendly_id?
-		username_changed?
-	end
+	#def should_generate_new_friendly_id?
+	#	username_changed?
+	#end
 
-	def normalize_friendly_id(text)
-		text.to_slug.transliterate.to_s
-	end
+	#def normalize_friendly_id(text)
+		#text.to_slug.transliterate.to_s
+	#end
 
 	def set_default_role
     	self.role ||= :user
