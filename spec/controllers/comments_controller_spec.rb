@@ -90,69 +90,69 @@ RSpec.describe CommentsController, type: :controller do
 				expect(response).not_to be_successful
 			end
 		end
+	end
 
-		describe "PUT #update" do
-			let!(:new_attr) { FactoryBot.attributes_for(:comment) }
-			context "with valid user" do
-				it "allows a comment to be updated" do
-					allow(controller).to receive(:authenticate_user!).and_return(true)
-					allow(controller).to receive(:current_user).and_return(@owner)
-					put :update, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id, :comment => new_attr}
-					@comment.reload
-					expect(response).to redirect_to(blog_post_path(@blog, @post))
-					expect(@comment.content).to eql new_attr[:content]
-				end
-			end
-
-			context "with invalid user" do
-				it "not allows a comment to be updated" do
-					allow(controller).to receive(:authenticate_user!).and_return(true)
-					allow(controller).to receive(:current_user).and_return(@user)
-					put :update, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id, :comment => new_attr}
-					@comment.reload
-					expect(response).to redirect_to(blog_post_path(@blog, @post))
-					expect(@comment.content).not_to eql new_attr[:content]
-				end
-			end
-
-			context "with not logged user" do
-				it "not allows a comment to be updated" do
-					expect(controller.user_signed_in?).to be false
-					put :update, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id, :comment => new_attr}
-					@comment.reload
-					expect(response).to redirect_to(new_user_session_path)
-					expect(@comment.content).not_to eql new_attr[:content]
-				end
+	describe "PUT #update" do
+		let!(:new_attr) { FactoryBot.attributes_for(:comment) }
+		context "with valid user" do
+			it "allows a comment to be updated" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@owner)
+				put :update, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id, :comment => new_attr}
+				@comment.reload
+				expect(response).to redirect_to(blog_post_path(@blog, @post))
+				expect(@comment.content).to eql new_attr[:content]
 			end
 		end
 
-		describe "DELETE #destroy" do
-			context "with valid user" do
-				it "allows to destroy the requested comment" do
-					allow(controller).to receive(:authenticate_user!).and_return(true)
-					allow(controller).to receive(:current_user).and_return(@owner)
-					expect { delete :destroy, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id} }.to change(Comment, :count).by(-1)
-					expect(response).to redirect_to(blog_post_path(@blog, @post))
-				end
+		context "with invalid user" do
+			it "not allows a comment to be updated" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				put :update, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id, :comment => new_attr}
+				@comment.reload
+				expect(response).to redirect_to(blog_post_path(@blog, @post))
+				expect(@comment.content).not_to eql new_attr[:content]
 			end
+		end
 
-			context "with invalid user" do
-				it "not allows to destroy the requested comment" do
-					allow(controller).to receive(:authenticate_user!).and_return(true)
-					allow(controller).to receive(:current_user).and_return(@user)
-					comment = @post.comments.create! @comment_attr
-					expect { delete :destroy, params: {:blog_id => @blog.id, :post_id => @post.id, :id => comment.id} }.not_to change(Comment, :count)
-					expect(response).to redirect_to(blog_post_path(@blog, @post))
-				end
+		context "with not logged user" do
+			it "not allows a comment to be updated" do
+				expect(controller.user_signed_in?).to be false
+				put :update, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id, :comment => new_attr}
+				@comment.reload
+				expect(response).to redirect_to(new_user_session_path)
+				expect(@comment.content).not_to eql new_attr[:content]
 			end
+		end
+	end
 
-			context "with not logged user" do
-				it "not allows to destroy the requested comment" do
-					expect(controller.user_signed_in?).to be false
-					expect { delete :destroy, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id} }.not_to change(Comment, :count)
-					expect(response).to redirect_to(new_user_session_path)
-					expect(response).not_to be_successful
-				end
+	describe "DELETE #destroy" do
+		context "with valid user" do
+			it "allows to destroy the requested comment" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@owner)
+				expect { delete :destroy, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id} }.to change(Comment, :count).by(-1)
+				expect(response).to redirect_to(blog_post_path(@blog, @post))
+			end
+		end
+
+		context "with invalid user" do
+			it "not allows to destroy the requested comment" do
+				allow(controller).to receive(:authenticate_user!).and_return(true)
+				allow(controller).to receive(:current_user).and_return(@user)
+				comment = @post.comments.create! @comment_attr
+				expect { delete :destroy, params: {:blog_id => @blog.id, :post_id => @post.id, :id => comment.id} }.not_to change(Comment, :count)
+				expect(response).to redirect_to(blog_post_path(@blog, @post))
+			end
+		end
+
+		context "with not logged user" do
+			it "not allows to destroy the requested comment" do
+				expect(controller.user_signed_in?).to be false
+				expect { delete :destroy, params: {:blog_id => @blog.id, :post_id => @post.id, :id => @comment.id} }.not_to change(Comment, :count)
+				expect(response).to redirect_to(new_user_session_path)
+				expect(response).not_to be_successful
 			end
 		end
 	end
