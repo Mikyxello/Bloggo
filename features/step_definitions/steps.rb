@@ -126,6 +126,9 @@ And /^I should see the image$/ do
   expect(User.last.avatar_image).not_to be nil
 end
 
+And /^I should see the results$/ do
+  visit search_index_path
+end
 When /^I visit the user_index page$/ do
   visit users_path
 end
