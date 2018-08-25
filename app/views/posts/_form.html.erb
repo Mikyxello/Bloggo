@@ -52,9 +52,9 @@
         </td>
         <td colspan="2" align="right" valign="top">
           <div class="form-group">
-            <%= form.label :tags %><br>
+            <%= form.label :tag_list %><br>
             <%= form.text_area :tag_list, value: form.object.tag_list.to_s, class: 'post-form-tag-list' %>
-            <small id="taggoesHelp" class="form-text text-muted">Tags must be separated by a comma.</small>
+            <small id="taggoesHelp" class="form-text text-muted">Tags must be separated by a comma.<br/>Leave <u>empty</u> for auto generated tags</small>
           </div>
         </td>
       </tr>

@@ -29,8 +29,18 @@ class PostsController < ApplicationController
 
 	def create
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.create(post_params)
+		@post = @blog.posts.new(post_params)
 		@post.user = current_user
+
+		if post_params[:tag_list] == ""
+			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
+			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: @post.content }
+			response = JSON.parse( response )
+			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+			keywords.each do |word|
+				@post.tag_list = @post.tag_list + word["keyword"] + ","
+			end
+		end
 
 		if @post.save
 			redirect_to blog_post_path(@blog, @post)
@@ -47,7 +57,19 @@ class PostsController < ApplicationController
 			@post.remove_file!
 		end
 
-		if @post.update(post_params)
+		new_params = post_params
+
+		if new_params[:tag_list] == ""
+			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
+			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: post_params[:content] }
+			response = JSON.parse( response )
+			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+			keywords.each do |word|
+				new_params[:tag_list] = new_params[:tag_list] + word["keyword"] + ","
+			end
+		end
+
+		if @post.update(new_params)
 			redirect_to blog_post_path(@blog, @post)
 		else
 			render 'edit'

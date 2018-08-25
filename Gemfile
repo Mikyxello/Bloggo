@@ -94,3 +94,5 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap4'
 # Organize models as a tree structure 
 gem 'ancestry'
+# Rest client requests
+gem 'rest-client'

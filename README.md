@@ -67,6 +67,8 @@ For running `rspec` tests use
 bundle exec rspec
 ```
 
+or just `rspec`
+
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org/) - The web framework used for backend
@@ -74,6 +76,7 @@ bundle exec rspec
 * [Unsplash](https://unsplash.com/) - External API for letting users get free images to use
 * [Photoeditor](https://www.photoeditorsdk.com/) - External API for letting users modify images
 * [Agor](https://www.open-agora.com/en/products/api) - External API for letting users make polls
+* [ParallelDots](https://www.paralleldots.com/) - External API for generate automatic tags
 
 ## Authors
 
