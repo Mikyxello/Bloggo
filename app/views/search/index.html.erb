@@ -22,14 +22,14 @@
       </div>
     </div>
     <div class="col" style="max-width:40%; max-height:100%;">
-      <div class="card" style="min-height: 22%;max-height: 22%">
+      <div class="card" style="max-height: 50%">
       <div class="card-header pastel_colour_yellow" style="text-align:center; ">
         <h2> Researched Taggoes</h2>
       </div>
       <div class="card-body">
         <% if (@tags) %>
           <% if (@tags.empty?) %>
-        <h2>No Bloggoes found.<h2>
+        <h2>No Taggoes found.<h2>
           <% else %>
             <% @tags.each do |tag| %>
               <%= render tag %>
@@ -41,10 +41,11 @@
 
         </div>
       </div>
-      <div class="card" style="min-height: 45%; max-height:85%; margin-top: 15px;">
-          <div class="card-header pastel_colour_green" style="text-align:center;">
+      <div class="card" style="max-height:100%; margin-top: 15px;">
+          <div class="card-header pastel_colour_green" style="text-align: center;">
             <h2>Researched Postoes</h2>
           </div>
+        <div class="card-body">
           <% if (@posts) %>
               <% if (@posts.empty?) %>
             <h2>No Postoes found.<h2>
@@ -56,8 +57,8 @@
         <% else %>
           <p>Use the search form to search for stuff.</p>
          <% end %>
-
-          </div>
+         </div>
+        </div>
     </div>
   </div>
 </div>
