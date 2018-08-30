@@ -16,26 +16,64 @@ class BlogsController < ApplicationController
 		@posts = Post.where(blog_id: @blog)
 		@filter = "Most Recent"
 		@shown_posts = @blog.posts.last(5)
+		puts"______________#{@blog.editors}________________"
 		render 'show'
+	end
+
+	def editors
+		@blog = Blog.find(params[:id])
+		@editors = Array.new()
+		if @blog.editors.blank?
+			redirect_to blog_path(@blog)
+			return
+		else
+			@editors_array = @blog.editors.split("/").map(&:to_i)
+			@editors_array.each do |editors|
+				@editors << User.find(editors)
+			end
+		end
 	end
 
 	def add_editors
 		@blog = Blog.find(params[:id])
-		@user = User.find(params[:user_id])
+		@user = User.find_by_email(params[:email])
 		@posts = Post.where(blog_id: @blog)
 		@shown_posts = @blog.posts.last(5)
-		@blog.editors = @user.id
+
+		if @user.nil? || @user.id == @blog.user.id
+			redirect_to blog_path(@blog)
+			return
+		end
+		if @blog.editors.nil?
+			@blog.editors = @user.id.to_s << "/"
+		else
+			@editors_array = @blog.editors.split("/").map(&:to_i)
+			if @editors_array.include?(@user.id)
+				redirect_to user_path
+			else
+				@blog.editors << @user.id.to_s << "/" 
+			end
+		end
 		@blog.save
-		render 'show'
+		redirect_to blog_path(@blog)
 	end
 
 	def remove_editors
 		@blog = Blog.find(params[:id])
-		@user = User.find(params[:user_id])
-		if (@blog.editors.includes(@user.id))
-			@blog.editors.remove(@user.id)
+		@editors_array = @blog.editors.split("/").map(&:to_s)
+		@new_editors = ""
+		if @editors_array.include?(params[:user_id])
+			@editors_array.delete(params[:user_id])
+		else
+			redirect_to blog_path(@blog)
+			return
 		end
-		render 'show'
+		@editors_array.each do |editors|
+			@new_editors << editors.to_s << "/"
+		end
+		@blog.editors = @new_editors
+		@blog.save
+		redirect_to blog_path(@blog)
 	end
 
 	def follow

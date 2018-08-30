@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_100346) do
+ActiveRecord::Schema.define(version: 2018_08_25_180736) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2018_08_09_100346) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "impressions_count"
-    t.integer "editors"
+    t.string "editors"
     t.boolean "suspended"
     t.string "header"
     t.string "profile"

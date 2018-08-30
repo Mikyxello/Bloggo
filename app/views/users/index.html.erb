@@ -16,7 +16,7 @@
     		<div class="row text-center">
         	<div class="col-sm-12 text-center">
           	<h3> Blogs</h3>
-          	<h6> <%= @blog.count %></h6>
+          	<h6> <%= @blog_count.count %></h6>
         	</div>
       	</div>
     		<% if @user.id == current_user.id %>
@@ -52,6 +52,9 @@
             </tr>
             <% end %>
           </table>
+          <% if @blog_count.count > 5 %>
+            <%= link_to '<button type="button" class="btn btn-primary">See all</button>'.html_safe, see_all_path(current_user) %>
+          <% end %>
           <% else %>
             <h3> No bloggoes found! </h3>
         <% end %>

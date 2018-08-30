@@ -1,11 +1,15 @@
-<h2 style="text-align:center;">Add User_id</h2>
-
+<h2>Insert credentials of the new editor:</h2>
   <form action="<%= @blog.id %>/add_editors" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <br>
+    <br>
     <table class="table">
     <tr>
-      <input type="text" name="user_id">   
+      <h6> email : </h6>
+      <input type="text" name="email">   
     </tr>
+    <br>
+    <br>
     <tr>
       <input type="submit" value="Add" />
     </tr>

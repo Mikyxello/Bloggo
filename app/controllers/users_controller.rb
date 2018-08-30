@@ -3,10 +3,16 @@ class UsersController < ApplicationController
 
   def index
 	  @user = current_user
+    @blog_count = Blog.where(user_id: @user)
 		@blog = Blog.where(user_id: @user).last(5).reverse!
     @favourite_blogs = current_user.favorited_by_type 'Blog'
     @favourite_posts = current_user.favorited_by_type 'Post'
 	end
+
+  def all
+    @user = current_user
+    @blog = Blog.where(user_id: @user)  
+  end
 
  	def show
 		@user = User.find(params[:id])

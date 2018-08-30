@@ -39,10 +39,12 @@ Rails.application.routes.draw do
   get 'blogs/:id/favourite', to: 'blogs#favourite', :as => :favourite
   get 'blogs/:id/unfavourite', to:'blogs#unfavourite', :as => :unfavourite
   get 'users/upgrade/:id', to: 'users#upgrade', :as => :upgrade
+  get 'blogs/:id/editors', to: 'blogs#editors', :as => :editors
   post 'blogs/:id/add_editors', to: 'blogs#add_editors', :as => :add_editor
-  post 'blogs/:id/remove_editors', to: 'blogs#remove_editors', :as => :remove_editor
+  get 'blogs/:id/remove_editors/:user_id', to: 'blogs#remove_editors', :as => :remove_editor
   get 'admin_panel/index'
   get 'users/:id/change_status', to:'users#change_status', :as => :change_status
+  get 'users/:id/all', to: 'users#all', :as => :see_all 
 
   match '*path' => 'application#render_404', via: :all
 end

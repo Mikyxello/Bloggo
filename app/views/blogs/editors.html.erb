@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="card" style="width: 100%;">
+	<div class="card-body tg-wrap" style="width: 100%;">
+	<table width="100%">
+	<% @editors.each do |editor| %>
+		<tr>
+			<td colspan="2" align="left"  valign="top">
+				<% if editor.avatar_image? %>
+					<%= image_tag(editor.avatar_image.url, alt: editor.avatar_image.identifier, class: 'image-link-aux') %>
+				<% else %>
+					<%= image_tag(asset_path('user-placeholder.jpeg'), alt: editor.name, class: 'image-link-aux')  %>
+				<% end %>
+			</td>
+			<td colspan="2" align="left" valign="center" class="post-title-aux">
+				<% if editor.username %>
+					<%= link_to editor.username, user_path(editor), class: "post-link" %>
+				<% else %>
+					<%= link_to editor.name, user_path(editor), class: "post-link" %> 
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5" align="right"  valign="top">
+				<%= link_to 'Remove', remove_editor_path(@blog,editor.id), class: "btn btn-warning"%> 
+			</td>
+		</tr>
+	<% end %>
+	</table>
+</div>
+</div>
+</div>
+
+<style>
+ .header_background{
+ 	background-image: url(<%= @blog.header.url.to_s %>);
+ }
+
+ .transbox {
+    margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.9;
+}
+</style>
