@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :tag do
-    name { Faker::String.random(3..15) }
+    name { Faker::Lorem.characters(10) }
   end
 end

@@ -23,7 +23,7 @@ end
 user_count = User.count
 users = User.all
 
-puts "Users generated!"
+puts "#{user_count} Users generated!"
 puts "Now generating Blogs..."
 
 # Generating Blogs
@@ -47,7 +47,7 @@ end
 blog_count = Blog.count
 blogs = Blog.all
 
-puts "Blogs generated!"
+puts "#{blog_count} Blogs generated!"
 puts "Now generating Posts..."
 
 # Generating Posts
@@ -78,7 +78,7 @@ end
 post_count = Post.count
 posts = Post.all
 
-puts "Posts generated!"
+puts "#{post_count} Posts generated!"
 puts "Now generating Comments..."
 
 # Generating Comments
@@ -93,9 +93,10 @@ puts "Now generating Comments..."
 	)
 end
 
+comment_count = Comment.count
 comments = Comment.all
 
-puts "Comments generated!"
+puts "#{comment_count} Comments generated!"
 puts "Now generating Replies..."
 
 # Generating Replies

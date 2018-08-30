@@ -36,16 +36,16 @@
 	padding: 2%;
 }
 
-.post-title {
-	font-size: 1.3vw;
-}
-
 .post-title-td {
 	width: 100%;
 }
 
+.post-title {
+	font-size: 1.4vw;
+}
+
 .post-subtitle {
-	font-size: 1.2vw;
+	font-size: 1.3vw;
 }
 
 .post-file {
@@ -58,15 +58,11 @@
 }
 
 .post-stats {
-	font-size: 1vw;
-}
-
-.post-share-buttons {
-	width: 10vw;
+	font-size: 1.1vw;
 }
 
 .post-content {
-	font-size: 1vw;
+	font-size: 1.1vw;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	-ms-word-break: break-all;
@@ -81,15 +77,15 @@
 .image-link {
 	border-radius: 50%;
 	object-fit: cover;
-	width: 3vw;
-	height: 3vw;
+	width: 3.5vw;
+	height: 3.5vw;
 	&:hover {
 		opacity: 0.8;
 	}
 }
 
 .post-link {
-	font-size: 1vw;
+	font-size: 1.3vw;
 	&:hover {
 		text-decoration: none;
 		opacity: 0.9;
@@ -97,27 +93,33 @@
 }
 
 .angry {
+	font-size: 1.2vw;
 	background: -webkit-linear-gradient(#FF493A, #FDD983);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	transition: transform .2s;
 	&:hover {
-		transform: scale(2);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-webkit-transform:scale(2);
 	}
 }
 
 .like {
+	font-size: 1.2vw;
 	background: -webkit-linear-gradient(#002F77, #12BAEB);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	transition: transform .2s;
 	&:hover {
-		transform: scale(2);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		-webkit-transform:scale(2);
 	}
 }
 
 .post-favourite {
-	font-size: 1.5vw;
+	font-size: 2vw;
 	background: -webkit-linear-gradient(#A83F39, #990000);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -133,10 +135,30 @@
 
 // Post Partial Render (views/posts/_post.html.erb)
 
+.card-post-aux {
+	width: 100%;
+}
+
+.card-body-post-aux {
+	width: 100%;
+}
+
+.table-post-aux {
+	width: 100%;
+}
+
 .post-title-aux {
 	text-align: left;
 	padding-left: 1%;
 	width: 100%;
+}
+
+.post-comment-counter-aux {
+	padding-left: 1.5vw;
+}
+
+.post-comment-counter {
+	font-size: 1.1vw;
 }
 
 .image-link-aux {
@@ -147,7 +169,7 @@
 }
 
 .read-more {
-	font-size: 0.7vw;
+	font-size: 1vw;
 }
 
 
@@ -223,7 +245,10 @@
 
 // Facebook & Google Share
 
-.share-button {
+.post-share-buttons {
 	font-size: 2vw !important;
-	margin-top: 2%;
+	line-height: 0.8 !important;
+	margin: 0vw !important;
+	padding: 1vw !important;
+	width: auto !important;
 }

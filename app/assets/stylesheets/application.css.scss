@@ -29,7 +29,7 @@ html {
 
 body {
   height: 100%;
-  font-size: 15px;
+  font-size: 1.3vw;
   font-weight: 300;
 }
 
@@ -46,16 +46,18 @@ h1, h2, h3, h4, h5 {
 }
 
 nav {
-	font-size: 25px;
+	font-size: 2vw;
 	font-weight: 400;
+}
+
+.brand-image {
+  height: 2em;
 }
 
 h6 {
 	font-weight: 200;
 	font-size: 20px;
 }
-
-
 
 
 .pastel_colour_blue {
@@ -113,19 +115,17 @@ h6 {
 }
 
 .username {
-  font-size: 1.8vw;
-  vertical-align: middle;
-  color: #FFF;
+  color: #FFF !important;
   margin-left: 0.2vw;
   margin-right: 0.2vw;
 }
 
 .text-small {
-  font-size: 0.8vw;
+  font-size: 0.9vw;
 }
 
 .badge {
-  font-size: 0.9vw;
+  font-size: 1vw;
 }
 
 // Footer
@@ -226,4 +226,11 @@ h6 {
 
 .notfound-body {
   font-size: 4rem;
+}
+
+
+// Generic
+
+.dropdown-toggle {
+  font-size: 1.4vw;
 }

@@ -15,8 +15,10 @@ class UsersController < ApplicationController
   end
 
  	def show
-		@user = User.find(params[:id])
-		@blog = Blog.where(user_id: @user)
+		#@user = User.friendly.find(params[:id])
+    @user = User.find(params[:id])
+		@blogs = Blog.where(user_id: @user)
+    @posts = Post.where(:user_id => @user.id)
     @favourite_blogs = @user.favorited_by_type 'Blog'
  	end
 

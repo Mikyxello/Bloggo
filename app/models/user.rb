@@ -1,19 +1,22 @@
 class User < ApplicationRecord
+	#extend FriendlyId
+	#friendly_id :username, :use => :slugged
+
 	acts_as_voter
-  acts_as_follower
-	acts_as_favoritor	
+  	acts_as_follower
+	acts_as_favoritor
 
 	mount_uploader :avatar_image, ImageUploader
 
-	has_many :blogs
-	has_many :posts
-	has_many :comments
+	has_many :blogs, dependent: :destroy
+	has_many :posts, dependent: :destroy
+	has_many :comments, dependent: :destroy
 
 	validates_presence_of :name, :surname, :username
 
 	#validates_presence_of   :avatar_image
-  validates_integrity_of  :avatar_image
-  validates_processing_of :avatar_image
+	validates_integrity_of  :avatar_image
+	validates_processing_of :avatar_image
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
@@ -35,10 +38,18 @@ class User < ApplicationRecord
 	  # user
 	 #end
 
-	 enum role: [:user, :bloggoer, :editor, :admin]
-   after_initialize :set_default_role,:set_default_banned_status, :if => :new_record?
+	enum role: [:user, :bloggoer, :editor, :admin]
+	after_initialize :set_default_role,:set_default_banned_status, :if => :new_record?
 
-	 def set_default_role
+	#def should_generate_new_friendly_id?
+	#	username_changed?
+	#end
+
+	#def normalize_friendly_id(text)
+		#text.to_slug.transliterate.to_s
+	#end
+
+	def set_default_role
     	self.role ||= :user
   	end
 
@@ -50,7 +61,7 @@ class User < ApplicationRecord
 			super && !self.banned
 		end
 
-	 def self.from_omniauth(auth)
+	def self.from_omniauth(auth)
 	  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
 	    user.email = auth.info.email
 	    user.password = Devise.friendly_token[0,20]
@@ -67,13 +78,11 @@ class User < ApplicationRecord
 	  end
 	end
 
-	 def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
-
-
+	def self.new_with_session(params, session)
+    	super.tap do |user|
+			if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+				user.email = data["email"] if user.email.blank?
+			end
+		end
+	end
 end

@@ -13,9 +13,8 @@ class PostsController < ApplicationController
 
 	def show
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		@related_posts = Post.where.not(id: @post.id).tagged_with(@post.tag_list, any: true).order(:cached_weighted_average => :desc, :cached_votes_total => :desc, :impressions_count => :asc).first(3)
-		render 'show'
 	end
 
 	def new
@@ -25,13 +24,23 @@ class PostsController < ApplicationController
 
 	def edit
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 	end
 
 	def create
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.create(post_params)
+		@post = @blog.posts.new(post_params)
 		@post.user = current_user
+
+		if post_params[:tag_list] == ""
+			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
+			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: @post.content }
+			response = JSON.parse( response )
+			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+			keywords.each do |word|
+				@post.tag_list = @post.tag_list + word["keyword"] + ","
+			end
+		end
 
 		if @post.save
 			redirect_to blog_post_path(@blog, @post)
@@ -42,13 +51,25 @@ class PostsController < ApplicationController
 
 	def update
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 
 		if params[:remove_file]
 			@post.remove_file!
 		end
 
-		if @post.update(post_params)
+		new_params = post_params
+
+		if new_params[:tag_list] == ""
+			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
+			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: post_params[:content] }
+			response = JSON.parse( response )
+			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+			keywords.each do |word|
+				new_params[:tag_list] = new_params[:tag_list] + word["keyword"] + ","
+			end
+		end
+
+		if @post.update(new_params)
 			redirect_to blog_post_path(@blog, @post)
 		else
 			render 'edit'
@@ -57,7 +78,7 @@ class PostsController < ApplicationController
 
 	def destroy
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		@post.destroy
 
 		if current_user.admin?
@@ -69,7 +90,7 @@ class PostsController < ApplicationController
 
 	def upvote
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		respond_to do |format|
 			if current_user.voted_up_on? @post
 				format.html { redirect_back fallback_location: root_path }
@@ -91,7 +112,7 @@ class PostsController < ApplicationController
 	
 	def downvote
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		respond_to do |format|
 			if current_user.voted_down_on? @post
 				format.html { redirect_back fallback_location: root_path }
@@ -113,7 +134,7 @@ class PostsController < ApplicationController
 
 	def favourite
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		current_user.favorite(@post)
 
 		respond_to do |format|
@@ -125,7 +146,7 @@ class PostsController < ApplicationController
 
 	def unfavourite
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		current_user.remove_favorite(@post)
 
 		respond_to do |format|
@@ -150,14 +171,14 @@ class PostsController < ApplicationController
 	private
 	def check_user
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		redirect_to blog_path(@blog) unless @post.user == current_user
 	end
 
 	private
 	def check_destroy
 		@blog = Blog.find(params[:blog_id])
-		@post = @blog.posts.find(params[:id])
+		@post = @blog.posts.friendly.find(params[:id])
 		redirect_to blog_path(@blog) unless (current_user.admin?) || (@blog.user == current_user) || (@blog.editors == current_user.id) || (!@post.nil? && @post.user == current_user)
 	end
 end

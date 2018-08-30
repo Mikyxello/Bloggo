@@ -12,6 +12,9 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 
+    when /^the search\s?page$/
+      search_index_path
+
     when /^the blog page$/
       blog_path(Blog.take)
 
@@ -21,7 +24,7 @@ module NavigationHelpers
     when /^the post page$/
       if (@post.nil?)
         blog_post_path(@blog, Post.take)
-      else 
+      else
         blog_post_path(@blog, @post)
       end
 

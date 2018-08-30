@@ -7,11 +7,15 @@ RSpec.describe HomeController, type: :controller do
   end
 
   describe "GET index" do
-    context "user logged in" do
-      it "renders the homepage" do
+
+
+    context "searched an empty word" do
+      it "renders the search page without results" do
         get :index
         expect(response).to be_successful
       end
     end
+
+
   end
 end
