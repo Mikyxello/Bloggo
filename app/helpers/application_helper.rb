@@ -14,4 +14,10 @@ module ApplicationHelper
   def devise_mapping
    @devise_mapping ||= Devise.mappings[:user]
   end
+
+  def show_photo
+      searched_photo = Unsplash::Photo.search("null")
+      @show_photo = searched_photo[0]['urls']['thumb']
+  end
+
 end

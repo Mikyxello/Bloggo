@@ -63,6 +63,9 @@
           <div class="input-group post-content-form-div">
             <%= form.text_area :content, class: "post-content-form" %>
           </div>
+          <div class="form-group unsplash-form-field">
+              <%= image_tag show_photo %>
+          </div>
         </td>
       </tr>
       <tr>
@@ -93,7 +96,7 @@
                 $('#videoPreview').attr('src', '<%= @post.file.url %>');
                 $('#videoPreview').css('display', '');
               </script>
-            <% else %> 
+            <% else %>
               <script>
                 $('#imagePreview').attr('src', '<%= @post.file.url %>');
                 $('#imagePreview').css('display', '');
@@ -120,7 +123,7 @@
 
 <br/>
 
-<script> 
+<script>
   $(document).ready(function(){
     $('#post_content').froalaEditor({
       width: '100%',
@@ -176,7 +179,7 @@
         else {
           $('#imagePreview').attr('src', '');
           $('#imagePreview').css('display', 'none');
-          $('#videoPreview').attr('src', '');         
+          $('#videoPreview').attr('src', '');
           $('#videoPreview').css('display', 'none');
         }
         $('#post_remove_file').css('display', '');
@@ -191,7 +194,7 @@
     if($('#post_remove_file').prop('checked')) {
       $('#imagePreview').attr('src', '');
       $('#imagePreview').css('display', 'none');
-      $('#videoPreview').attr('src', '');         
+      $('#videoPreview').attr('src', '');
       $('#videoPreview').css('display', 'none');
       $('#post_remove_file').css('display', 'none');
       $('#delete-icon').css('display', 'none');

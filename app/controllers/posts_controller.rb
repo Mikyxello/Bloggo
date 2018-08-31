@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 	before_action :check_user, only: [ :edit, :update ]
 	before_action :check_destroy, only: [ :destroy ]
 	impressionist actions: [ :show ], unique: [ :impressionable_type, :impressionable_id, :session_hash ]
-	
+
 	def index
 		@blog = Blog.find(params[:blog_id])
 		@posts = @blog.posts.paginate(page: params[:page], per_page: 5)
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.new(post_params)
 		@post.user = current_user
-
+		
 		if post_params[:tag_list] == ""
 			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
 			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: @post.content }
@@ -109,7 +109,7 @@ class PostsController < ApplicationController
 			end
 		end
 	end
-	
+
 	def downvote
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.friendly.find(params[:id])
@@ -154,7 +154,7 @@ class PostsController < ApplicationController
 			format.json { head :no_content }
 			format.js { render :layout => false }
 		end
-	end	
+	end
 
 
 	private

@@ -67,6 +67,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'unsplash'
 gem 'bootstrap'
 gem 'wysiwyg-rails'
 gem 'jquery-rails'
@@ -92,7 +93,7 @@ gem 'notifications', '~> 0.6.0'
 gem 'will_paginate', '~> 3.1.0'
 # Add style to paginating with Boostrap 4
 gem 'will_paginate-bootstrap4'
-# Organize models as a tree structure 
+# Organize models as a tree structure
 gem 'ancestry'
 # Rest client requests
 gem 'rest-client'
