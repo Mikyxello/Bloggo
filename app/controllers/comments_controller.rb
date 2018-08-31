@@ -61,6 +61,6 @@ class CommentsController < ApplicationController
 	def check_destroy
 		@post = Post.friendly.find(params[:post_id])
 		@comment = @post.comments.find(params[:id])
-		redirect_to blog_post_path(@post.blog, @post) unless ([@post.user, @post.blog.user].include? current_user) || (@post.blog.editors == current_user.id) || (current_user.admin?) || (!@comment.nil? && @comment.user == current_user) 
+		redirect_to blog_post_path(@post.blog, @post) unless ([@post.user, @post.blog.user].include? current_user) || (!@post.blog.editors.nil? && @post.blog.editors.include?(current_user.id.to_s)) || (current_user.admin?) || (!@comment.nil? && @comment.user == current_user) 
 	end
 end

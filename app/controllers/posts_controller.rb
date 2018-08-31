@@ -165,7 +165,7 @@ class PostsController < ApplicationController
 	private
 	def check_editor
 		@blog = Blog.find(params[:blog_id])
-		redirect_to blog_path(@blog) unless (@blog.user == current_user) || (@blog.editors == current_user.id)
+		redirect_to blog_path(@blog) unless (@blog.user == current_user) || (!@blog.editors.nil? && @blog.editors.include?(current_user.id.to_s))
 	end
 
 	private
@@ -179,6 +179,6 @@ class PostsController < ApplicationController
 	def check_destroy
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.friendly.find(params[:id])
-		redirect_to blog_path(@blog) unless (current_user.admin?) || (@blog.user == current_user) || (@blog.editors == current_user.id) || (!@post.nil? && @post.user == current_user)
+		redirect_to blog_path(@blog) unless (current_user.admin?) || (@blog.user == current_user) || (!@blog.editors.nil? && @blog.editors.include?(current_user.id.to_s)) || (!@post.nil? && @post.user == current_user)
 	end
 end
