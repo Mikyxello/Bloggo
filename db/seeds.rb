@@ -29,9 +29,20 @@ puts "Now generating Blogs..."
 # Generating Blogs
 
 10.times do
-	editor_id = Faker::Number.between(0, user_count)
-	if editor_id == 0
-		editor_id = nil
+	user_id = users.sample.id
+
+	editors_num = Faker::Number.between(0, user_count)
+	editors_id = ""
+	if editors_num == 0
+		editors_id = nil
+	else
+		editors_num.times do 
+			new_editor = Faker::Number.unique.between(1, user_count)
+			if new_editor != user_id
+				editors_id = editors_id + new_editor.to_s + ","
+			end
+		end
+		Faker::Number.unique.clear
 	end
 
 	Blog.create!(
@@ -39,8 +50,8 @@ puts "Now generating Blogs..."
 		:description =>  		Faker::Company.catch_phrase,
 		:remote_profile_url =>  Faker::Avatar.image,
 		:remote_header_url =>  	Faker::LoremFlickr.image("1280x720"),
-		:user_id =>  			users.sample.id,
-		:editors => 			editor_id
+		:user_id =>  			user_id,
+		:editors => 			editors_id
 	)
 end
 
@@ -60,8 +71,9 @@ puts "Now generating Posts..."
 
 	if (editors.nil?)
 		user_id = Blog.find(blog_id).user_id
-	else 
-		user_id = [Blog.find(blog_id).user_id, Blog.find(blog_id).editors].sample
+	else
+		user_id_array = Blog.find(blog_id).editors.split(",").map(&:to_i) << Blog.find(blog_id).user_id
+		user_id = user_id_array.sample
 	end
 
 	Post.create!(
