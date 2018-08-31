@@ -36,9 +36,11 @@ class PostsController < ApplicationController
 			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
 			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: @post.content }
 			response = JSON.parse( response )
-			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
-			keywords.each do |word|
-				@post.tag_list = @post.tag_list + word["keyword"] + ","
+			if !response["keywords"][0].nil?
+				keywords = response["keywords"].sort_by{ |word| word["confidence_score"].to_i }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+				keywords.each do |word|
+					@post.tag_list = @post.tag_list + word["keyword"] + ","
+				end
 			end
 		end
 
@@ -63,9 +65,11 @@ class PostsController < ApplicationController
 			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
 			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: post_params[:content] }
 			response = JSON.parse( response )
-			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
-			keywords.each do |word|
-				new_params[:tag_list] = new_params[:tag_list] + word["keyword"] + ","
+			if !response["keywords"][0].nil?
+				keywords = response["keywords"].sort_by{ |word| word["confidence_score"].to_i }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+				keywords.each do |word|
+					new_params[:tag_list] = new_params[:tag_list] + word["keyword"] + ","
+				end
 			end
 		end
 
