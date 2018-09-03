@@ -32,7 +32,7 @@ class PostsController < ApplicationController
 		@post = @blog.posts.new(post_params)
 		@post.user = current_user
 		
-		if post_params[:tag_list] == ""
+		if post_params[:tag_list] == "" && post_params[:content] != ""
 			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
 			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: @post.content }
 			response = JSON.parse( response )
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 
 		new_params = post_params
 
-		if new_params[:tag_list] == ""
+		if new_params[:tag_list] == "" && new_params[:content] != ""
 			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
 			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: post_params[:content] }
 			response = JSON.parse( response )
