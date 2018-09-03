@@ -63,10 +63,9 @@
           <div class="input-group post-content-form-div">
             <%= form.text_area :content, class: "post-content-form" %>
           </div>
-          <div class="form-group unsplash-form-field">
-              <%= image_tag show_photo %>
-          </div>
-        </td>
+          </td>
+
+
       </tr>
       <tr>
         <td align="left">
@@ -118,12 +117,71 @@
         </td>
       </tr>
     </table>
+    <br />
+
   </div>
 <% end %>
+
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+      <div class="container-fluid">
+          <h3> Search from Unsplash Website</h3>
+
+          <%= form_tag(new_blog_post_url,:method => "get") do %>
+          <%= text_field_tag :photo, params[:photo], placeholder: "Search images.."%>
+          <%= submit_tag 'Search in Unsplash' %>
+          <% end %>
+
+          <br />
+      <div class="col-lg-4" >
+        <br />
+          <label class="image-checkbox" style="max-width: 30%">
+            <%= image_tag show_photo1%>
+            <button id ="link1" class="btn"><i class="fa fa-download" onclick="clicklink1();" ></i> Download</button>
+            <%= javascript_tag do %>
+              window.downloadlink1 = "<%= getLink1 %>";
+              alert(window.downloadlink1);
+            <% end %>
+        </label>
+      </div>
+      <div class="col-lg-4" style="max-width: 30%">
+        <label class="image-checkbox">
+            <%= image_tag show_photo2 %>
+
+        </label>
+      </div>
+      <div class="col-lg-4 nopad text-center" style="max-width: 30%">
+          <label class="image-checkbox">
+            <%= image_tag show_photo3 %>
+
+          </label>
+        </div>
+
+
+</div>
 
 <br/>
 
 <script>
+
+$('#link1').on('click', function () {
+  $.ajax({
+      url: window.downloadlink1;,
+      method: 'GET',
+      xhrFields: {
+          responseType: 'blob'
+      },
+      success: function (data) {
+          var a = document.createElement('a');
+          var url = window.URL.createObjectURL(data);
+          a.href = url;
+          a.download = 'myfile.pdf';
+          a.click();
+          window.URL.revokeObjectURL(url);
+      }
+  });
+});
+
   $(document).ready(function(){
     $('#post_content').froalaEditor({
       width: '100%',
@@ -154,6 +212,11 @@
         break;
     }
   });
+
+
+
+
+
 
   function readURL(input) {
     if (input.files && input.files[0]) {
@@ -189,6 +252,8 @@
       reader.readAsDataURL(input.files[0]);
     }
   };
+
+
 
   $('#post_remove_file').on('change', function() {
     if($('#post_remove_file').prop('checked')) {

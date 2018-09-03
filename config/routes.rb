@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :blogs do
   	resources :posts do
   		resources :comments
+
   collection do
     get 'search'
   end
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'blogs/index'
   get 'search/index'
+  
   get 'blogs/:id/visited_view' => "blogs#visited_view", :as => :visited_view
   get 'blogs/:id/recent_view' => "blogs#recent_view", :as => :recent_view
   get 'blogs/:id/reacted_view' => "blogs#reacted_view", :as => :reacted_view
@@ -44,7 +46,7 @@ Rails.application.routes.draw do
   get 'blogs/:id/remove_editors/:user_id', to: 'blogs#remove_editors', :as => :remove_editor
   get 'admin_panel/index'
   get 'users/:id/change_status', to:'users#change_status', :as => :change_status
-  get 'users/:id/all', to: 'users#all', :as => :see_all 
+  get 'users/:id/all', to: 'users#all', :as => :see_all
 
   match '*path' => 'application#render_404', via: :all
 end
