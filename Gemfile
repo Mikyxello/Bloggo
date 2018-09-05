@@ -67,7 +67,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'paperclip'
+
+
+gem 'pesdk-html5-rails', :git => 'https://github.com/imgly/pesdk-ruby-gem-demo.git'
 gem 'unsplash'
 gem 'bootstrap'
 gem 'wysiwyg-rails'
