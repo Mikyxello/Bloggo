@@ -1,6 +1,3 @@
-
-
-
 <%= form_with model: [ @blog, @post ], local: true do |form| %>
 
   <% if @post.errors.any? %>
@@ -67,8 +64,6 @@
             <%= form.text_area :content, class: "post-content-form" %>
           </div>
           </td>
-
-
       </tr>
       <tr>
         <td align="left">
@@ -144,7 +139,6 @@
   </div>
     <br />
     <br />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
       <div class="row container-fluid">
           <br />
           <h3> Search from Unsplash Website </h3>
@@ -179,30 +173,23 @@
       </div>
   </div>
 
-
-
-
 <script>
-
-
-
   function redirect1() {
     var url = '<%= getLink1 %>';
     window.open(url, 'download_window', 'toolbar=0,location=no,directories=0,status=0,scrollbars=0,resizeable=0,width=1,height=1,top=0,left=0');
-  }
+  };
   function redirect2() {
     var url = '<%= getLink2 %>';
     window.open(url, 'download_window', 'toolbar=0,location=no,directories=0,status=0,scrollbars=0,resizeable=0,width=1,height=1,top=0,left=0');
-  }
+  };
   function redirect3() {
     var url = '<%= getLink3 %>';
     window.open(url, 'download_window', 'toolbar=0,location=no,directories=0,status=0,scrollbars=0,resizeable=0,width=1,height=1,top=0,left=0');
-  }
+  };
 
   document.getElementById('link1').addEventListener('click',redirect1);
   document.getElementById('link2').addEventListener('click',redirect2);
   document.getElementById('link3').addEventListener('click',redirect3);
-
 
   $(document).ready(function(){
     $('#post_content').froalaEditor({
@@ -269,8 +256,6 @@
       reader.readAsDataURL(input.files[0]);
     }
   };
-
-
 
   $('#post_remove_file').on('change', function() {
     if($('#post_remove_file').prop('checked')) {

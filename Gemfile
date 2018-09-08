@@ -67,16 +67,21 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-
-
 gem 'pesdk-html5-rails', :git => 'https://github.com/imgly/pesdk-ruby-gem-demo.git'
+# Get free images
 gem 'unsplash'
+# Restyle CSS and JS with Bootstrap
 gem 'bootstrap'
+# Use a customized text editor for textareas
 gem 'wysiwyg-rails'
 gem 'jquery-rails'
+# Handle users
 gem 'devise'
+# Handle oAuth with Facebook
 gem 'omniauth-facebook'
+# Handle oAuth with Google
 gem 'omniauth-google-oauth2'
+# Handle users' roles
 gem 'canard', '~> 0.5.0.pre'
 
 # Add tag to models
