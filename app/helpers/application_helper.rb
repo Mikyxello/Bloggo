@@ -18,7 +18,7 @@ module ApplicationHelper
 
   def photo
     if(params[:photo] == nil)
-      @photo = Unsplash::Photo.search("nothing")
+      @photo = Unsplash::Photo.search("blog")
     else
       @photo ||= Unsplash::Photo.search(params[:photo])
     end

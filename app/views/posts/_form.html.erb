@@ -123,18 +123,7 @@
   <div class="row container-fluid" >
     <div id="pesdk" style="width: 100vmin; height: 75vmin; padding: 0px; margin: 0px; margin-bottom:10px">
       <script>
-      window.onload = function () {
-        license= ' {"owner":"Simone Silvestri","version":"2.1","enterprise_license":false,"available_actions":["magic","filter","transform","sticker","text","adjustments","brush","focus","frames","camera"],"features":["adjustment","filter","focus","overlay","transform","text","sticker","frame","brush","camera","textdesign","library","export"],"platform":"HTML5","app_identifiers":["127.0.0.1"],"api_token":"RwjrXpg8PWW9HjinvTG4jQ","domains":["https://api.photoeditorsdk.com"],"issued_at":1536084910,"expires_at":1538611200,"signature":"SEAHqGO4b6SDFIv9HlzdFT978B41nxa8HewfO9/Tov6E3ooLPAU7X843gFPhGGWEKAx6h8KqS6pPd6KPwT2JUMx8ryfMAdzPpRorwxdwNfywu238GezEN87NZhZUGQ6aUC2BmYs0MyoYhQ6chD6/JW8NUscbsr6s/L8vXpsJHQhYJC5A9xMPWqLK8s0XONcVqcyTVbkIGwoqKQg2Sre/tSvT3S3tz80YgQesoe4Jk80BD7MGujo2tJJUU/0U2hLT+oAvBZaA8SrTJXeY/FN2nNLxcj50SQJJiipjOpA0Nxx6dJA8ltzsOIAj32zdyCMquUun5opJ5xI+igNtA0oySkBTZMzxX8PUjB6bOXlJcoYp7sVwR5tzzW2jrfaCA3mVml9QYlmFtIhI2f4wMdZwjGATT5ayxkVnVGsNQ2+Nn1K5x5ozjjlf7uTIeIXoA0Iw0DBisOeI3xr4DdF9BwpieFSiOfS4qhuLnDDtAQyKfLBKDTuYo4pMBGD+WC8Q5+5egjCB5wMBW99FXvOzBxKme5NFclgoTCImzPteQvIbhQ9DUsXPQBcMhgcCbI8mrFejWCRhu93YY4duk/mfz+YjARu/2JFGO7aEPRuwedKZDnMKUQz5HtKMusCpYLnJM2m7dDhFOwu2NW6yGzcse6T5HULb5dZKqgY2A4keKQdScl8="}'
-        var container = document.getElementById('pesdk')
-        var editor = new PhotoEditorSDK.UI.ReactUI({
-          container: container,
-          license: license,
-          assets: {
-              baseUrl: '/assets', // => Matches default asset url for rails
-              resolver: function (path) { return path }
-        }
-      })
-      }
+
       </script>
   </div>
     <br />
@@ -174,6 +163,19 @@
   </div>
 
 <script>
+
+window.onload = function () {
+  license= ' {"owner":"Simone Silvestri","version":"2.1","enterprise_license":false,"available_actions":["magic","filter","transform","sticker","text","adjustments","brush","focus","frames","camera"],"features":["adjustment","filter","focus","overlay","transform","text","sticker","frame","brush","camera","textdesign","library","export"],"platform":"HTML5","app_identifiers":["127.0.0.1"],"api_token":"RwjrXpg8PWW9HjinvTG4jQ","domains":["https://api.photoeditorsdk.com"],"issued_at":1536084910,"expires_at":1538611200,"signature":"SEAHqGO4b6SDFIv9HlzdFT978B41nxa8HewfO9/Tov6E3ooLPAU7X843gFPhGGWEKAx6h8KqS6pPd6KPwT2JUMx8ryfMAdzPpRorwxdwNfywu238GezEN87NZhZUGQ6aUC2BmYs0MyoYhQ6chD6/JW8NUscbsr6s/L8vXpsJHQhYJC5A9xMPWqLK8s0XONcVqcyTVbkIGwoqKQg2Sre/tSvT3S3tz80YgQesoe4Jk80BD7MGujo2tJJUU/0U2hLT+oAvBZaA8SrTJXeY/FN2nNLxcj50SQJJiipjOpA0Nxx6dJA8ltzsOIAj32zdyCMquUun5opJ5xI+igNtA0oySkBTZMzxX8PUjB6bOXlJcoYp7sVwR5tzzW2jrfaCA3mVml9QYlmFtIhI2f4wMdZwjGATT5ayxkVnVGsNQ2+Nn1K5x5ozjjlf7uTIeIXoA0Iw0DBisOeI3xr4DdF9BwpieFSiOfS4qhuLnDDtAQyKfLBKDTuYo4pMBGD+WC8Q5+5egjCB5wMBW99FXvOzBxKme5NFclgoTCImzPteQvIbhQ9DUsXPQBcMhgcCbI8mrFejWCRhu93YY4duk/mfz+YjARu/2JFGO7aEPRuwedKZDnMKUQz5HtKMusCpYLnJM2m7dDhFOwu2NW6yGzcse6T5HULb5dZKqgY2A4keKQdScl8="}'
+  var container = document.getElementById('pesdk')
+  var editor = new PhotoEditorSDK.UI.ReactUI({
+    container: container,
+    license: license,
+    assets: {
+        baseUrl: '/assets', // => Matches default asset url for rails
+        resolver: function (path) { return path }
+  }
+});
+}
   function redirect1() {
     var url = '<%= getLink1 %>';
     window.open(url, 'download_window', 'toolbar=0,location=no,directories=0,status=0,scrollbars=0,resizeable=0,width=1,height=1,top=0,left=0');
