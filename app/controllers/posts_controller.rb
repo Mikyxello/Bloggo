@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 	before_action :check_user, only: [ :edit, :update ]
 	before_action :check_destroy, only: [ :destroy ]
 	impressionist actions: [ :show ], unique: [ :impressionable_type, :impressionable_id, :session_hash ]
-	
+
 	def index
 		@blog = Blog.find(params[:blog_id])
 		@posts = @blog.posts.paginate(page: params[:page], per_page: 5)
@@ -31,14 +31,16 @@ class PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.new(post_params)
 		@post.user = current_user
-
-		if post_params[:tag_list] == ""
+		
+		if post_params[:tag_list] == "" && post_params[:content] != ""
 			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
 			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: @post.content }
 			response = JSON.parse( response )
-			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
-			keywords.each do |word|
-				@post.tag_list = @post.tag_list + word["keyword"] + ","
+			if !response["keywords"][0].nil?
+				keywords = response["keywords"].sort_by{ |word| word["confidence_score"].to_i }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+				keywords.each do |word|
+					@post.tag_list = @post.tag_list + word["keyword"] + ","
+				end
 			end
 		end
 
@@ -59,13 +61,15 @@ class PostsController < ApplicationController
 
 		new_params = post_params
 
-		if new_params[:tag_list] == ""
+		if new_params[:tag_list] == "" && new_params[:content] != ""
 			api_key  = 'fHpDGKPcXGGMOpxtH9GFqaAEnbGhKyNGkePJXhFAQ54'
 			response = RestClient.post "https://apis.paralleldots.com/v3/keywords", { api_key: api_key, text: post_params[:content] }
 			response = JSON.parse( response )
-			keywords = response["keywords"].sort_by{ |word| word["confidence_score"] }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
-			keywords.each do |word|
-				new_params[:tag_list] = new_params[:tag_list] + word["keyword"] + ","
+			if !response["keywords"][0].nil?
+				keywords = response["keywords"].sort_by{ |word| word["confidence_score"].to_i }.reverse.select{ |word| word["keyword"].length <= 15 && word["keyword"].length >= 3}.first(5)
+				keywords.each do |word|
+					new_params[:tag_list] = new_params[:tag_list] + word["keyword"] + ","
+				end
 			end
 		end
 
@@ -109,7 +113,7 @@ class PostsController < ApplicationController
 			end
 		end
 	end
-	
+
 	def downvote
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.friendly.find(params[:id])
@@ -154,7 +158,7 @@ class PostsController < ApplicationController
 			format.json { head :no_content }
 			format.js { render :layout => false }
 		end
-	end	
+	end
 
 
 	private
@@ -165,7 +169,7 @@ class PostsController < ApplicationController
 	private
 	def check_editor
 		@blog = Blog.find(params[:blog_id])
-		redirect_to blog_path(@blog) unless (@blog.user == current_user) || (@blog.editors == current_user.id)
+		redirect_to blog_path(@blog) unless (@blog.user == current_user) || (!@blog.editors.nil? && @blog.editors.include?(current_user.id.to_s))
 	end
 
 	private
@@ -179,6 +183,6 @@ class PostsController < ApplicationController
 	def check_destroy
 		@blog = Blog.find(params[:blog_id])
 		@post = @blog.posts.friendly.find(params[:id])
-		redirect_to blog_path(@blog) unless (current_user.admin?) || (@blog.user == current_user) || (@blog.editors == current_user.id) || (!@post.nil? && @post.user == current_user)
+		redirect_to blog_path(@blog) unless (current_user.admin?) || (@blog.user == current_user) || (!@blog.editors.nil? && @blog.editors.include?(current_user.id.to_s)) || (!@post.nil? && @post.user == current_user)
 	end
 end

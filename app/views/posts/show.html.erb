@@ -63,7 +63,7 @@
 													<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(@post.blog, @post), class: "dropdown-item" %>
 												</div>
 											</div>
-										<% elsif (@blog.user == current_user) || (@blog.editors == current_user.id) || (current_user.admin?) %>
+										<% elsif (@blog.user == current_user) || (!@blog.editors.nil? && @blog.editors.include?(current_user.id.to_s)) || (current_user.admin?) %>
 											<div class="dropdown">
 												<a class="dropdown-toggle" id="dropdownMenuSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuSettings">

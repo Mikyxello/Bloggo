@@ -16,7 +16,6 @@ class BlogsController < ApplicationController
 		@posts = Post.where(blog_id: @blog)
 		@filter = "Most Recent"
 		@shown_posts = @blog.posts.last(5)
-		puts"______________#{@blog.editors}________________"
 		render 'show'
 	end
 

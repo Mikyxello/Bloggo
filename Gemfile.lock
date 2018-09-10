@@ -1,6 +1,13 @@
 GIT
+  remote: https://github.com/imgly/pesdk-ruby-gem-demo.git
+  revision: 3cfb91f4cbad89019a36ac3e1e2b311036deecba
+  specs:
+    pesdk-html5-rails (4.1.2)
+      railties (>= 4.2.0)
+
+GIT
   remote: https://github.com/stympy/faker.git
-  revision: 86a9fcf5c1867fcbac9750925e0b3820570613b8
+  revision: 316029319d4daef4b6a00eeaf58fc1781f818ab7
   branch: master
   specs:
     faker (1.9.1)
@@ -69,10 +76,10 @@ GEM
       activerecord (>= 3.2.0)
     arel (9.0.0)
     ast (2.4.0)
-    autoprefixer-rails (9.1.3)
+    autoprefixer-rails (9.1.4)
       execjs
     babosa (1.0.2)
-    backports (3.11.3)
+    backports (3.11.4)
     bcrypt (3.1.12)
     bindex (0.5.0)
     bootsnap (1.3.1)
@@ -86,7 +93,7 @@ GEM
       cancancan (~> 1)
       role_model (~> 0)
     cancancan (1.17.0)
-    capybara (3.6.0)
+    capybara (3.7.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -148,7 +155,7 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
-    font-awesome-sass (5.2.0)
+    font-awesome-sass (5.3.1)
       sassc (>= 1.11)
     friendly_id (5.2.4)
       activerecord (>= 4.0.0)
@@ -158,6 +165,8 @@ GEM
     hashie (3.5.7)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     impressionist (1.6.1)
@@ -312,7 +321,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    rubocop-rspec (1.28.0)
+    rubocop-rspec (1.29.1)
       rubocop (>= 0.58.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
@@ -359,9 +368,12 @@ GEM
       unf_ext
     unf_ext (0.0.7.5)
     unicode-display_width (1.4.0)
+    unsplash (1.5.5)
+      httparty (~> 0.14.0)
+      oauth2 (~> 1)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.6.2)
+    web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
@@ -409,6 +421,7 @@ DEPENDENCIES
   notifications (~> 0.6.0)
   omniauth-facebook
   omniauth-google-oauth2
+  pesdk-html5-rails!
   puma (~> 3.11)
   rails (~> 5.2.0)
   rails-controller-testing
@@ -423,6 +436,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
+  unsplash
   web-console (>= 3.3.0)
   will_paginate (~> 3.1.0)
   will_paginate-bootstrap4

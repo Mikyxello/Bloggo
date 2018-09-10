@@ -28,7 +28,7 @@
 							<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_comment_path(comment.post.blog, comment.post, comment), class: "dropdown-item"%>
 						</div>
 					</div>
-				<% elsif ([comment.post.blog.user, comment.post.user].include? current_user) || (current_user.id == comment.post.blog.editors) || (current_user.admin?) %>
+				<% elsif ([comment.post.blog.user, comment.post.user].include? current_user) || (!comment.post.blog.editors.nil? && comment.post.blog.editors.include?(current_user.id.to_s)) || (current_user.admin?) %>
 					<div class="dropdown">
 						<a class="dropdown-toggle" id="dropdownMenuComment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuComment">

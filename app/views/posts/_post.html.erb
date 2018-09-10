@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td colspan="5" align="left" valign="center">
-					<div class="fr-view post-content">
+					<div class="fr-view post-content-aux">
 						<%= 
 							truncate(post.content.html_safe, 
 							:length => 300, 
@@ -73,7 +73,7 @@
 									<%= link_to raw('<i class="fas fa-edit"></i> Edit'), edit_blog_post_path(post.blog, post), class: "dropdown-item" %>
 								</div>
 							</div>
-						<% elsif (post.blog.user == current_user) || (post.blog.editors == current_user.id) || (current_user.admin?) %>
+						<% elsif (post.blog.user == current_user) || (!post.blog.editors.nil? && post.blog.editors.include?(current_user.id.to_s)) || (current_user.admin?) %>
 							<div class="btn-group dropup">
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
 								<div class="dropdown-menu">
