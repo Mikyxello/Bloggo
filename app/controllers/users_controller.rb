@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 		@blogs = Blog.where(user_id: @user)
     @posts = Post.where(:user_id => @user.id)
+    @filter = "Most Recent"
     @favourite_blogs = @user.favorited_by_type 'Blog'
  	end
 
@@ -51,6 +52,27 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def visited_view
+    @filter = "Most Visited"
+    @posts = Post.where(blog_id: @blog)
+    @shown_posts = @blog.posts.order(:impressions_count).reverse.last(5)
+    render 'show'
+  end
+
+  def recent_view
+    @filter = "Most Recent"
+    @posts = Post.where(blog_id: @blog)
+    @shown_posts = @blog.posts.last(5)
+    render 'show'
+  end
+
+  def reacted_view
+    @filter = "Most Reacted"
+    @posts = Post.where(blog_id: @blog)
+    @shown_posts = @blog.posts.order(:cached_votes_total).reverse.last(5)
+    render 'show'
   end
 
   def create
