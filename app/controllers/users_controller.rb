@@ -17,10 +17,8 @@ class UsersController < ApplicationController
  	def show
 		#@user = User.friendly.find(params[:id])
     @user = User.find(params[:id])
-		@blogs = Blog.where(user_id: @user)
-    @posts = Post.where(:user_id => @user.id)
-    @filter = "Most Recent"
-    @favourite_blogs = @user.favorited_by_type 'Blog'
+		@blog = Blog.where(user_id: @user)
+    @filter = "Newest"
  	end
 
  	def upgrade
@@ -55,23 +53,18 @@ class UsersController < ApplicationController
   end
 
   def visited_view
+    @user = User.find(params[:id])
     @filter = "Most Visited"
-    @posts = Post.where(blog_id: @blog)
-    @shown_posts = @blog.posts.order(:impressions_count).reverse.last(5)
+    @blogs= Blog.where(user_id: @user)
+    @blog = @blogs.order(:impressions_count).reverse.last(@blogs.count)
     render 'show'
   end
 
   def recent_view
+    @user = User.find(params[:id])
     @filter = "Most Recent"
-    @posts = Post.where(blog_id: @blog)
-    @shown_posts = @blog.posts.last(5)
-    render 'show'
-  end
-
-  def reacted_view
-    @filter = "Most Reacted"
-    @posts = Post.where(blog_id: @blog)
-    @shown_posts = @blog.posts.order(:cached_votes_total).reverse.last(5)
+    @blogs = Blog.where(user_id: @user)
+    @blog = @blogs.last(@blogs.count)
     render 'show'
   end
 

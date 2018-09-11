@@ -1,65 +1,63 @@
-<div class="container">
-	<div class="jumbotron" style="margin-top: 20px;">
+<!-- <link rel="stylesheet" href="styles.scss"> -->
+<div class="container-fluid" style="margin-top:10px; margin-bottom:10px;">
+  <div class="row">
+    <div class="col-sm-6">
+    	<div class="jumbotron" style="margin-top: 20px;">
 
-		<img class="mx-auto d-block" style="border-radius:60%; width:200px; height:200px; object-fit:cover; margin-top: 50px;" alt="User Profile Pic Example"
-		 src="<% if @user.avatar_image? %>
-						<%= @user.avatar_image %>
-					<% else %>
-						<%= asset_path('user-placeholder.jpeg') %>
-					<% end %>" />
-		<h1 class="text-center"><%= @user.username %></h1>
+    		<img class="mx-auto d-block" style="border-radius:60%; width:200px; height:200px; object-fit:cover; margin-top: 50px;" alt="User Profile Pic Example"
+    		 src="<% if @user.avatar_image? %>
+    						<%= @user.avatar_image %>
+    					<% else %>
+    						<%= asset_path('user-placeholder.jpeg') %>
+    					<% end %>" />
+    		<!-- <img src="<%= asset_path('blog_profile_example.jpg') %>" class="text-center rounded mx-auto d-block" style="margin-top: 50px;" alt="Bloggo Profile Pic Example"> -->
+    		<h1 class="text-center" style="margin-top: 15px"> <%= @user.username %></h1>
 
-		<div class="row" style="margin-top: 80px; margin-left: 300px; margin-right: 300px;">
-    	<div class="col-sm text-center">
-    		<table align="center" style="width: 100%;">
-    			<tr>
-    				<th>
-    					<h3>Blogs</h3>
-    				</th>
-    				<th>
-    					<h3>Posts</h3>
-    				</th>
-    			</tr>
-    			<tr>
-		      		<td>
-		      			<h6><%= @blogs.count %></h6>
-		      		</td>
-		      		<td>
-		      			<h6><%= @posts.size %></h6>
-		      		</td>
-		      	</tr>
-		    </table>
-    	</div>
-  	</div>
-	</div>
-
-	<div class="row" style="margin-top: 120px;">
-
-		<div class="col-sm">
-			<div class="jumbotron" >
-      	<h3 class="text-center" style="margin-bottom: 20px;"> Lastest Bloggoes</h3>
-  	      <% @blogs.last(5).each do |blog| %>
-      	<div class="jumbotron" style="background: white">
-  	      <h3 class="text-center" style: "color: black"> <%= link_to blog.name, blog_path(blog)%> </h3>
-  	      <h6 class="text-center" style: "color: black"> <%= blog.description %> </h6>
-  	    </div>
-	        <% end %>
-    	</div>
+    		<div class="row text-center">
+        	<div class="col-sm-12 text-center">
+          	<h3> Blogs</h3>
+          	<h6> <%= @blog.count %></h6>
+        	</div>
+        </div>
+      	</div>
     </div>
-
-		<div class="col-sm">
-			<div class="jumbotron text-center">
-      	<h3>Top 5 Post</h3>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header pastel_colour_yellow" style="text-align:center;">
+          <h2><%= @user.name %>'s Bloggoes</h2>
+        </div>
+        <div class="card-body">
+        <% if @blog != nil && @blog.count != 0%>
+          <table class="table">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Visits</th>
+            </tr>
+            <% @blog.each do |blog| %>
+            <tr>
+              <td><%= link_to blog.name, blog_path(blog) %></td>
+              <td><%= blog.description %></td>
+              <td><%= link_to blog.impressionist_count%></td>
+            </tr>
+            <% end %>
+          </table>
       	  <div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filter by
+					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><%= @filter %>
 					  <span class="caret"></span></button>
 					  <ul class="dropdown-menu">
-					    <li><a href="#">Most Visited</a></li>
-					    <li><a href="#">Newest</a></li>
-					    <li><a href="#">Most Reacted</a></li>
+					    <li> <%= link_to 'Newest'.html_safe, recent_user_path(@user) %></li>	
+					  	<li> <%= link_to 'Most Visited'.html_safe, visited_user_path(@user) %></li>
 	 				  </ul>
 				  </div>
-    	</div>
+          <% if @blog.count > 5 %>
+            <%= link_to '<button type="button" class="btn btn-primary">See all</button>'.html_safe, see_all_path(@user) %>
+          <% end %>
+          <% else %>
+            <h3> No bloggoes found! </h3>
+        <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

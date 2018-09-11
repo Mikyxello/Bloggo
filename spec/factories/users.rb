@@ -10,6 +10,10 @@ FactoryBot.define do
         password_confirmation { "password" }
 		role { 'user' }
 		banned { false }
+
+        trait :is_bloggoer do
+          role 'bloggoer'
+        end
     end
 
 

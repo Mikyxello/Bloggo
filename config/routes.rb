@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   get 'blogs/:id/favourite', to: 'blogs#favourite', :as => :favourite
   get 'blogs/:id/unfavourite', to:'blogs#unfavourite', :as => :unfavourite
   get 'users/upgrade/:id', to: 'users#upgrade', :as => :upgrade
+  get 'users/:id/visited_view' => "users#visited_view", :as => :visited_user
+  get 'users/:id/recent_view' => "users#recent_view", :as => :recent_user
   get 'blogs/:id/editors', to: 'blogs#editors', :as => :editors
   post 'blogs/:id/add_editors', to: 'blogs#add_editors', :as => :add_editor
   get 'blogs/:id/remove_editors/:user_id', to: 'blogs#remove_editors', :as => :remove_editor

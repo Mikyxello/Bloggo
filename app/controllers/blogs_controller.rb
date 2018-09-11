@@ -136,9 +136,13 @@ class BlogsController < ApplicationController
 
 	def new
 		if user_signed_in?
-			@blog = current_user.blogs.build
+			if current_user.role.to_s == "bloggoer"
+				@blog = current_user.blogs.build
+			else
+				redirect_to '/'
+			end
 		else
-			render 'index'
+			redirect_to '/'
 		end
 	end
 
