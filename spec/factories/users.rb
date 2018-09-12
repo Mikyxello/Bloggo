@@ -12,7 +12,7 @@ FactoryBot.define do
 		banned { false }
 
         trait :is_bloggoer do
-          role 'bloggoer'
+          role { 'bloggoer' }
         end
     end
 
