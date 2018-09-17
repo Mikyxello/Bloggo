@@ -16,18 +16,17 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require_tree .
 
 //= require froala_editor.min.js
-//= require jquery
 //= require jquery_ujs
-//= require turbolinks
 
 //= require react
 //= require react-dom
 //= require PhotoEditorSDK
 //= require PhotoEditorSDK.UI.ReactUI
 
-//= require_tree .
+
 
 
 

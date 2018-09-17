@@ -121,7 +121,7 @@
 <% end %>
 
   <div class="row container-fluid" >
-    <div id="pesdk" style="width: 100vmin; height: 75vmin; padding: 0px; margin: 0px; margin-bottom:10px">
+    <div id="pesdk" style="width: 100vmin; height: 75vmin; padding: 0px; margin: 0px; margin-bottom:10px"></div>
       <script>
 
       </script>
@@ -133,13 +133,13 @@
           <h3> Search from Unsplash Website </h3>
 
           <%= form_tag(new_blog_post_url,:method => "get") do %>
-          <%= text_field_tag :photo, params[:photo], placeholder: "Search images.."%>
+          <%= text_field_tag :photo, params[:photo], placeholder: "Search images.." %>
           <%= submit_tag 'Search in Unsplash' %>
           <% end %>
       <div class="col-lg-4" >
         <br />
           <label class="image-checkbox" style="max-width: 30%">
-            <%= image_tag show_photo1%>
+            <%= image_tag show_photo1 %>
             <button id="link1" class="btn"><i class="fa fa-download" onclick="prova()"></i> Download</button>
 
         </label>
@@ -193,7 +193,7 @@ window.onload = function () {
   document.getElementById('link2').addEventListener('click',redirect2);
   document.getElementById('link3').addEventListener('click',redirect3);
 
-  $(document).ready(function(){
+  $(function() {
     $('#post_content').froalaEditor({
       width: '100%',
       pastePlain: true,

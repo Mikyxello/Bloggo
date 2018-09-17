@@ -67,18 +67,18 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Use a customized text editor for textareas
+gem 'wysiwyg-rails'
+# Icons set from FontAwesome
+gem 'font-awesome-sass', '~> 5.3.1'
+# jQuery JavaScript
+gem 'jquery-rails'
+# Photo Editor SDK API
 gem 'pesdk-html5-rails', :git => 'https://github.com/imgly/pesdk-ruby-gem-demo.git'
 # Get free images
 gem 'unsplash'
 # Restyle CSS and JS with Bootstrap
 gem 'bootstrap'
-# Use a customized text editor for textareas
-gem 'wysiwyg-rails'
-# Icons set from FontAwesome
-gem 'font-awesome-sass', '~> 5.3.1'
-#gem 'font-awesome-rails'
-# jQuery JavaScript
-gem 'jquery-rails'
 # Handle users
 gem 'devise'
 # Handle oAuth with Facebook
