@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount Notifications::Engine => "/notifications"
+
   devise_for :users, controllers: {
         sessions: 'users/sessions',
         omniauth_callbacks: "users/omniauth_callbacks",
@@ -15,10 +15,9 @@ Rails.application.routes.draw do
   resources :blogs do
   	resources :posts do
   		resources :comments
-
-  collection do
-    get 'search'
-  end
+      collection do
+        get 'search'
+      end
       member do
         put 'like', to: 'posts#upvote'
         put 'dislike', to: 'posts#downvote'

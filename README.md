@@ -1,6 +1,6 @@
 # Bloggo
 
-Bloggo is a social network Web App that allows its user to create blogs for creating content (posts) and receive feedbacks from other users with comments and reactions (like or dislike). Also provide some stats of the social network, like the most used Tags on the entire database and the most upvoted Posts. Users can also follow their favorites blogs for receiving notifications about new posts in these blogs. A user that creates a blog is called "Bloggoer", and can appoint "Editor" other users, who can create content in the blog they are editor of.
+Bloggo is a social network Web App that allows its user to create blogs for creating content (posts) and receive feedbacks from other users with comments and reactions (like or dislike). Also provide some stats of the social network, like the most used Tags on the entire database and the most upvoted Posts. Users can also follow their favorites blogs. A user that creates a blog is called "Bloggoer", and can appoint "Editor" other users, who can create content in the blog they are editor of.
 
 ## Getting Started
 

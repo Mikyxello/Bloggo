@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_25_180736) do
+ActiveRecord::Schema.define(version: 2018_09_17_114104) do
 
   create_table "blogs", force: :cascade do |t|
     t.string "name"
@@ -69,18 +69,6 @@ ActiveRecord::Schema.define(version: 2018_08_25_180736) do
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower_type_and_follower_id"
   end
 
-  create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string "slug", null: false
-    t.integer "sluggable_id", null: false
-    t.string "sluggable_type", limit: 50
-    t.string "scope"
-    t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
-  end
-
   create_table "impressions", force: :cascade do |t|
     t.string "impressionable_type"
     t.integer "impressionable_id"
@@ -105,23 +93,6 @@ ActiveRecord::Schema.define(version: 2018_08_25_180736) do
     t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
     t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
     t.index ["user_id"], name: "index_impressions_on_user_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "actor_id"
-    t.string "notify_type", null: false
-    t.string "target_type"
-    t.integer "target_id"
-    t.string "second_target_type"
-    t.integer "second_target_id"
-    t.string "third_target_type"
-    t.integer "third_target_id"
-    t.datetime "read_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id", "notify_type"], name: "index_notifications_on_user_id_and_notify_type"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -197,10 +168,8 @@ ActiveRecord::Schema.define(version: 2018_08_25_180736) do
     t.string "username"
     t.datetime "birth_date"
     t.boolean "banned"
-    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   create_table "votes", force: :cascade do |t|

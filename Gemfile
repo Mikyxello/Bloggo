@@ -74,6 +74,10 @@ gem 'unsplash'
 gem 'bootstrap'
 # Use a customized text editor for textareas
 gem 'wysiwyg-rails'
+# Icons set from FontAwesome
+gem 'font-awesome-sass', '~> 5.3.1'
+#gem 'font-awesome-rails'
+# jQuery JavaScript
 gem 'jquery-rails'
 # Handle users
 gem 'devise'
@@ -94,8 +98,6 @@ gem 'acts_as_favoritor'
 gem 'acts_as_follower', :git => 'https://github.com/tcocca/acts_as_follower.git', :branch => 'master'
 # Handle visits on pages
 gem 'impressionist'
-# Get notifications alert
-gem 'notifications', '~> 0.6.0'
 
 # Paginating models
 gem 'will_paginate', '~> 3.1.0'
